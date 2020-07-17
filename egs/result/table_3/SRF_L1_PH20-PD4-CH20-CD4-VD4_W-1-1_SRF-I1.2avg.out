@@ -1,0 +1,166 @@
+2020-07-10 20:31:55.139730: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.10.1
+2020-07-10 20:31:56.111099: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcuda.so.1
+2020-07-10 20:31:56.117466: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties: 
+pciBusID: 0000:17:00.0 name: GeForce RTX 2080 Ti computeCapability: 7.5
+coreClock: 1.635GHz coreCount: 68 deviceMemorySize: 10.76GiB deviceMemoryBandwidth: 573.69GiB/s
+2020-07-10 20:31:56.117490: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.10.1
+2020-07-10 20:31:56.118696: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcublas.so.10
+2020-07-10 20:31:56.119818: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcufft.so.10
+2020-07-10 20:31:56.120006: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcurand.so.10
+2020-07-10 20:31:56.121218: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcusolver.so.10
+2020-07-10 20:31:56.121912: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcusparse.so.10
+2020-07-10 20:31:56.124525: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudnn.so.7
+2020-07-10 20:31:56.125476: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1858] Adding visible gpu devices: 0
+2020-07-10 20:31:56.000127: I common_helper.py:233] ********************************************
+2020-07-10 20:31:56.000127: I common_helper.py:234]         Settings for Transformer ASR
+2020-07-10 20:31:56.000127: I common_helper.py:235] ********************************************
+2020-07-10 20:31:56.000127: I common_helper.py:241] . CONFIG
+2020-07-10 20:31:56.000127: I common_helper.py:244] - config=samples/conf/sequence_router.conf
+2020-07-10 20:31:56.000127: I common_helper.py:241] . DECODING
+2020-07-10 20:31:56.000127: I common_helper.py:244] - decoding_beam_width=100
+2020-07-10 20:31:56.000127: I common_helper.py:244] - decoding_from_npy=False
+2020-07-10 20:31:56.000127: I common_helper.py:244] - decoding_lp_alpha=None
+2020-07-10 20:31:56.000127: I common_helper.py:241] . FEAT
+2020-07-10 20:31:56.000127: I common_helper.py:244] - feat_dim=123
+2020-07-10 20:31:56.000127: I common_helper.py:244] - feat_dim1=None
+2020-07-10 20:31:56.000127: I common_helper.py:244] - feat_dim2=None
+2020-07-10 20:31:56.000127: I common_helper.py:244] - feat_type=graves13
+2020-07-10 20:31:56.000127: I common_helper.py:241] . MODEL
+2020-07-10 20:31:56.000127: I common_helper.py:244] - model_ap_decoder=False
+2020-07-10 20:31:56.000127: I common_helper.py:244] - model_ap_encdec=False
+2020-07-10 20:31:56.000127: I common_helper.py:244] - model_ap_encoder=False
+2020-07-10 20:31:56.000127: I common_helper.py:244] - model_ap_scale=None
+2020-07-10 20:31:56.000127: I common_helper.py:244] - model_ap_width_stripe=None
+2020-07-10 20:31:56.000127: I common_helper.py:244] - model_ap_width_zero=None
+2020-07-10 20:31:56.000127: I common_helper.py:244] - model_att_head_num=None
+2020-07-10 20:31:56.000127: I common_helper.py:244] - model_average_num=10
+2020-07-10 20:31:56.000127: I common_helper.py:244] - model_caps_class_dim=4
+2020-07-10 20:31:56.000127: I common_helper.py:244] - model_caps_context=True
+2020-07-10 20:31:56.000127: I common_helper.py:244] - model_caps_convolution_dim=4
+2020-07-10 20:31:56.000127: I common_helper.py:244] - model_caps_convolution_num=20
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_caps_iter=1
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_caps_layernorm=True
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_caps_norm=1.0
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_caps_primary_dim=4
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_caps_primary_num=20
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_caps_recon=False
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_caps_routing_type=dr
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_caps_seq_type=None
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_caps_stride=1
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_caps_stride_n=2
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_caps_window=3
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_caps_window_even=True
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_caps_window_lpad=1
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_caps_window_rpad=1
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_ckpt_max_to_keep=-1
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_conv_filter_num=64
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_conv_layer_num=2
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_conv_mask_type=0
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_conv_stride=2
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_decoder_num=None
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_dimension=1
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_emb_sqrt=True
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_encoder_num=1
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_initializer=fan_avg
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_inner_dim=None
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_res_dec=1
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_res_enc=1
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_shared_embed=False
+2020-07-10 20:31:56.000128: I common_helper.py:244] - model_type=stf
+2020-07-10 20:31:56.000128: I common_helper.py:241] . PATH
+2020-07-10 20:31:56.000128: I common_helper.py:244] - path_base=/data/timit
+2020-07-10 20:31:56.000128: I common_helper.py:244] - path_ckpt=./checkpoint/SRF_L1_PH20-PD4-CH20-CD4-VD4_W-1-1_SRF-I1
+2020-07-10 20:31:56.000128: I common_helper.py:244] - path_ckpt_epoch=0
+2020-07-10 20:31:56.000128: I common_helper.py:244] - path_cmvn_ptrn=None
+2020-07-10 20:31:56.000128: I common_helper.py:244] - path_hyp=None
+2020-07-10 20:31:56.000128: I common_helper.py:244] - path_test_json=None
+2020-07-10 20:31:56.000128: I common_helper.py:244] - path_test_ptrn=tfrecord_graves13/timit-test-None-123-*-of-*
+2020-07-10 20:31:56.000128: I common_helper.py:244] - path_train_json=None
+2020-07-10 20:31:56.000128: I common_helper.py:244] - path_train_ptrn=tfrecord_graves13/timit-train-None-123-*-of-*
+2020-07-10 20:31:56.000128: I common_helper.py:244] - path_valid_json=None
+2020-07-10 20:31:56.000128: I common_helper.py:244] - path_valid_ptrn=tfrecord_graves13/timit-valid-None-123-*-of-*
+2020-07-10 20:31:56.000128: I common_helper.py:244] - path_vocab=samples/data/timit_61.vocab
+2020-07-10 20:31:56.000128: I common_helper.py:244] - path_wrt_tfrecord=None
+2020-07-10 20:31:56.000128: I common_helper.py:241] . PREP
+2020-07-10 20:31:56.000128: I common_helper.py:244] - prep_data_bos=True
+2020-07-10 20:31:56.000128: I common_helper.py:244] - prep_data_name=wsj
+2020-07-10 20:31:56.000128: I common_helper.py:244] - prep_data_pad_space=True
+2020-07-10 20:31:56.000128: I common_helper.py:244] - prep_data_shard=100
+2020-07-10 20:31:56.000128: I common_helper.py:244] - prep_data_unit=word
+2020-07-10 20:31:56.000128: I common_helper.py:244] - prep_max_inp=-1
+2020-07-10 20:31:56.000128: I common_helper.py:244] - prep_max_tar=-1
+2020-07-10 20:31:56.000128: I common_helper.py:241] . TRAIN
+2020-07-10 20:31:56.000128: I common_helper.py:244] - train_adam_beta1=0.9
+2020-07-10 20:31:56.000128: I common_helper.py:244] - train_adam_beta2=0.98
+2020-07-10 20:31:56.000128: I common_helper.py:244] - train_adam_epsilon=1e-09
+2020-07-10 20:31:56.000128: I common_helper.py:244] - train_att_dropout=0.1
+2020-07-10 20:31:56.000128: I common_helper.py:244] - train_batch_dynamic=True
+2020-07-10 20:31:56.000128: I common_helper.py:244] - train_batch_frame=7000
+2020-07-10 20:31:56.000128: I common_helper.py:244] - train_batch_size=26
+2020-07-10 20:31:56.000128: I common_helper.py:244] - train_ckpt_saving_per=1
+2020-07-10 20:31:56.000128: I common_helper.py:244] - train_es_min_delta=0.001
+2020-07-10 20:31:56.000129: I common_helper.py:244] - train_es_tolerance=1
+2020-07-10 20:31:56.000129: I common_helper.py:244] - train_inn_dropout=0.2
+2020-07-10 20:31:56.000129: I common_helper.py:244] - train_inp_dropout=0.2
+2020-07-10 20:31:56.000129: I common_helper.py:244] - train_is_mwer=False
+2020-07-10 20:31:56.000129: I common_helper.py:244] - train_lr_param_k=1e-06
+2020-07-10 20:31:56.000129: I common_helper.py:244] - train_max_epoch=0
+2020-07-10 20:31:56.000129: I common_helper.py:244] - train_max_step=0
+2020-07-10 20:31:56.000129: I common_helper.py:244] - train_ppl_step=1
+2020-07-10 20:31:56.000129: I common_helper.py:244] - train_res_dropout=0.1
+2020-07-10 20:31:56.000129: I common_helper.py:244] - train_schedule_prob=None
+2020-07-10 20:31:56.000129: I common_helper.py:244] - train_smoothing_confidence=0.0
+2020-07-10 20:31:56.000129: I common_helper.py:244] - train_smoothing_type=neighbor
+2020-07-10 20:31:56.000129: I common_helper.py:244] - train_warmup_n=1200
+2020-07-10 20:31:56.000129: I common_helper.py:245] *********************************************
+2020-07-10 20:31:56.000129: C misc_helper.py:93] Last index must be BOS: @, but zh
+2020-07-10 20:31:56.000129: I misc_helper.py:106] Decoder Input Dim: 62, Output Dim 62
+2020-07-10 20:31:56.000129: I average_ckpt_sr.py:51] The modified output Dimension 63
+2020-07-10 20:31:56.156803: I tensorflow/core/platform/profile_utils/cpu_utils.cc:104] CPU Frequency: 3699850000 Hz
+2020-07-10 20:31:56.157812: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x596cef0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-07-10 20:31:56.157852: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+2020-07-10 20:31:56.262872: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x5902660 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2020-07-10 20:31:56.262910: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): GeForce RTX 2080 Ti, Compute Capability 7.5
+2020-07-10 20:31:56.263779: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties: 
+pciBusID: 0000:17:00.0 name: GeForce RTX 2080 Ti computeCapability: 7.5
+coreClock: 1.635GHz coreCount: 68 deviceMemorySize: 10.76GiB deviceMemoryBandwidth: 573.69GiB/s
+2020-07-10 20:31:56.263809: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.10.1
+2020-07-10 20:31:56.263826: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcublas.so.10
+2020-07-10 20:31:56.263836: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcufft.so.10
+2020-07-10 20:31:56.263845: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcurand.so.10
+2020-07-10 20:31:56.263855: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcusolver.so.10
+2020-07-10 20:31:56.263864: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcusparse.so.10
+2020-07-10 20:31:56.263873: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudnn.so.7
+2020-07-10 20:31:56.265242: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1858] Adding visible gpu devices: 0
+2020-07-10 20:31:56.265269: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.10.1
+2020-07-10 20:31:56.858914: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1257] Device interconnect StreamExecutor with strength 1 edge matrix:
+2020-07-10 20:31:56.858958: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1263]      0 
+2020-07-10 20:31:56.858963: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1276] 0:   N 
+2020-07-10 20:31:56.860019: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1402] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 6218 MB memory) -> physical GPU (device: 0, name: GeForce RTX 2080 Ti, pci bus id: 0000:17:00.0, compute capability: 7.5)
+2020-07-10 20:31:56.860353: I tensorflow/core/common_runtime/process_util.cc:146] Creating new thread pool with default inter op setting: 2. Tune using inter_op_parallelism_threads for best performance.
+2020-07-10 20:31:56.000888: I sequence_router.py:176] Layer x 1, Iter x 1, Init CONTEXT, Win 3 (l:1, r:1), Normalized with softmax w/ 1.0 temp
+2020-07-10 20:31:56.000896: I average_ckpt_sr.py:73] ./checkpoint/SRF_L1_PH20-PD4-CH20-CD4-VD4_W-1-1_SRF-I1/ckpt-191
+2020-07-10 20:31:56.000915: I sequence_router.py:176] Layer x 1, Iter x 1, Init CONTEXT, Win 3 (l:1, r:1), Normalized with softmax w/ 1.0 temp
+2020-07-10 20:31:57.096282: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcublas.so.10
+2020-07-10 20:31:57.616170: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudnn.so.7
+2020-07-10 20:31:59.000430: I average_ckpt_sr.py:73] ./checkpoint/SRF_L1_PH20-PD4-CH20-CD4-VD4_W-1-1_SRF-I1/ckpt-192
+2020-07-10 20:31:59.000455: I sequence_router.py:176] Layer x 1, Iter x 1, Init CONTEXT, Win 3 (l:1, r:1), Normalized with softmax w/ 1.0 temp
+2020-07-10 20:32:00.000107: I average_ckpt_sr.py:73] ./checkpoint/SRF_L1_PH20-PD4-CH20-CD4-VD4_W-1-1_SRF-I1/ckpt-193
+2020-07-10 20:32:00.000150: I sequence_router.py:176] Layer x 1, Iter x 1, Init CONTEXT, Win 3 (l:1, r:1), Normalized with softmax w/ 1.0 temp
+2020-07-10 20:32:00.000816: I average_ckpt_sr.py:73] ./checkpoint/SRF_L1_PH20-PD4-CH20-CD4-VD4_W-1-1_SRF-I1/ckpt-194
+2020-07-10 20:32:00.000844: I sequence_router.py:176] Layer x 1, Iter x 1, Init CONTEXT, Win 3 (l:1, r:1), Normalized with softmax w/ 1.0 temp
+2020-07-10 20:32:01.000494: I average_ckpt_sr.py:73] ./checkpoint/SRF_L1_PH20-PD4-CH20-CD4-VD4_W-1-1_SRF-I1/ckpt-195
+2020-07-10 20:32:01.000519: I sequence_router.py:176] Layer x 1, Iter x 1, Init CONTEXT, Win 3 (l:1, r:1), Normalized with softmax w/ 1.0 temp
+2020-07-10 20:32:02.000131: I average_ckpt_sr.py:73] ./checkpoint/SRF_L1_PH20-PD4-CH20-CD4-VD4_W-1-1_SRF-I1/ckpt-196
+2020-07-10 20:32:02.000168: I sequence_router.py:176] Layer x 1, Iter x 1, Init CONTEXT, Win 3 (l:1, r:1), Normalized with softmax w/ 1.0 temp
+2020-07-10 20:32:02.000763: I average_ckpt_sr.py:73] ./checkpoint/SRF_L1_PH20-PD4-CH20-CD4-VD4_W-1-1_SRF-I1/ckpt-197
+2020-07-10 20:32:02.000790: I sequence_router.py:176] Layer x 1, Iter x 1, Init CONTEXT, Win 3 (l:1, r:1), Normalized with softmax w/ 1.0 temp
+2020-07-10 20:32:03.000436: I average_ckpt_sr.py:73] ./checkpoint/SRF_L1_PH20-PD4-CH20-CD4-VD4_W-1-1_SRF-I1/ckpt-198
+2020-07-10 20:32:03.000470: I sequence_router.py:176] Layer x 1, Iter x 1, Init CONTEXT, Win 3 (l:1, r:1), Normalized with softmax w/ 1.0 temp
+2020-07-10 20:32:04.000077: I average_ckpt_sr.py:73] ./checkpoint/SRF_L1_PH20-PD4-CH20-CD4-VD4_W-1-1_SRF-I1/ckpt-199
+2020-07-10 20:32:04.000101: I sequence_router.py:176] Layer x 1, Iter x 1, Init CONTEXT, Win 3 (l:1, r:1), Normalized with softmax w/ 1.0 temp
+2020-07-10 20:32:04.000763: I average_ckpt_sr.py:73] ./checkpoint/SRF_L1_PH20-PD4-CH20-CD4-VD4_W-1-1_SRF-I1/ckpt-200
+2020-07-10 20:32:04.000787: I sequence_router.py:176] Layer x 1, Iter x 1, Init CONTEXT, Win 3 (l:1, r:1), Normalized with softmax w/ 1.0 temp
+2020-07-10 20:32:05.000317: I average_ckpt_sr.py:87] Total 10 models were loaded.
+2020-07-10 20:32:05.000503: I sequence_router.py:176] Layer x 1, Iter x 1, Init CONTEXT, Win 3 (l:1, r:1), Normalized with softmax w/ 1.0 temp
+2020-07-10 20:32:05.000734: I average_ckpt_sr.py:117] Saved to ./checkpoint/SRF_L1_PH20-PD4-CH20-CD4-VD4_W-1-1_SRF-I1/avg/ckpt-1

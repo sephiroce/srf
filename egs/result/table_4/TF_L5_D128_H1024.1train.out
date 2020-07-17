@@ -1,0 +1,1211 @@
+2020-07-16 18:26:53.408504: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.10.1
+2020-07-16 18:26:54.295630: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcuda.so.1
+2020-07-16 18:26:55.103652: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties: 
+pciBusID: 0000:65:00.0 name: GeForce RTX 2080 Ti computeCapability: 7.5
+coreClock: 1.635GHz coreCount: 68 deviceMemorySize: 10.76GiB deviceMemoryBandwidth: 573.69GiB/s
+2020-07-16 18:26:55.103690: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.10.1
+2020-07-16 18:26:55.104907: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcublas.so.10
+2020-07-16 18:26:55.106046: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcufft.so.10
+2020-07-16 18:26:55.106242: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcurand.so.10
+2020-07-16 18:26:55.107420: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcusolver.so.10
+2020-07-16 18:26:55.108086: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcusparse.so.10
+2020-07-16 18:26:55.110609: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudnn.so.7
+2020-07-16 18:26:55.111385: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1858] Adding visible gpu devices: 0
+2020-07-16 18:26:55.000113: I common_helper.py:233] ********************************************
+2020-07-16 18:26:55.000113: I common_helper.py:234]         Settings for Transformer ASR
+2020-07-16 18:26:55.000113: I common_helper.py:235] ********************************************
+2020-07-16 18:26:55.000113: I common_helper.py:241] . CONFIG
+2020-07-16 18:26:55.000113: I common_helper.py:244] - config=samples/conf/stf_timit.conf
+2020-07-16 18:26:55.000113: I common_helper.py:241] . DECODING
+2020-07-16 18:26:55.000113: I common_helper.py:244] - decoding_beam_width=100
+2020-07-16 18:26:55.000113: I common_helper.py:244] - decoding_from_npy=False
+2020-07-16 18:26:55.000113: I common_helper.py:244] - decoding_lp_alpha=None
+2020-07-16 18:26:55.000113: I common_helper.py:241] . FEAT
+2020-07-16 18:26:55.000113: I common_helper.py:244] - feat_dim=123
+2020-07-16 18:26:55.000113: I common_helper.py:244] - feat_dim1=None
+2020-07-16 18:26:55.000113: I common_helper.py:244] - feat_dim2=None
+2020-07-16 18:26:55.000113: I common_helper.py:244] - feat_type=graves13
+2020-07-16 18:26:55.000113: I common_helper.py:241] . MODEL
+2020-07-16 18:26:55.000113: I common_helper.py:244] - model_ap_decoder=True
+2020-07-16 18:26:55.000113: I common_helper.py:244] - model_ap_encdec=False
+2020-07-16 18:26:55.000113: I common_helper.py:244] - model_ap_encoder=True
+2020-07-16 18:26:55.000113: I common_helper.py:244] - model_ap_scale=1.0
+2020-07-16 18:26:55.000113: I common_helper.py:244] - model_ap_width_stripe=1
+2020-07-16 18:26:55.000113: I common_helper.py:244] - model_ap_width_zero=1
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_att_head_num=4
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_average_num=10
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_caps_class_dim=64
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_caps_context=True
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_caps_convolution_dim=4
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_caps_convolution_num=4
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_caps_iter=2
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_caps_layernorm=True
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_caps_norm=None
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_caps_primary_dim=2
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_caps_primary_num=3
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_caps_recon=False
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_caps_routing_type=dr
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_caps_seq_type=None
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_caps_stride=1
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_caps_stride_n=2
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_caps_window=3
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_caps_window_even=True
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_caps_window_lpad=None
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_caps_window_rpad=None
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_ckpt_max_to_keep=-1
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_conv_filter_num=64
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_conv_layer_num=2
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_conv_mask_type=0
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_conv_stride=2
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_decoder_num=None
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_dimension=128
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_emb_sqrt=True
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_encoder_num=5
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_initializer=fan_avg
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_inner_dim=1024
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_res_dec=1
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_res_enc=1
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_shared_embed=False
+2020-07-16 18:26:55.000114: I common_helper.py:244] - model_type=stf
+2020-07-16 18:26:55.000114: I common_helper.py:241] . PATH
+2020-07-16 18:26:55.000114: I common_helper.py:244] - path_base=/data/timit
+2020-07-16 18:26:55.000114: I common_helper.py:244] - path_ckpt=./checkpoint/TF_L5_D128_H1024
+2020-07-16 18:26:55.000114: I common_helper.py:244] - path_ckpt_epoch=0
+2020-07-16 18:26:55.000114: I common_helper.py:244] - path_cmvn_ptrn=None
+2020-07-16 18:26:55.000114: I common_helper.py:244] - path_hyp=None
+2020-07-16 18:26:55.000114: I common_helper.py:244] - path_test_json=None
+2020-07-16 18:26:55.000114: I common_helper.py:244] - path_test_ptrn=tfrecord_graves13/timit-test-None-123-*-of-*
+2020-07-16 18:26:55.000114: I common_helper.py:244] - path_train_json=None
+2020-07-16 18:26:55.000114: I common_helper.py:244] - path_train_ptrn=tfrecord_graves13/timit-train-None-123-*-of-*
+2020-07-16 18:26:55.000114: I common_helper.py:244] - path_valid_json=None
+2020-07-16 18:26:55.000114: I common_helper.py:244] - path_valid_ptrn=tfrecord_graves13/timit-valid-None-123-*-of-*
+2020-07-16 18:26:55.000114: I common_helper.py:244] - path_vocab=samples/data/timit_61.vocab
+2020-07-16 18:26:55.000114: I common_helper.py:244] - path_wrt_tfrecord=None
+2020-07-16 18:26:55.000114: I common_helper.py:241] . PREP
+2020-07-16 18:26:55.000114: I common_helper.py:244] - prep_data_bos=True
+2020-07-16 18:26:55.000114: I common_helper.py:244] - prep_data_name=wsj
+2020-07-16 18:26:55.000114: I common_helper.py:244] - prep_data_pad_space=True
+2020-07-16 18:26:55.000114: I common_helper.py:244] - prep_data_shard=100
+2020-07-16 18:26:55.000114: I common_helper.py:244] - prep_data_unit=word
+2020-07-16 18:26:55.000114: I common_helper.py:244] - prep_max_inp=-1
+2020-07-16 18:26:55.000114: I common_helper.py:244] - prep_max_tar=-1
+2020-07-16 18:26:55.000114: I common_helper.py:241] . TRAIN
+2020-07-16 18:26:55.000114: I common_helper.py:244] - train_adam_beta1=0.9
+2020-07-16 18:26:55.000114: I common_helper.py:244] - train_adam_beta2=0.98
+2020-07-16 18:26:55.000114: I common_helper.py:244] - train_adam_epsilon=1e-09
+2020-07-16 18:26:55.000114: I common_helper.py:244] - train_att_dropout=0.3
+2020-07-16 18:26:55.000114: I common_helper.py:244] - train_batch_dynamic=True
+2020-07-16 18:26:55.000115: I common_helper.py:244] - train_batch_frame=20000
+2020-07-16 18:26:55.000115: I common_helper.py:244] - train_batch_size=26
+2020-07-16 18:26:55.000115: I common_helper.py:244] - train_ckpt_saving_per=1
+2020-07-16 18:26:55.000115: I common_helper.py:244] - train_es_min_delta=0.001
+2020-07-16 18:26:55.000115: I common_helper.py:244] - train_es_tolerance=27
+2020-07-16 18:26:55.000115: I common_helper.py:244] - train_inn_dropout=0.4
+2020-07-16 18:26:55.000115: I common_helper.py:244] - train_inp_dropout=0.3
+2020-07-16 18:26:55.000115: I common_helper.py:244] - train_is_mwer=False
+2020-07-16 18:26:55.000115: I common_helper.py:244] - train_lr_param_k=1.5
+2020-07-16 18:26:55.000115: I common_helper.py:244] - train_max_epoch=27
+2020-07-16 18:26:55.000115: I common_helper.py:244] - train_max_step=0
+2020-07-16 18:26:55.000115: I common_helper.py:244] - train_ppl_step=1
+2020-07-16 18:26:55.000115: I common_helper.py:244] - train_res_dropout=0.4
+2020-07-16 18:26:55.000115: I common_helper.py:244] - train_schedule_prob=None
+2020-07-16 18:26:55.000115: I common_helper.py:244] - train_smoothing_confidence=0.0
+2020-07-16 18:26:55.000115: I common_helper.py:244] - train_smoothing_type=neighbor
+2020-07-16 18:26:55.000115: I common_helper.py:244] - train_warmup_n=1000
+2020-07-16 18:26:55.000115: I common_helper.py:245] *********************************************
+2020-07-16 18:26:55.000115: C misc_helper.py:93] Last index must be BOS: @, but zh
+2020-07-16 18:26:55.000115: I misc_helper.py:106] Decoder Input Dim: 62, Output Dim 62
+2020-07-16 18:26:55.000115: I trainer_tf.py:180] The modified output Dimension 63, blank index 62
+2020-07-16 18:26:55.140885: I tensorflow/core/platform/profile_utils/cpu_utils.cc:104] CPU Frequency: 3699850000 Hz
+2020-07-16 18:26:55.141648: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x3f81690 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-07-16 18:26:55.141672: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+2020-07-16 18:26:55.272546: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x3f23290 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2020-07-16 18:26:55.272594: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): GeForce RTX 2080 Ti, Compute Capability 7.5
+2020-07-16 18:26:55.273672: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties: 
+pciBusID: 0000:65:00.0 name: GeForce RTX 2080 Ti computeCapability: 7.5
+coreClock: 1.635GHz coreCount: 68 deviceMemorySize: 10.76GiB deviceMemoryBandwidth: 573.69GiB/s
+2020-07-16 18:26:55.273712: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.10.1
+2020-07-16 18:26:55.273739: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcublas.so.10
+2020-07-16 18:26:55.273753: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcufft.so.10
+2020-07-16 18:26:55.273768: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcurand.so.10
+2020-07-16 18:26:55.273782: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcusolver.so.10
+2020-07-16 18:26:55.273796: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcusparse.so.10
+2020-07-16 18:26:55.273811: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudnn.so.7
+2020-07-16 18:26:55.275538: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1858] Adding visible gpu devices: 0
+2020-07-16 18:26:55.275579: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.10.1
+2020-07-16 18:26:55.755828: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1257] Device interconnect StreamExecutor with strength 1 edge matrix:
+2020-07-16 18:26:55.755871: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1263]      0 
+2020-07-16 18:26:55.755876: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1276] 0:   N 
+2020-07-16 18:26:55.756807: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1402] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 5541 MB memory) -> physical GPU (device: 0, name: GeForce RTX 2080 Ti, pci bus id: 0000:65:00.0, compute capability: 7.5)
+2020-07-16 18:26:55.757173: I tensorflow/core/common_runtime/process_util.cc:146] Creating new thread pool with default inter op setting: 2. Tune using inter_op_parallelism_threads for best performance.
+2020-07-16 18:26:55.000758: I data_helper.py:57] bucket_boundaries: [300, 500, 700, 900, 1100, 1300, 1500, 1700, 1900, 2100, 2300, 2500, 2700, 2900, 3100, 3300, 3500, 3700, 3900, 4100, 4300, 4500, 4700, 4900, 5100, 5300, 5500, 5700, 5900, 6100, 6300, 6500, 6700, 6900, 7100, 7300, 7500, 7700, 7900, 8100, 8300, 8500, 8700, 8900, 9100, 9300, 9500, 9700, 9900]
+2020-07-16 18:26:55.000759: I data_helper.py:59] bucket_batch_sizes: [66, 40, 28, 22, 18, 15, 13, 11, 10, 9, 8, 8, 7, 6, 6, 6, 5, 5, 5, 4, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1]
+2020-07-16 18:26:56.000072: I data_helper.py:31] Batch size for test will be set to 1
+2020-07-16 18:26:59.000047: I model_helper.py:202] An attention penalty board was built with a zero width 1, a stripe width 1 and a scale factor 1.000000
+2020-07-16 18:26:59.000048: I model_helper.py:203] Attention penalties mask will be applied for
+2020-07-16 18:26:59.000048: I model_helper.py:205] > Encoder self-attention
+2020-07-16 18:26:59.000048: I model_helper.py:207] > Decoder self-attention
+2020-07-16 18:26:59.000149: I misc_helper.py:161] Loaded ckpt: ./checkpoint/TF_L5_D128_H1024/ckpt-117
+WARNING:tensorflow:From /home/sephiroce/virtualenv/py3-tf2-gpu/lib/python3.6/site-packages/tensorflow/python/data/ops/multi_device_iterator_ops.py:601: get_next_as_optional (from tensorflow.python.data.ops.iterator_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.data.Iterator.get_next_as_optional()` instead.
+WARNING:tensorflow:From /home/sephiroce/virtualenv/py3-tf2-gpu/lib/python3.6/site-packages/tensorflow/python/ops/ctc_ops.py:1408: alias_inplace_add (from tensorflow.python.ops.inplace_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Prefer tf.tensor_scatter_nd_add, which offers the same functionality with well-defined read-write semantics.
+WARNING:tensorflow:From /home/sephiroce/virtualenv/py3-tf2-gpu/lib/python3.6/site-packages/tensorflow/python/ops/ctc_ops.py:1391: alias_inplace_update (from tensorflow.python.ops.inplace_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Prefer tf.tensor_scatter_nd_update, which offers the same functionality with well-defined read-write semantics.
+2020-07-16 18:27:06.121883: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcublas.so.10
+2020-07-16 18:27:06.542795: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudnn.so.7
+Model: "conv_encoder"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+encoder_block (EncoderBlock) multiple                  329472    
+_________________________________________________________________
+encoder_block_1 (EncoderBloc multiple                  329472    
+_________________________________________________________________
+encoder_block_2 (EncoderBloc multiple                  329472    
+_________________________________________________________________
+encoder_block_3 (EncoderBloc multiple                  329472    
+_________________________________________________________________
+encoder_block_4 (EncoderBloc multiple                  329472    
+_________________________________________________________________
+layer_normalization_15 (Laye multiple                  256       
+_________________________________________________________________
+lambda (Lambda)              multiple                  0         
+_________________________________________________________________
+capsulation_layer (Capsulati multiple                  75648     
+_________________________________________________________________
+reshape_to_ffwd (Reshape)    multiple                  0         
+_________________________________________________________________
+dense_30 (Dense)             multiple                  254080    
+_________________________________________________________________
+dropout_19 (Dropout)         multiple                  0         
+_________________________________________________________________
+dense_31 (Dense)             multiple                  8127      
+=================================================================
+Total params: 1,985,471
+Trainable params: 1,985,215
+Non-trainable params: 256
+_________________________________________________________________
+Average Loss 22.0686779
+2020-07-16 18:27:11.489970: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.10.1
+2020-07-16 18:27:12.393816: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcuda.so.1
+2020-07-16 18:27:13.194477: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties: 
+pciBusID: 0000:65:00.0 name: GeForce RTX 2080 Ti computeCapability: 7.5
+coreClock: 1.635GHz coreCount: 68 deviceMemorySize: 10.76GiB deviceMemoryBandwidth: 573.69GiB/s
+2020-07-16 18:27:13.194510: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.10.1
+2020-07-16 18:27:13.195673: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcublas.so.10
+2020-07-16 18:27:13.196785: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcufft.so.10
+2020-07-16 18:27:13.196988: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcurand.so.10
+2020-07-16 18:27:13.198144: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcusolver.so.10
+2020-07-16 18:27:13.198788: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcusparse.so.10
+2020-07-16 18:27:13.201283: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudnn.so.7
+2020-07-16 18:27:13.202043: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1858] Adding visible gpu devices: 0
+2020-07-16 18:27:13.000204: I common_helper.py:233] ********************************************
+2020-07-16 18:27:13.000204: I common_helper.py:234]         Settings for Transformer ASR
+2020-07-16 18:27:13.000204: I common_helper.py:235] ********************************************
+2020-07-16 18:27:13.000204: I common_helper.py:241] . CONFIG
+2020-07-16 18:27:13.000204: I common_helper.py:244] - config=samples/conf/stf_timit.conf
+2020-07-16 18:27:13.000204: I common_helper.py:241] . DECODING
+2020-07-16 18:27:13.000204: I common_helper.py:244] - decoding_beam_width=100
+2020-07-16 18:27:13.000204: I common_helper.py:244] - decoding_from_npy=False
+2020-07-16 18:27:13.000204: I common_helper.py:244] - decoding_lp_alpha=None
+2020-07-16 18:27:13.000204: I common_helper.py:241] . FEAT
+2020-07-16 18:27:13.000204: I common_helper.py:244] - feat_dim=123
+2020-07-16 18:27:13.000204: I common_helper.py:244] - feat_dim1=None
+2020-07-16 18:27:13.000204: I common_helper.py:244] - feat_dim2=None
+2020-07-16 18:27:13.000204: I common_helper.py:244] - feat_type=graves13
+2020-07-16 18:27:13.000204: I common_helper.py:241] . MODEL
+2020-07-16 18:27:13.000204: I common_helper.py:244] - model_ap_decoder=True
+2020-07-16 18:27:13.000204: I common_helper.py:244] - model_ap_encdec=False
+2020-07-16 18:27:13.000204: I common_helper.py:244] - model_ap_encoder=True
+2020-07-16 18:27:13.000204: I common_helper.py:244] - model_ap_scale=1.0
+2020-07-16 18:27:13.000204: I common_helper.py:244] - model_ap_width_stripe=1
+2020-07-16 18:27:13.000204: I common_helper.py:244] - model_ap_width_zero=1
+2020-07-16 18:27:13.000204: I common_helper.py:244] - model_att_head_num=4
+2020-07-16 18:27:13.000204: I common_helper.py:244] - model_average_num=10
+2020-07-16 18:27:13.000204: I common_helper.py:244] - model_caps_class_dim=64
+2020-07-16 18:27:13.000204: I common_helper.py:244] - model_caps_context=True
+2020-07-16 18:27:13.000204: I common_helper.py:244] - model_caps_convolution_dim=4
+2020-07-16 18:27:13.000204: I common_helper.py:244] - model_caps_convolution_num=4
+2020-07-16 18:27:13.000204: I common_helper.py:244] - model_caps_iter=2
+2020-07-16 18:27:13.000204: I common_helper.py:244] - model_caps_layernorm=True
+2020-07-16 18:27:13.000204: I common_helper.py:244] - model_caps_norm=None
+2020-07-16 18:27:13.000204: I common_helper.py:244] - model_caps_primary_dim=2
+2020-07-16 18:27:13.000204: I common_helper.py:244] - model_caps_primary_num=3
+2020-07-16 18:27:13.000204: I common_helper.py:244] - model_caps_recon=False
+2020-07-16 18:27:13.000204: I common_helper.py:244] - model_caps_routing_type=dr
+2020-07-16 18:27:13.000204: I common_helper.py:244] - model_caps_seq_type=None
+2020-07-16 18:27:13.000204: I common_helper.py:244] - model_caps_stride=1
+2020-07-16 18:27:13.000204: I common_helper.py:244] - model_caps_stride_n=2
+2020-07-16 18:27:13.000204: I common_helper.py:244] - model_caps_window=3
+2020-07-16 18:27:13.000204: I common_helper.py:244] - model_caps_window_even=True
+2020-07-16 18:27:13.000204: I common_helper.py:244] - model_caps_window_lpad=None
+2020-07-16 18:27:13.000204: I common_helper.py:244] - model_caps_window_rpad=None
+2020-07-16 18:27:13.000205: I common_helper.py:244] - model_ckpt_max_to_keep=-1
+2020-07-16 18:27:13.000205: I common_helper.py:244] - model_conv_filter_num=64
+2020-07-16 18:27:13.000205: I common_helper.py:244] - model_conv_layer_num=2
+2020-07-16 18:27:13.000205: I common_helper.py:244] - model_conv_mask_type=0
+2020-07-16 18:27:13.000205: I common_helper.py:244] - model_conv_stride=2
+2020-07-16 18:27:13.000205: I common_helper.py:244] - model_decoder_num=None
+2020-07-16 18:27:13.000205: I common_helper.py:244] - model_dimension=128
+2020-07-16 18:27:13.000205: I common_helper.py:244] - model_emb_sqrt=True
+2020-07-16 18:27:13.000205: I common_helper.py:244] - model_encoder_num=5
+2020-07-16 18:27:13.000205: I common_helper.py:244] - model_initializer=fan_avg
+2020-07-16 18:27:13.000205: I common_helper.py:244] - model_inner_dim=1024
+2020-07-16 18:27:13.000205: I common_helper.py:244] - model_res_dec=1
+2020-07-16 18:27:13.000205: I common_helper.py:244] - model_res_enc=1
+2020-07-16 18:27:13.000205: I common_helper.py:244] - model_shared_embed=False
+2020-07-16 18:27:13.000205: I common_helper.py:244] - model_type=stf
+2020-07-16 18:27:13.000205: I common_helper.py:241] . PATH
+2020-07-16 18:27:13.000205: I common_helper.py:244] - path_base=/data/timit
+2020-07-16 18:27:13.000205: I common_helper.py:244] - path_ckpt=./checkpoint/TF_L5_D128_H1024
+2020-07-16 18:27:13.000205: I common_helper.py:244] - path_ckpt_epoch=0
+2020-07-16 18:27:13.000205: I common_helper.py:244] - path_cmvn_ptrn=None
+2020-07-16 18:27:13.000205: I common_helper.py:244] - path_hyp=None
+2020-07-16 18:27:13.000205: I common_helper.py:244] - path_test_json=None
+2020-07-16 18:27:13.000205: I common_helper.py:244] - path_test_ptrn=tfrecord_graves13/timit-test-None-123-*-of-*
+2020-07-16 18:27:13.000205: I common_helper.py:244] - path_train_json=None
+2020-07-16 18:27:13.000205: I common_helper.py:244] - path_train_ptrn=tfrecord_graves13/timit-train-None-123-*-of-*
+2020-07-16 18:27:13.000205: I common_helper.py:244] - path_valid_json=None
+2020-07-16 18:27:13.000205: I common_helper.py:244] - path_valid_ptrn=tfrecord_graves13/timit-valid-None-123-*-of-*
+2020-07-16 18:27:13.000205: I common_helper.py:244] - path_vocab=samples/data/timit_61.vocab
+2020-07-16 18:27:13.000205: I common_helper.py:244] - path_wrt_tfrecord=None
+2020-07-16 18:27:13.000205: I common_helper.py:241] . PREP
+2020-07-16 18:27:13.000205: I common_helper.py:244] - prep_data_bos=True
+2020-07-16 18:27:13.000205: I common_helper.py:244] - prep_data_name=wsj
+2020-07-16 18:27:13.000205: I common_helper.py:244] - prep_data_pad_space=True
+2020-07-16 18:27:13.000205: I common_helper.py:244] - prep_data_shard=100
+2020-07-16 18:27:13.000205: I common_helper.py:244] - prep_data_unit=word
+2020-07-16 18:27:13.000205: I common_helper.py:244] - prep_max_inp=-1
+2020-07-16 18:27:13.000205: I common_helper.py:244] - prep_max_tar=-1
+2020-07-16 18:27:13.000205: I common_helper.py:241] . TRAIN
+2020-07-16 18:27:13.000205: I common_helper.py:244] - train_adam_beta1=0.9
+2020-07-16 18:27:13.000205: I common_helper.py:244] - train_adam_beta2=0.98
+2020-07-16 18:27:13.000205: I common_helper.py:244] - train_adam_epsilon=1e-09
+2020-07-16 18:27:13.000205: I common_helper.py:244] - train_att_dropout=0.3
+2020-07-16 18:27:13.000205: I common_helper.py:244] - train_batch_dynamic=True
+2020-07-16 18:27:13.000205: I common_helper.py:244] - train_batch_frame=20000
+2020-07-16 18:27:13.000205: I common_helper.py:244] - train_batch_size=26
+2020-07-16 18:27:13.000205: I common_helper.py:244] - train_ckpt_saving_per=1
+2020-07-16 18:27:13.000205: I common_helper.py:244] - train_es_min_delta=0.001
+2020-07-16 18:27:13.000205: I common_helper.py:244] - train_es_tolerance=200
+2020-07-16 18:27:13.000205: I common_helper.py:244] - train_inn_dropout=0.4
+2020-07-16 18:27:13.000205: I common_helper.py:244] - train_inp_dropout=0.3
+2020-07-16 18:27:13.000205: I common_helper.py:244] - train_is_mwer=False
+2020-07-16 18:27:13.000205: I common_helper.py:244] - train_lr_param_k=0.5
+2020-07-16 18:27:13.000205: I common_helper.py:244] - train_max_epoch=200
+2020-07-16 18:27:13.000205: I common_helper.py:244] - train_max_step=0
+2020-07-16 18:27:13.000205: I common_helper.py:244] - train_ppl_step=1
+2020-07-16 18:27:13.000205: I common_helper.py:244] - train_res_dropout=0.4
+2020-07-16 18:27:13.000205: I common_helper.py:244] - train_schedule_prob=None
+2020-07-16 18:27:13.000205: I common_helper.py:244] - train_smoothing_confidence=0.0
+2020-07-16 18:27:13.000205: I common_helper.py:244] - train_smoothing_type=neighbor
+2020-07-16 18:27:13.000205: I common_helper.py:244] - train_warmup_n=1000
+2020-07-16 18:27:13.000205: I common_helper.py:245] *********************************************
+2020-07-16 18:27:13.000206: C misc_helper.py:93] Last index must be BOS: @, but zh
+2020-07-16 18:27:13.000206: I misc_helper.py:106] Decoder Input Dim: 62, Output Dim 62
+2020-07-16 18:27:13.000206: I trainer_tf.py:180] The modified output Dimension 63, blank index 62
+2020-07-16 18:27:13.228959: I tensorflow/core/platform/profile_utils/cpu_utils.cc:104] CPU Frequency: 3699850000 Hz
+2020-07-16 18:27:13.229711: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x58e12a0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-07-16 18:27:13.229735: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+2020-07-16 18:27:13.285949: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x58e3600 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2020-07-16 18:27:13.286005: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): GeForce RTX 2080 Ti, Compute Capability 7.5
+2020-07-16 18:27:13.287415: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties: 
+pciBusID: 0000:65:00.0 name: GeForce RTX 2080 Ti computeCapability: 7.5
+coreClock: 1.635GHz coreCount: 68 deviceMemorySize: 10.76GiB deviceMemoryBandwidth: 573.69GiB/s
+2020-07-16 18:27:13.287468: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.10.1
+2020-07-16 18:27:13.287507: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcublas.so.10
+2020-07-16 18:27:13.287551: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcufft.so.10
+2020-07-16 18:27:13.287580: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcurand.so.10
+2020-07-16 18:27:13.287608: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcusolver.so.10
+2020-07-16 18:27:13.287635: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcusparse.so.10
+2020-07-16 18:27:13.287663: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudnn.so.7
+2020-07-16 18:27:13.289163: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1858] Adding visible gpu devices: 0
+2020-07-16 18:27:13.289204: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.10.1
+2020-07-16 18:27:13.630373: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1257] Device interconnect StreamExecutor with strength 1 edge matrix:
+2020-07-16 18:27:13.630405: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1263]      0 
+2020-07-16 18:27:13.630410: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1276] 0:   N 
+2020-07-16 18:27:13.631283: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1402] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 5541 MB memory) -> physical GPU (device: 0, name: GeForce RTX 2080 Ti, pci bus id: 0000:65:00.0, compute capability: 7.5)
+2020-07-16 18:27:13.631728: I tensorflow/core/common_runtime/process_util.cc:146] Creating new thread pool with default inter op setting: 2. Tune using inter_op_parallelism_threads for best performance.
+2020-07-16 18:27:13.000633: I data_helper.py:57] bucket_boundaries: [300, 500, 700, 900, 1100, 1300, 1500, 1700, 1900, 2100, 2300, 2500, 2700, 2900, 3100, 3300, 3500, 3700, 3900, 4100, 4300, 4500, 4700, 4900, 5100, 5300, 5500, 5700, 5900, 6100, 6300, 6500, 6700, 6900, 7100, 7300, 7500, 7700, 7900, 8100, 8300, 8500, 8700, 8900, 9100, 9300, 9500, 9700, 9900]
+2020-07-16 18:27:13.000633: I data_helper.py:59] bucket_batch_sizes: [66, 40, 28, 22, 18, 15, 13, 11, 10, 9, 8, 8, 7, 6, 6, 6, 5, 5, 5, 4, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1]
+2020-07-16 18:27:13.000939: I data_helper.py:31] Batch size for test will be set to 1
+2020-07-16 18:27:16.000930: I model_helper.py:202] An attention penalty board was built with a zero width 1, a stripe width 1 and a scale factor 1.000000
+2020-07-16 18:27:16.000930: I model_helper.py:203] Attention penalties mask will be applied for
+2020-07-16 18:27:16.000930: I model_helper.py:205] > Encoder self-attention
+2020-07-16 18:27:16.000930: I model_helper.py:207] > Decoder self-attention
+2020-07-16 18:27:17.000023: I misc_helper.py:161] Loaded ckpt: ./checkpoint/TF_L5_D128_H1024/ckpt-117
+WARNING:tensorflow:From /home/sephiroce/virtualenv/py3-tf2-gpu/lib/python3.6/site-packages/tensorflow/python/data/ops/multi_device_iterator_ops.py:601: get_next_as_optional (from tensorflow.python.data.ops.iterator_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.data.Iterator.get_next_as_optional()` instead.
+WARNING:tensorflow:From /home/sephiroce/virtualenv/py3-tf2-gpu/lib/python3.6/site-packages/tensorflow/python/ops/ctc_ops.py:1408: alias_inplace_add (from tensorflow.python.ops.inplace_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Prefer tf.tensor_scatter_nd_add, which offers the same functionality with well-defined read-write semantics.
+WARNING:tensorflow:From /home/sephiroce/virtualenv/py3-tf2-gpu/lib/python3.6/site-packages/tensorflow/python/ops/ctc_ops.py:1391: alias_inplace_update (from tensorflow.python.ops.inplace_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Prefer tf.tensor_scatter_nd_update, which offers the same functionality with well-defined read-write semantics.
+2020-07-16 18:27:20.000621: I trainer_tf.py:253] Epoch 118 Train Loss 22.1496, 33.577 secs, 15254 feats/step, 8496/0 steps
+2020-07-16 18:27:23.000609: I trainer_tf.py:265] Epoch 118 Valid Loss 33.7776, 2.988 secs, improved
+2020-07-16 18:27:23.000721: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-118
+2020-07-16 18:27:24.046672: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcublas.so.10
+Average Loss 25.7529392
+2020-07-16 18:27:24.487907: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudnn.so.7
+Model: "conv_encoder"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+encoder_block (EncoderBlock) multiple                  329472    
+_________________________________________________________________
+encoder_block_1 (EncoderBloc multiple                  329472    
+_________________________________________________________________
+encoder_block_2 (EncoderBloc multiple                  329472    
+_________________________________________________________________
+encoder_block_3 (EncoderBloc multiple                  329472    
+_________________________________________________________________
+encoder_block_4 (EncoderBloc multiple                  329472    
+_________________________________________________________________
+layer_normalization_15 (Laye multiple                  256       
+_________________________________________________________________
+lambda (Lambda)              multiple                  0         
+_________________________________________________________________
+capsulation_layer (Capsulati multiple                  75648     
+_________________________________________________________________
+reshape_to_ffwd (Reshape)    multiple                  0         
+_________________________________________________________________
+dense_30 (Dense)             multiple                  254080    
+_________________________________________________________________
+dropout_19 (Dropout)         multiple                  0         
+_________________________________________________________________
+dense_31 (Dense)             multiple                  8127      
+=================================================================
+Total params: 1,985,471
+Trainable params: 1,985,215
+Non-trainable params: 256
+_________________________________________________________________
+Average Loss 21.8556633
+Average Loss 22.2637329
+2020-07-16 18:27:57.000546: I trainer_tf.py:253] Epoch 119 Train Loss 22.0199, 33.815 secs, 15267 feats/step, 8568/0 steps
+2020-07-16 18:28:00.000906: I trainer_tf.py:265] Epoch 119 Valid Loss 34.0690, 3.359 secs, improved
+2020-07-16 18:28:01.000203: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-119
+Average Loss 20.9502487
+Average Loss 18.1679668
+2020-07-16 18:28:16.000111: I trainer_tf.py:253] Epoch 118 Train Loss 21.2427, 47.937 secs, 15259 feats/step, 8496/0 steps
+2020-07-16 18:28:18.000936: I trainer_tf.py:265] Epoch 118 Valid Loss 33.9301, 2.824 secs, improved
+2020-07-16 18:28:19.000216: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-118
+Average Loss 20.0324345
+Average Loss 21.828474
+2020-07-16 18:28:40.000124: I trainer_tf.py:253] Epoch 120 Train Loss 21.8067, 38.902 secs, 15267 feats/step, 8640/0 steps
+2020-07-16 18:28:43.000227: I trainer_tf.py:265] Epoch 120 Valid Loss 34.2815, 3.102 secs, improved
+Average Loss 21.0293865
+2020-07-16 18:28:43.000343: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-120
+Average Loss 21.9271469
+2020-07-16 18:28:51.000463: I trainer_tf.py:253] Epoch 119 Train Loss 21.0648, 32.243 secs, 15270 feats/step, 8568/0 steps
+2020-07-16 18:28:53.000936: I trainer_tf.py:265] Epoch 119 Valid Loss 34.2396, 2.473 secs, improved
+2020-07-16 18:28:54.000134: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-119
+Average Loss 26.2321529
+Average Loss 21.9997654
+Average Loss 21.1565742
+2020-07-16 18:29:19.000456: I trainer_tf.py:253] Epoch 121 Train Loss 22.1791, 36.098 secs, 15266 feats/step, 8712/0 steps
+2020-07-16 18:29:21.000032: I trainer_tf.py:253] Epoch 120 Train Loss 21.3283, 26.893 secs, 15270 feats/step, 8640/0 steps
+2020-07-16 18:29:22.000575: I trainer_tf.py:265] Epoch 121 Valid Loss 33.8442, 3.119 secs, improved
+2020-07-16 18:29:22.000682: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-121
+2020-07-16 18:29:23.000295: I trainer_tf.py:265] Epoch 120 Valid Loss 33.8486, 2.260 secs, improved
+Average Loss 25.4867916
+2020-07-16 18:29:23.000500: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-120
+Average Loss 19.289465
+Average Loss 21.3736362
+Average Loss 21.7562122
+2020-07-16 18:29:52.000821: I trainer_tf.py:253] Epoch 121 Train Loss 21.5123, 29.307 secs, 15266 feats/step, 8712/0 steps
+2020-07-16 18:29:55.000141: I trainer_tf.py:265] Epoch 121 Valid Loss 34.1569, 2.320 secs, improved
+2020-07-16 18:29:55.000412: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-121
+Average Loss 22.3277397
+2020-07-16 18:29:56.000733: I trainer_tf.py:253] Epoch 122 Train Loss 21.7972, 34.035 secs, 15261 feats/step, 8784/0 steps
+2020-07-16 18:29:59.000830: I trainer_tf.py:265] Epoch 122 Valid Loss 34.0193, 3.094 secs, improved
+2020-07-16 18:29:59.000924: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-122
+Average Loss 21.422884
+Average Loss 21.2019482
+Average Loss 21.4849911
+2020-07-16 18:30:30.000034: I trainer_tf.py:253] Epoch 122 Train Loss 21.1703, 34.616 secs, 15258 feats/step, 8784/0 steps
+2020-07-16 18:30:33.000342: I trainer_tf.py:265] Epoch 122 Valid Loss 34.3085, 3.306 secs, improved
+2020-07-16 18:30:33.000532: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-122
+2020-07-16 18:30:34.000299: I trainer_tf.py:253] Epoch 123 Train Loss 21.6968, 34.369 secs, 15253 feats/step, 8856/0 steps
+Average Loss 23.4852619
+2020-07-16 18:30:37.000532: I trainer_tf.py:265] Epoch 123 Valid Loss 34.0403, 3.233 secs, improved
+2020-07-16 18:30:37.000657: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-123
+Average Loss 23.4814072
+Average Loss 20.7972736
+Average Loss 21.725172
+2020-07-16 18:31:10.000123: I trainer_tf.py:253] Epoch 123 Train Loss 21.0917, 36.585 secs, 15258 feats/step, 8856/0 steps
+2020-07-16 18:31:12.000871: I trainer_tf.py:253] Epoch 124 Train Loss 21.8423, 35.199 secs, 15263 feats/step, 8928/0 steps
+2020-07-16 18:31:13.000327: I trainer_tf.py:265] Epoch 123 Valid Loss 34.1477, 3.204 secs, improved
+2020-07-16 18:31:13.000560: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-123
+Average Loss 22.1103725
+2020-07-16 18:31:16.000031: I trainer_tf.py:265] Epoch 124 Valid Loss 34.0937, 3.159 secs, improved
+2020-07-16 18:31:16.000162: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-124
+Average Loss 22.3041897
+Average Loss 21.2097111
+Average Loss 21.4973297
+2020-07-16 18:31:49.000427: I trainer_tf.py:253] Epoch 124 Train Loss 21.3413, 35.851 secs, 15258 feats/step, 8928/0 steps
+2020-07-16 18:31:51.000825: I trainer_tf.py:253] Epoch 125 Train Loss 21.5549, 35.642 secs, 15263 feats/step, 9000/0 steps
+2020-07-16 18:31:52.000512: I trainer_tf.py:265] Epoch 124 Valid Loss 34.0271, 3.085 secs, improved
+2020-07-16 18:31:52.000719: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-124
+Average Loss 18.7799492
+2020-07-16 18:31:54.000703: I trainer_tf.py:265] Epoch 125 Valid Loss 34.1040, 2.878 secs, improved
+2020-07-16 18:31:54.000879: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-125
+Average Loss 21.7248325
+Average Loss 20.3091755
+Average Loss 21.6421
+2020-07-16 18:32:28.000875: I trainer_tf.py:253] Epoch 125 Train Loss 20.6154, 36.139 secs, 15254 feats/step, 9000/0 steps
+2020-07-16 18:32:31.000805: I trainer_tf.py:253] Epoch 126 Train Loss 21.6126, 36.908 secs, 15260 feats/step, 9072/0 steps
+2020-07-16 18:32:32.000012: I trainer_tf.py:265] Epoch 125 Valid Loss 33.9979, 3.137 secs, improved
+2020-07-16 18:32:32.000251: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-125
+Average Loss 18.737463
+2020-07-16 18:32:34.000762: I trainer_tf.py:265] Epoch 126 Valid Loss 33.8232, 2.957 secs, improved
+2020-07-16 18:32:34.000908: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-126
+Average Loss 28.5603027
+Average Loss 20.8135796
+Average Loss 21.8330421
+2020-07-16 18:33:08.000283: I trainer_tf.py:253] Epoch 126 Train Loss 20.7487, 36.017 secs, 15273 feats/step, 9072/0 steps
+2020-07-16 18:33:10.000996: I trainer_tf.py:253] Epoch 127 Train Loss 21.8774, 36.085 secs, 15263 feats/step, 9144/0 steps
+2020-07-16 18:33:11.000580: I trainer_tf.py:265] Epoch 126 Valid Loss 34.0836, 3.297 secs, improved
+2020-07-16 18:33:11.000815: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-126
+Average Loss 21.4334259
+2020-07-16 18:33:14.000319: I trainer_tf.py:265] Epoch 127 Valid Loss 34.4146, 3.322 secs, tolerance 1
+2020-07-16 18:33:14.000455: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-127
+Average Loss 24.1524906
+Average Loss 20.6135063
+Average Loss 21.3860073
+2020-07-16 18:33:48.000004: I trainer_tf.py:253] Epoch 127 Train Loss 20.8723, 36.185 secs, 15264 feats/step, 9144/0 steps
+2020-07-16 18:33:49.000985: I trainer_tf.py:253] Epoch 128 Train Loss 21.8261, 35.515 secs, 15263 feats/step, 9216/0 steps
+2020-07-16 18:33:50.000691: I trainer_tf.py:265] Epoch 127 Valid Loss 34.3749, 2.686 secs, improved
+2020-07-16 18:33:50.000937: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-127
+Average Loss 21.7099724
+2020-07-16 18:33:53.000201: I trainer_tf.py:265] Epoch 128 Valid Loss 34.0567, 3.216 secs, improved
+2020-07-16 18:33:53.000402: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-128
+Average Loss 15.6342831
+Average Loss 20.573597
+Average Loss 21.9510117
+2020-07-16 18:34:28.000087: I trainer_tf.py:253] Epoch 128 Train Loss 20.7834, 37.144 secs, 15258 feats/step, 9216/0 steps
+2020-07-16 18:34:28.000915: I trainer_tf.py:253] Epoch 129 Train Loss 21.7281, 35.509 secs, 15261 feats/step, 9288/0 steps
+2020-07-16 18:34:31.000348: I trainer_tf.py:265] Epoch 128 Valid Loss 34.3746, 3.260 secs, improved
+2020-07-16 18:34:31.000655: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-128
+2020-07-16 18:34:32.000143: I trainer_tf.py:265] Epoch 129 Valid Loss 33.8207, 3.228 secs, improved
+2020-07-16 18:34:32.000256: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-129
+Average Loss 22.1805973
+Average Loss 23.5467644
+Average Loss 21.1815872
+Average Loss 21.6104794
+2020-07-16 18:35:07.000457: I trainer_tf.py:253] Epoch 130 Train Loss 21.5636, 35.192 secs, 15261 feats/step, 9360/0 steps
+2020-07-16 18:35:07.000847: I trainer_tf.py:253] Epoch 129 Train Loss 20.9928, 36.186 secs, 15255 feats/step, 9288/0 steps
+2020-07-16 18:35:10.000730: I trainer_tf.py:265] Epoch 130 Valid Loss 34.2194, 3.272 secs, tolerance 1
+2020-07-16 18:35:10.000866: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-130
+2020-07-16 18:35:11.000089: I trainer_tf.py:265] Epoch 129 Valid Loss 34.0113, 3.241 secs, improved
+2020-07-16 18:35:11.000330: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-129
+Average Loss 19.0433578
+Average Loss 21.3312569
+Average Loss 20.7264805
+Average Loss 21.1024628
+2020-07-16 18:35:47.000322: I trainer_tf.py:253] Epoch 131 Train Loss 21.2988, 36.447 secs, 15260 feats/step, 9432/0 steps
+2020-07-16 18:35:47.000383: I trainer_tf.py:253] Epoch 130 Train Loss 20.6395, 36.038 secs, 15267 feats/step, 9360/0 steps
+2020-07-16 18:35:50.000374: I trainer_tf.py:265] Epoch 131 Valid Loss 34.4996, 3.052 secs, improved
+2020-07-16 18:35:50.000498: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-131
+2020-07-16 18:35:50.000619: I trainer_tf.py:265] Epoch 130 Valid Loss 34.2881, 3.235 secs, improved
+2020-07-16 18:35:50.000881: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-130
+Average Loss 18.5632477
+Average Loss 21.548214
+Average Loss 21.4800377
+Average Loss 20.4089909
+2020-07-16 18:36:25.000966: I trainer_tf.py:253] Epoch 132 Train Loss 21.7399, 35.463 secs, 15264 feats/step, 9504/0 steps
+2020-07-16 18:36:26.000666: I trainer_tf.py:253] Epoch 131 Train Loss 20.6389, 35.766 secs, 15272 feats/step, 9432/0 steps
+2020-07-16 18:36:29.000194: I trainer_tf.py:265] Epoch 132 Valid Loss 34.2215, 3.228 secs, improved
+2020-07-16 18:36:29.000340: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-132
+2020-07-16 18:36:29.000824: I trainer_tf.py:265] Epoch 131 Valid Loss 34.2301, 3.158 secs, improved
+2020-07-16 18:36:30.000073: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-131
+Average Loss 23.8204327
+Average Loss 16.2334976
+Average Loss 20.972229
+Average Loss 20.2554932
+2020-07-16 18:37:05.000010: I trainer_tf.py:253] Epoch 133 Train Loss 21.1377, 35.654 secs, 15268 feats/step, 9576/0 steps
+2020-07-16 18:37:06.000710: I trainer_tf.py:253] Epoch 132 Train Loss 20.3300, 36.621 secs, 15268 feats/step, 9504/0 steps
+2020-07-16 18:37:08.000279: I trainer_tf.py:265] Epoch 133 Valid Loss 34.2952, 3.268 secs, improved
+2020-07-16 18:37:08.000399: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-133
+Average Loss 23.6339531
+2020-07-16 18:37:09.000334: I trainer_tf.py:265] Epoch 132 Valid Loss 34.3013, 2.624 secs, improved
+2020-07-16 18:37:09.000577: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-132
+Average Loss 23.8117218
+Average Loss 21.2526932
+Average Loss 20.741724
+2020-07-16 18:37:44.000064: I trainer_tf.py:253] Epoch 134 Train Loss 21.3614, 35.650 secs, 15265 feats/step, 9648/0 steps
+2020-07-16 18:37:46.000576: I trainer_tf.py:253] Epoch 133 Train Loss 20.6683, 36.994 secs, 15269 feats/step, 9576/0 steps
+2020-07-16 18:37:47.000354: I trainer_tf.py:265] Epoch 134 Valid Loss 34.1367, 3.289 secs, improved
+2020-07-16 18:37:47.000501: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-134
+Average Loss 20.6649799
+2020-07-16 18:37:49.000897: I trainer_tf.py:265] Epoch 133 Valid Loss 34.1442, 3.319 secs, improved
+2020-07-16 18:37:50.000151: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-133
+Average Loss 23.0852966
+Average Loss 21.0792046
+Average Loss 20.7486591
+2020-07-16 18:38:23.000069: I trainer_tf.py:253] Epoch 135 Train Loss 21.2079, 35.564 secs, 15255 feats/step, 9720/0 steps
+2020-07-16 18:38:25.000871: I trainer_tf.py:253] Epoch 134 Train Loss 20.3900, 35.716 secs, 15265 feats/step, 9648/0 steps
+2020-07-16 18:38:26.000252: I trainer_tf.py:265] Epoch 135 Valid Loss 34.2097, 3.182 secs, improved
+2020-07-16 18:38:26.000356: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-135
+Average Loss 24.6783695
+2020-07-16 18:38:28.000921: I trainer_tf.py:265] Epoch 134 Valid Loss 34.1123, 3.049 secs, improved
+2020-07-16 18:38:29.000168: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-134
+Average Loss 25.0821304
+Average Loss 21.1633759
+Average Loss 20.6037197
+2020-07-16 18:39:02.000897: I trainer_tf.py:253] Epoch 136 Train Loss 21.3666, 36.530 secs, 15268 feats/step, 9792/0 steps
+2020-07-16 18:39:04.000900: I trainer_tf.py:253] Epoch 135 Train Loss 20.6973, 35.727 secs, 15262 feats/step, 9720/0 steps
+2020-07-16 18:39:06.000043: I trainer_tf.py:265] Epoch 136 Valid Loss 34.3174, 3.145 secs, improved
+2020-07-16 18:39:06.000196: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-136
+Average Loss 26.1302738
+2020-07-16 18:39:08.000102: I trainer_tf.py:265] Epoch 135 Valid Loss 34.4357, 3.202 secs, improved
+2020-07-16 18:39:08.000325: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-135
+Average Loss 23.7338181
+Average Loss 21.143528
+Average Loss 20.667223
+2020-07-16 18:39:41.000632: I trainer_tf.py:253] Epoch 137 Train Loss 21.4069, 35.432 secs, 15266 feats/step, 9864/0 steps
+2020-07-16 18:39:42.000892: I trainer_tf.py:253] Epoch 136 Train Loss 20.4883, 34.563 secs, 15254 feats/step, 9792/0 steps
+2020-07-16 18:39:44.000763: I trainer_tf.py:265] Epoch 137 Valid Loss 34.3315, 3.131 secs, improved
+2020-07-16 18:39:44.000904: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-137
+2020-07-16 18:39:45.000208: I trainer_tf.py:265] Epoch 136 Valid Loss 34.2906, 2.315 secs, improved
+2020-07-16 18:39:45.000440: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-136
+Average Loss 20.2321873
+Average Loss 24.372
+Average Loss 19.5435658
+Average Loss 21.5923309
+2020-07-16 18:40:07.000646: I trainer_tf.py:253] Epoch 137 Train Loss 20.0216, 22.201 secs, 15265 feats/step, 9864/0 steps
+2020-07-16 18:40:09.000637: I trainer_tf.py:265] Epoch 137 Valid Loss 34.4314, 1.989 secs, improved
+2020-07-16 18:40:09.000843: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-137
+Average Loss 14.308466
+2020-07-16 18:40:15.000862: I trainer_tf.py:253] Epoch 138 Train Loss 21.5216, 30.942 secs, 15263 feats/step, 9936/0 steps
+2020-07-16 18:40:18.000397: I trainer_tf.py:265] Epoch 138 Valid Loss 34.2193, 2.535 secs, improved
+2020-07-16 18:40:18.000503: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-138
+Average Loss 21.3164082
+Average Loss 20.5255604
+2020-07-16 18:40:31.000841: I trainer_tf.py:253] Epoch 138 Train Loss 20.4176, 21.990 secs, 15267 feats/step, 9936/0 steps
+2020-07-16 18:40:33.000784: I trainer_tf.py:265] Epoch 138 Valid Loss 34.2071, 1.943 secs, improved
+2020-07-16 18:40:33.000993: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-138
+Average Loss 21.3175316
+Average Loss 21.0491428
+Average Loss 20.3730087
+2020-07-16 18:40:49.000804: I trainer_tf.py:253] Epoch 139 Train Loss 21.0700, 31.286 secs, 15257 feats/step, 10008/0 steps
+2020-07-16 18:40:52.000228: I trainer_tf.py:265] Epoch 139 Valid Loss 34.3473, 2.423 secs, improved
+2020-07-16 18:40:52.000348: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-139
+Average Loss 24.8659267
+2020-07-16 18:40:56.000458: I trainer_tf.py:253] Epoch 139 Train Loss 20.2242, 22.449 secs, 15261 feats/step, 10008/0 steps
+2020-07-16 18:41:00.000403: I trainer_tf.py:265] Epoch 139 Valid Loss 34.1554, 3.940 secs, improved
+2020-07-16 18:41:00.000659: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-139
+Average Loss 21.0351982
+Average Loss 21.1271954
+Average Loss 20.3984089
+2020-07-16 18:41:26.000554: I trainer_tf.py:253] Epoch 140 Train Loss 21.3354, 34.199 secs, 15253 feats/step, 10080/0 steps
+2020-07-16 18:41:29.000370: I trainer_tf.py:253] Epoch 140 Train Loss 20.1100, 28.684 secs, 15265 feats/step, 10080/0 steps
+2020-07-16 18:41:29.000782: I trainer_tf.py:265] Epoch 140 Valid Loss 34.4014, 3.227 secs, improved
+2020-07-16 18:41:29.000912: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-140
+Average Loss 24.1408615
+2020-07-16 18:41:32.000069: I trainer_tf.py:265] Epoch 140 Valid Loss 34.5146, 2.699 secs, tolerance 1
+2020-07-16 18:41:32.000320: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-140
+Average Loss 15.2829113
+Average Loss 19.7344952
+Average Loss 20.920927
+2020-07-16 18:42:04.000061: I trainer_tf.py:253] Epoch 141 Train Loss 20.1015, 31.735 secs, 15263 feats/step, 10152/0 steps
+2020-07-16 18:42:05.000777: I trainer_tf.py:253] Epoch 141 Train Loss 21.0137, 35.848 secs, 15256 feats/step, 10152/0 steps
+2020-07-16 18:42:06.000811: I trainer_tf.py:265] Epoch 141 Valid Loss 34.4609, 2.750 secs, improved
+2020-07-16 18:42:07.000056: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-141
+Average Loss 19.6396065
+2020-07-16 18:42:09.000014: I trainer_tf.py:265] Epoch 141 Valid Loss 34.3200, 3.236 secs, improved
+2020-07-16 18:42:09.000278: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-141
+Average Loss 19.5055447
+Average Loss 20.3636
+Average Loss 20.7566128
+2020-07-16 18:42:38.000323: I trainer_tf.py:253] Epoch 142 Train Loss 20.4355, 31.261 secs, 15268 feats/step, 10224/0 steps
+2020-07-16 18:42:41.000128: I trainer_tf.py:265] Epoch 142 Valid Loss 34.2562, 2.804 secs, improved
+2020-07-16 18:42:41.000222: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-142
+Average Loss 19.6833534
+2020-07-16 18:42:44.000054: I trainer_tf.py:253] Epoch 142 Train Loss 20.9364, 34.769 secs, 15260 feats/step, 10224/0 steps
+2020-07-16 18:42:47.000352: I trainer_tf.py:265] Epoch 142 Valid Loss 34.6664, 3.295 secs, tolerance 1
+2020-07-16 18:42:47.000640: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-142
+Average Loss 15.7841597
+Average Loss 20.2510738
+Average Loss 20.9088364
+2020-07-16 18:43:12.000731: I trainer_tf.py:253] Epoch 143 Train Loss 20.2229, 31.504 secs, 15260 feats/step, 10296/0 steps
+2020-07-16 18:43:15.000517: I trainer_tf.py:265] Epoch 143 Valid Loss 34.2693, 2.784 secs, improved
+2020-07-16 18:43:15.000664: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-143
+Average Loss 21.5296345
+2020-07-16 18:43:22.000395: I trainer_tf.py:253] Epoch 143 Train Loss 21.1072, 34.751 secs, 15265 feats/step, 10296/0 steps
+2020-07-16 18:43:25.000698: I trainer_tf.py:265] Epoch 143 Valid Loss 34.5647, 3.303 secs, improved
+2020-07-16 18:43:25.000994: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-143
+Average Loss 22.4906502
+Average Loss 20.1761646
+2020-07-16 18:43:47.000022: I trainer_tf.py:253] Epoch 144 Train Loss 20.0983, 31.353 secs, 15266 feats/step, 10368/0 steps
+2020-07-16 18:43:49.000685: I trainer_tf.py:265] Epoch 144 Valid Loss 34.4341, 2.662 secs, improved
+2020-07-16 18:43:49.000809: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-144
+Average Loss 20.680109
+Average Loss 23.4663696
+2020-07-16 18:44:00.000853: I trainer_tf.py:253] Epoch 144 Train Loss 20.7238, 34.843 secs, 15263 feats/step, 10368/0 steps
+2020-07-16 18:44:04.000105: I trainer_tf.py:265] Epoch 144 Valid Loss 34.5690, 3.252 secs, improved
+2020-07-16 18:44:04.000368: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-144
+Average Loss 24.8218384
+Average Loss 20.3871193
+2020-07-16 18:44:18.000580: I trainer_tf.py:253] Epoch 145 Train Loss 20.2306, 28.768 secs, 15256 feats/step, 10440/0 steps
+2020-07-16 18:44:21.000019: I trainer_tf.py:265] Epoch 145 Valid Loss 34.1338, 2.439 secs, improved
+2020-07-16 18:44:21.000131: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-145
+Average Loss 24.1557255
+Average Loss 20.5983925
+2020-07-16 18:44:38.000476: I trainer_tf.py:253] Epoch 145 Train Loss 20.6901, 34.104 secs, 15262 feats/step, 10440/0 steps
+Average Loss 19.4146519
+2020-07-16 18:44:41.000613: I trainer_tf.py:265] Epoch 145 Valid Loss 34.2165, 3.136 secs, improved
+2020-07-16 18:44:41.000845: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-145
+Average Loss 21.6501217
+2020-07-16 18:44:49.000907: I trainer_tf.py:253] Epoch 146 Train Loss 19.9287, 28.771 secs, 15271 feats/step, 10512/0 steps
+2020-07-16 18:44:52.000407: I trainer_tf.py:265] Epoch 146 Valid Loss 34.7116, 2.500 secs, tolerance 1
+2020-07-16 18:44:52.000571: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-146
+Average Loss 23.8864708
+Average Loss 20.9849415
+Average Loss 20.0280704
+2020-07-16 18:45:16.000545: I trainer_tf.py:253] Epoch 146 Train Loss 20.9282, 34.695 secs, 15254 feats/step, 10512/0 steps
+2020-07-16 18:45:19.000672: I trainer_tf.py:253] Epoch 147 Train Loss 19.9103, 27.097 secs, 15259 feats/step, 10584/0 steps
+2020-07-16 18:45:19.000714: I trainer_tf.py:265] Epoch 146 Valid Loss 34.4468, 3.167 secs, improved
+2020-07-16 18:45:19.000971: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-146
+Average Loss 23.828022
+2020-07-16 18:45:21.000959: I trainer_tf.py:265] Epoch 147 Valid Loss 34.4937, 2.286 secs, improved
+2020-07-16 18:45:22.000046: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-147
+Average Loss 17.1724758
+Average Loss 19.9702473
+Average Loss 21.3780327
+2020-07-16 18:45:48.000506: I trainer_tf.py:253] Epoch 148 Train Loss 20.1379, 26.455 secs, 15261 feats/step, 10656/0 steps
+2020-07-16 18:45:50.000914: I trainer_tf.py:265] Epoch 148 Valid Loss 34.3406, 2.408 secs, improved
+2020-07-16 18:45:51.000050: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-148
+Average Loss 22.1291389
+2020-07-16 18:45:54.000302: I trainer_tf.py:253] Epoch 147 Train Loss 20.8657, 34.315 secs, 15260 feats/step, 10584/0 steps
+2020-07-16 18:45:57.000524: I trainer_tf.py:265] Epoch 147 Valid Loss 34.3479, 3.221 secs, improved
+2020-07-16 18:45:57.000733: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-147
+Average Loss 22.9738731
+Average Loss 19.4712677
+2020-07-16 18:46:12.000042: I trainer_tf.py:253] Epoch 149 Train Loss 19.7518, 20.989 secs, 15262 feats/step, 10728/0 steps
+2020-07-16 18:46:13.000426: I trainer_tf.py:265] Epoch 149 Valid Loss 34.4495, 1.384 secs, improved
+2020-07-16 18:46:13.000541: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-149
+Average Loss 17.3002548
+Average Loss 20.9623966
+Average Loss 19.2542362
+2020-07-16 18:46:30.000807: I trainer_tf.py:253] Epoch 150 Train Loss 19.5657, 17.263 secs, 15264 feats/step, 10800/0 steps
+2020-07-16 18:46:31.000755: I trainer_tf.py:253] Epoch 148 Train Loss 20.7245, 34.019 secs, 15259 feats/step, 10656/0 steps
+2020-07-16 18:46:32.000810: I trainer_tf.py:265] Epoch 150 Valid Loss 34.6055, 2.001 secs, improved
+2020-07-16 18:46:32.000929: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-150
+Average Loss 15.9242258
+2020-07-16 18:46:34.000953: I trainer_tf.py:265] Epoch 148 Valid Loss 34.5271, 3.197 secs, improved
+2020-07-16 18:46:35.000204: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-148
+Average Loss 21.0318604
+Average Loss 19.797163
+Average Loss 20.9749279
+2020-07-16 18:47:01.000717: I trainer_tf.py:253] Epoch 151 Train Loss 19.9774, 28.785 secs, 15250 feats/step, 10872/0 steps
+2020-07-16 18:47:03.000706: I trainer_tf.py:265] Epoch 151 Valid Loss 34.5207, 1.989 secs, improved
+2020-07-16 18:47:03.000817: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-151
+Average Loss 22.5311069
+2020-07-16 18:47:10.000528: I trainer_tf.py:253] Epoch 149 Train Loss 20.9215, 35.319 secs, 15259 feats/step, 10728/0 steps
+2020-07-16 18:47:13.000833: I trainer_tf.py:265] Epoch 149 Valid Loss 34.7010, 3.304 secs, improved
+2020-07-16 18:47:14.000076: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-149
+Average Loss 26.0152168
+Average Loss 19.9287224
+2020-07-16 18:47:31.000636: I trainer_tf.py:253] Epoch 152 Train Loss 19.9961, 27.816 secs, 15261 feats/step, 10944/0 steps
+2020-07-16 18:47:33.000650: I trainer_tf.py:265] Epoch 152 Valid Loss 34.6669, 2.014 secs, improved
+2020-07-16 18:47:33.000807: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-152
+Average Loss 21.7313843
+Average Loss 20.9775314
+2020-07-16 18:47:49.000268: I trainer_tf.py:253] Epoch 150 Train Loss 20.8521, 35.186 secs, 15263 feats/step, 10800/0 steps
+2020-07-16 18:47:52.000509: I trainer_tf.py:265] Epoch 150 Valid Loss 34.3229, 3.241 secs, improved
+2020-07-16 18:47:52.000730: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-150
+Average Loss 19.5788193
+Average Loss 20.1183357
+2020-07-16 18:48:00.000665: I trainer_tf.py:253] Epoch 153 Train Loss 19.5707, 26.855 secs, 15271 feats/step, 11016/0 steps
+2020-07-16 18:48:02.000376: I trainer_tf.py:265] Epoch 153 Valid Loss 34.8849, 1.711 secs, improved
+2020-07-16 18:48:02.000482: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-153
+Average Loss 22.21912
+Average Loss 21.2032604
+Average Loss 19.7862568
+2020-07-16 18:48:28.000362: I trainer_tf.py:253] Epoch 151 Train Loss 20.8910, 35.626 secs, 15268 feats/step, 10872/0 steps
+2020-07-16 18:48:28.000897: I trainer_tf.py:253] Epoch 154 Train Loss 19.7664, 26.403 secs, 15264 feats/step, 11088/0 steps
+2020-07-16 18:48:30.000649: I trainer_tf.py:265] Epoch 154 Valid Loss 34.2869, 1.751 secs, improved
+2020-07-16 18:48:30.000770: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-154
+2020-07-16 18:48:31.000061: I trainer_tf.py:265] Epoch 151 Valid Loss 34.4634, 2.699 secs, improved
+Average Loss 19.9890137
+2020-07-16 18:48:31.000285: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-151
+Average Loss 19.6859283
+Average Loss 19.6796169
+Average Loss 20.0604916
+2020-07-16 18:48:56.000482: I trainer_tf.py:253] Epoch 155 Train Loss 19.8019, 25.708 secs, 15261 feats/step, 11160/0 steps
+2020-07-16 18:48:58.000212: I trainer_tf.py:265] Epoch 155 Valid Loss 34.5353, 1.730 secs, improved
+2020-07-16 18:48:58.000309: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-155
+Average Loss 22.7870083
+2020-07-16 18:49:06.000277: I trainer_tf.py:253] Epoch 152 Train Loss 20.4608, 34.988 secs, 15264 feats/step, 10944/0 steps
+2020-07-16 18:49:09.000238: I trainer_tf.py:265] Epoch 152 Valid Loss 34.6050, 2.960 secs, improved
+2020-07-16 18:49:09.000515: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-152
+Average Loss 20.9095402
+Average Loss 19.2918491
+2020-07-16 18:49:25.000377: I trainer_tf.py:253] Epoch 156 Train Loss 19.2734, 27.064 secs, 15261 feats/step, 11232/0 steps
+2020-07-16 18:49:27.000369: I trainer_tf.py:265] Epoch 156 Valid Loss 34.6475, 1.991 secs, improved
+2020-07-16 18:49:27.000498: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-156
+Average Loss 14.8221693
+Average Loss 20.4881458
+2020-07-16 18:49:45.000352: I trainer_tf.py:253] Epoch 153 Train Loss 20.6697, 35.832 secs, 15266 feats/step, 11016/0 steps
+Average Loss 19.5235329
+2020-07-16 18:49:48.000594: I trainer_tf.py:265] Epoch 153 Valid Loss 34.8369, 3.242 secs, improved
+2020-07-16 18:49:48.000809: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-153
+Average Loss 22.7284126
+2020-07-16 18:49:55.000030: I trainer_tf.py:253] Epoch 157 Train Loss 19.6385, 27.528 secs, 15260 feats/step, 11304/0 steps
+2020-07-16 18:49:56.000969: I trainer_tf.py:265] Epoch 157 Valid Loss 34.5071, 1.939 secs, improved
+2020-07-16 18:49:57.000090: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-157
+Average Loss 20.0489159
+Average Loss 20.8928471
+Average Loss 19.1476231
+2020-07-16 18:50:24.000326: I trainer_tf.py:253] Epoch 154 Train Loss 20.7741, 35.512 secs, 15260 feats/step, 11088/0 steps
+2020-07-16 18:50:24.000753: I trainer_tf.py:253] Epoch 158 Train Loss 19.4679, 27.660 secs, 15261 feats/step, 11376/0 steps
+2020-07-16 18:50:26.000646: I trainer_tf.py:265] Epoch 158 Valid Loss 34.8875, 1.892 secs, tolerance 1
+2020-07-16 18:50:26.000774: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-158
+Average Loss 19.7039433
+2020-07-16 18:50:27.000571: I trainer_tf.py:265] Epoch 154 Valid Loss 34.8181, 3.245 secs, improved
+2020-07-16 18:50:27.000822: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-154
+Average Loss 15.6059256
+Average Loss 19.4514771
+Average Loss 20.4449062
+2020-07-16 18:50:54.000351: I trainer_tf.py:253] Epoch 159 Train Loss 19.3885, 27.574 secs, 15261 feats/step, 11448/0 steps
+2020-07-16 18:50:56.000277: I trainer_tf.py:265] Epoch 159 Valid Loss 34.5689, 1.926 secs, improved
+2020-07-16 18:50:56.000433: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-159
+Average Loss 22.2019749
+2020-07-16 18:51:03.000266: I trainer_tf.py:253] Epoch 155 Train Loss 20.5077, 35.438 secs, 15263 feats/step, 11160/0 steps
+2020-07-16 18:51:06.000610: I trainer_tf.py:265] Epoch 155 Valid Loss 34.9033, 3.343 secs, improved
+2020-07-16 18:51:06.000870: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-155
+Average Loss 22.6941814
+Average Loss 19.3107433
+2020-07-16 18:51:23.000813: I trainer_tf.py:253] Epoch 160 Train Loss 19.5805, 27.375 secs, 15257 feats/step, 11520/0 steps
+2020-07-16 18:51:25.000715: I trainer_tf.py:265] Epoch 160 Valid Loss 34.7340, 1.901 secs, improved
+2020-07-16 18:51:25.000825: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-160
+Average Loss 15.3299761
+Average Loss 20.3417931
+2020-07-16 18:51:43.000525: I trainer_tf.py:253] Epoch 156 Train Loss 20.3433, 36.640 secs, 15267 feats/step, 11232/0 steps
+Average Loss 19.1274147
+2020-07-16 18:51:46.000599: I trainer_tf.py:265] Epoch 156 Valid Loss 35.0367, 3.074 secs, improved
+2020-07-16 18:51:46.000857: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-156
+Average Loss 14.33389
+2020-07-16 18:51:53.000316: I trainer_tf.py:253] Epoch 161 Train Loss 19.3352, 27.488 secs, 15270 feats/step, 11592/0 steps
+2020-07-16 18:51:55.000260: I trainer_tf.py:265] Epoch 161 Valid Loss 34.6659, 1.943 secs, improved
+2020-07-16 18:51:55.000403: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-161
+Average Loss 20.8491402
+Average Loss 20.5975704
+Average Loss 19.1775475
+2020-07-16 18:52:22.000574: I trainer_tf.py:253] Epoch 157 Train Loss 20.6018, 35.712 secs, 15259 feats/step, 11304/0 steps
+2020-07-16 18:52:22.000848: I trainer_tf.py:253] Epoch 162 Train Loss 19.3236, 27.440 secs, 15269 feats/step, 11664/0 steps
+2020-07-16 18:52:24.000770: I trainer_tf.py:265] Epoch 162 Valid Loss 34.6350, 1.922 secs, improved
+2020-07-16 18:52:24.000905: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-162
+Average Loss 22.5199623
+2020-07-16 18:52:25.000753: I trainer_tf.py:265] Epoch 157 Valid Loss 34.5216, 3.178 secs, improved
+2020-07-16 18:52:25.000998: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-157
+Average Loss 15.5273895
+Average Loss 19.1940269
+Average Loss 20.1843414
+2020-07-16 18:52:52.000678: I trainer_tf.py:253] Epoch 163 Train Loss 19.5967, 27.769 secs, 15267 feats/step, 11736/0 steps
+2020-07-16 18:52:54.000614: I trainer_tf.py:265] Epoch 163 Valid Loss 34.7449, 1.935 secs, improved
+2020-07-16 18:52:54.000735: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-163
+Average Loss 21.3787785
+2020-07-16 18:53:01.000748: I trainer_tf.py:253] Epoch 158 Train Loss 20.2893, 35.735 secs, 15257 feats/step, 11376/0 steps
+2020-07-16 18:53:04.000880: I trainer_tf.py:265] Epoch 158 Valid Loss 34.7542, 3.131 secs, improved
+2020-07-16 18:53:05.000123: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-158
+Average Loss 14.8163366
+Average Loss 19.2938442
+2020-07-16 18:53:22.000421: I trainer_tf.py:253] Epoch 164 Train Loss 19.4032, 27.683 secs, 15257 feats/step, 11808/0 steps
+2020-07-16 18:53:24.000338: I trainer_tf.py:265] Epoch 164 Valid Loss 34.6232, 1.917 secs, improved
+2020-07-16 18:53:24.000488: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-164
+Average Loss 19.8902435
+Average Loss 19.9728298
+2020-07-16 18:53:40.000679: I trainer_tf.py:253] Epoch 159 Train Loss 20.3787, 35.543 secs, 15271 feats/step, 11448/0 steps
+2020-07-16 18:53:43.000946: I trainer_tf.py:265] Epoch 159 Valid Loss 34.6593, 3.267 secs, improved
+Average Loss 19.6309547
+2020-07-16 18:53:44.000172: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-159
+Average Loss 21.6345425
+2020-07-16 18:53:52.000108: I trainer_tf.py:253] Epoch 165 Train Loss 19.2546, 27.616 secs, 15264 feats/step, 11880/0 steps
+2020-07-16 18:53:54.000134: I trainer_tf.py:265] Epoch 165 Valid Loss 34.6834, 2.026 secs, improved
+2020-07-16 18:53:54.000275: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-165
+Average Loss 19.2011375
+Average Loss 20.0739803
+Average Loss 19.2712898
+2020-07-16 18:54:19.000688: I trainer_tf.py:253] Epoch 160 Train Loss 20.4595, 35.509 secs, 15264 feats/step, 11520/0 steps
+2020-07-16 18:54:21.000933: I trainer_tf.py:253] Epoch 166 Train Loss 19.1367, 27.655 secs, 15266 feats/step, 11952/0 steps
+2020-07-16 18:54:22.000921: I trainer_tf.py:265] Epoch 160 Valid Loss 34.6761, 3.233 secs, improved
+2020-07-16 18:54:23.000138: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-160
+2020-07-16 18:54:23.000897: I trainer_tf.py:265] Epoch 166 Valid Loss 34.9679, 1.964 secs, improved
+Average Loss 24.0534
+2020-07-16 18:54:24.000025: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-166
+Average Loss 23.6409702
+Average Loss 19.1230202
+Average Loss 20.3707981
+2020-07-16 18:54:51.000769: I trainer_tf.py:253] Epoch 167 Train Loss 19.3258, 27.741 secs, 15260 feats/step, 12024/0 steps
+2020-07-16 18:54:53.000758: I trainer_tf.py:265] Epoch 167 Valid Loss 34.6763, 1.989 secs, improved
+2020-07-16 18:54:53.000888: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-167
+Average Loss 24.6586819
+2020-07-16 18:54:59.000820: I trainer_tf.py:253] Epoch 161 Train Loss 20.3498, 36.677 secs, 15269 feats/step, 11592/0 steps
+2020-07-16 18:55:02.000871: I trainer_tf.py:265] Epoch 161 Valid Loss 34.7235, 3.050 secs, improved
+2020-07-16 18:55:03.000091: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-161
+Average Loss 21.3368263
+Average Loss 19.0771961
+2020-07-16 18:55:21.000427: I trainer_tf.py:253] Epoch 168 Train Loss 19.0562, 27.537 secs, 15262 feats/step, 12096/0 steps
+2020-07-16 18:55:23.000432: I trainer_tf.py:265] Epoch 168 Valid Loss 34.9239, 2.004 secs, improved
+2020-07-16 18:55:23.000545: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-168
+Average Loss 18.6713448
+Average Loss 20.7013817
+2020-07-16 18:55:39.000025: I trainer_tf.py:253] Epoch 162 Train Loss 20.6009, 35.929 secs, 15266 feats/step, 11664/0 steps
+2020-07-16 18:55:42.000393: I trainer_tf.py:265] Epoch 162 Valid Loss 34.5598, 3.367 secs, improved
+2020-07-16 18:55:42.000651: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-162
+Average Loss 19.3666592
+Average Loss 21.972208
+2020-07-16 18:55:51.000351: I trainer_tf.py:253] Epoch 169 Train Loss 19.4183, 27.804 secs, 15259 feats/step, 12168/0 steps
+2020-07-16 18:55:53.000354: I trainer_tf.py:265] Epoch 169 Valid Loss 34.7799, 2.002 secs, improved
+2020-07-16 18:55:53.000445: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-169
+Average Loss 21.6189823
+Average Loss 20.4258423
+Average Loss 19.0823765
+2020-07-16 18:56:18.000304: I trainer_tf.py:253] Epoch 163 Train Loss 20.3926, 35.636 secs, 15269 feats/step, 11736/0 steps
+2020-07-16 18:56:21.000149: I trainer_tf.py:253] Epoch 170 Train Loss 19.0906, 27.702 secs, 15268 feats/step, 12240/0 steps
+2020-07-16 18:56:21.000632: I trainer_tf.py:265] Epoch 163 Valid Loss 34.8597, 3.328 secs, improved
+2020-07-16 18:56:21.000866: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-163
+Average Loss 24.798214
+2020-07-16 18:56:22.000956: I trainer_tf.py:265] Epoch 170 Valid Loss 34.6595, 1.806 secs, improved
+2020-07-16 18:56:23.000069: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-170
+Average Loss 14.45895
+Average Loss 19.033493
+Average Loss 20.3918343
+2020-07-16 18:56:50.000624: I trainer_tf.py:253] Epoch 171 Train Loss 19.1629, 27.553 secs, 15260 feats/step, 12312/0 steps
+2020-07-16 18:56:52.000624: I trainer_tf.py:265] Epoch 171 Valid Loss 34.7878, 2.000 secs, improved
+2020-07-16 18:56:52.000769: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-171
+Average Loss 15.8569517
+2020-07-16 18:56:57.000933: I trainer_tf.py:253] Epoch 164 Train Loss 20.2371, 36.063 secs, 15276 feats/step, 11808/0 steps
+2020-07-16 18:57:01.000098: I trainer_tf.py:265] Epoch 164 Valid Loss 34.6079, 3.165 secs, improved
+2020-07-16 18:57:01.000581: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-164
+Average Loss 15.6327276
+Average Loss 18.9250984
+2020-07-16 18:57:20.000364: I trainer_tf.py:253] Epoch 172 Train Loss 19.0949, 27.593 secs, 15261 feats/step, 12384/0 steps
+2020-07-16 18:57:22.000319: I trainer_tf.py:265] Epoch 172 Valid Loss 34.9683, 1.954 secs, improved
+2020-07-16 18:57:22.000431: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-172
+Average Loss 20.0178738
+Average Loss 20.0717716
+2020-07-16 18:57:37.000634: I trainer_tf.py:253] Epoch 165 Train Loss 20.2809, 36.046 secs, 15272 feats/step, 11880/0 steps
+2020-07-16 18:57:40.000407: I trainer_tf.py:265] Epoch 165 Valid Loss 35.0136, 2.773 secs, tolerance 1
+2020-07-16 18:57:40.000669: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-165
+Average Loss 20.5636826
+Average Loss 18.9017372
+2020-07-16 18:57:49.000641: I trainer_tf.py:253] Epoch 173 Train Loss 19.1216, 27.208 secs, 15259 feats/step, 12456/0 steps
+2020-07-16 18:57:51.000608: I trainer_tf.py:265] Epoch 173 Valid Loss 34.9632, 1.966 secs, improved
+2020-07-16 18:57:51.000733: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-173
+Average Loss 23.3692894
+Average Loss 20.4050465
+Average Loss 18.8732281
+2020-07-16 18:58:17.000911: I trainer_tf.py:253] Epoch 166 Train Loss 20.2841, 37.236 secs, 15270 feats/step, 11952/0 steps
+2020-07-16 18:58:19.000388: I trainer_tf.py:253] Epoch 174 Train Loss 18.9491, 27.651 secs, 15267 feats/step, 12528/0 steps
+2020-07-16 18:58:20.000405: I trainer_tf.py:265] Epoch 166 Valid Loss 34.7559, 2.493 secs, improved
+2020-07-16 18:58:20.000658: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-166
+2020-07-16 18:58:21.000187: I trainer_tf.py:265] Epoch 174 Valid Loss 35.1649, 1.799 secs, improved
+Average Loss 21.6821861
+2020-07-16 18:58:21.000279: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-174
+Average Loss 16.6083088
+Average Loss 18.8322811
+Average Loss 20.3706093
+2020-07-16 18:58:48.000953: I trainer_tf.py:253] Epoch 175 Train Loss 18.7833, 27.671 secs, 15257 feats/step, 12600/0 steps
+2020-07-16 18:58:50.000932: I trainer_tf.py:265] Epoch 175 Valid Loss 35.2438, 1.978 secs, improved
+2020-07-16 18:58:51.000057: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-175
+Average Loss 19.085516
+2020-07-16 18:58:57.000054: I trainer_tf.py:253] Epoch 167 Train Loss 20.2410, 36.390 secs, 15272 feats/step, 12024/0 steps
+2020-07-16 18:59:00.000392: I trainer_tf.py:265] Epoch 167 Valid Loss 34.9409, 3.337 secs, improved
+2020-07-16 18:59:00.000615: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-167
+Average Loss 23.4992409
+Average Loss 18.7631588
+2020-07-16 18:59:18.000537: I trainer_tf.py:253] Epoch 176 Train Loss 18.9514, 27.477 secs, 15273 feats/step, 12672/0 steps
+2020-07-16 18:59:20.000407: I trainer_tf.py:265] Epoch 176 Valid Loss 35.2267, 1.869 secs, improved
+2020-07-16 18:59:20.000530: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-176
+Average Loss 22.8173676
+Average Loss 20.0084934
+2020-07-16 18:59:36.000109: I trainer_tf.py:253] Epoch 168 Train Loss 20.2419, 35.488 secs, 15253 feats/step, 12096/0 steps
+2020-07-16 18:59:39.000437: I trainer_tf.py:265] Epoch 168 Valid Loss 35.0607, 3.327 secs, improved
+2020-07-16 18:59:39.000685: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-168
+Average Loss 19.2251301
+Average Loss 20.3219185
+2020-07-16 18:59:48.000104: I trainer_tf.py:253] Epoch 177 Train Loss 19.4101, 27.567 secs, 15266 feats/step, 12744/0 steps
+2020-07-16 18:59:49.000911: I trainer_tf.py:265] Epoch 177 Valid Loss 34.7759, 1.807 secs, improved
+2020-07-16 18:59:50.000140: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-177
+Average Loss 20.7820282
+Average Loss 19.8319836
+Average Loss 18.8438492
+2020-07-16 19:00:15.000563: I trainer_tf.py:253] Epoch 169 Train Loss 19.8331, 35.862 secs, 15265 feats/step, 12168/0 steps
+2020-07-16 19:00:17.000530: I trainer_tf.py:253] Epoch 178 Train Loss 18.7795, 27.386 secs, 15263 feats/step, 12816/0 steps
+2020-07-16 19:00:18.000812: I trainer_tf.py:265] Epoch 169 Valid Loss 35.0757, 3.248 secs, improved
+2020-07-16 19:00:19.000196: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-169
+2020-07-16 19:00:19.000390: I trainer_tf.py:265] Epoch 178 Valid Loss 34.7964, 1.859 secs, improved
+2020-07-16 19:00:19.000511: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-178
+Average Loss 15.6273689
+Average Loss 16.3442192
+Average Loss 18.2821388
+Average Loss 20.0898342
+2020-07-16 19:00:47.000134: I trainer_tf.py:253] Epoch 179 Train Loss 18.8746, 27.620 secs, 15260 feats/step, 12888/0 steps
+2020-07-16 19:00:48.000976: I trainer_tf.py:265] Epoch 179 Valid Loss 34.9345, 1.842 secs, improved
+2020-07-16 19:00:49.000082: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-179
+Average Loss 19.8313942
+2020-07-16 19:00:54.000458: I trainer_tf.py:253] Epoch 170 Train Loss 20.0357, 35.257 secs, 15268 feats/step, 12240/0 steps
+2020-07-16 19:00:57.000767: I trainer_tf.py:265] Epoch 170 Valid Loss 34.6897, 3.309 secs, improved
+2020-07-16 19:00:58.000031: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-170
+Average Loss 24.971508
+Average Loss 19.17379
+2020-07-16 19:01:16.000731: I trainer_tf.py:253] Epoch 180 Train Loss 18.7211, 27.646 secs, 15262 feats/step, 12960/0 steps
+2020-07-16 19:01:18.000715: I trainer_tf.py:265] Epoch 180 Valid Loss 34.9550, 1.984 secs, improved
+2020-07-16 19:01:18.000809: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-180
+Average Loss 20.2123241
+Average Loss 20.1516685
+2020-07-16 19:01:34.000595: I trainer_tf.py:253] Epoch 171 Train Loss 20.0218, 36.548 secs, 15269 feats/step, 12312/0 steps
+2020-07-16 19:01:37.000266: I trainer_tf.py:265] Epoch 171 Valid Loss 35.0799, 2.670 secs, tolerance 1
+2020-07-16 19:01:37.000503: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-171
+Average Loss 19.7851677
+Average Loss 19.1235542
+2020-07-16 19:01:46.000484: I trainer_tf.py:253] Epoch 181 Train Loss 18.7983, 27.672 secs, 15261 feats/step, 13032/0 steps
+2020-07-16 19:01:48.000468: I trainer_tf.py:265] Epoch 181 Valid Loss 35.2772, 1.983 secs, improved
+2020-07-16 19:01:48.000631: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-181
+Average Loss 20.1751747
+Average Loss 19.649929
+Average Loss 18.396431
+2020-07-16 19:02:13.000951: I trainer_tf.py:253] Epoch 172 Train Loss 20.0197, 36.433 secs, 15269 feats/step, 12384/0 steps
+2020-07-16 19:02:16.000296: I trainer_tf.py:253] Epoch 182 Train Loss 18.5943, 27.662 secs, 15260 feats/step, 13104/0 steps
+2020-07-16 19:02:17.000084: I trainer_tf.py:265] Epoch 172 Valid Loss 34.9832, 3.132 secs, improved
+2020-07-16 19:02:17.000310: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-172
+Average Loss 18.7604256
+2020-07-16 19:02:18.000158: I trainer_tf.py:265] Epoch 182 Valid Loss 35.2506, 1.862 secs, improved
+2020-07-16 19:02:18.000298: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-182
+Average Loss 19.6372318
+Average Loss 18.8323021
+Average Loss 20.1932964
+2020-07-16 19:02:45.000906: I trainer_tf.py:253] Epoch 183 Train Loss 18.6349, 27.600 secs, 15267 feats/step, 13176/0 steps
+2020-07-16 19:02:47.000885: I trainer_tf.py:265] Epoch 183 Valid Loss 35.0420, 1.978 secs, improved
+2020-07-16 19:02:48.000040: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-183
+Average Loss 22.4210968
+2020-07-16 19:02:52.000999: I trainer_tf.py:253] Epoch 173 Train Loss 20.0737, 35.682 secs, 15262 feats/step, 12456/0 steps
+2020-07-16 19:02:56.000296: I trainer_tf.py:265] Epoch 173 Valid Loss 34.6707, 3.296 secs, improved
+2020-07-16 19:02:56.000539: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-173
+Average Loss 27.1535339
+Average Loss 19.007534
+2020-07-16 19:03:15.000588: I trainer_tf.py:253] Epoch 184 Train Loss 18.7747, 27.544 secs, 15261 feats/step, 13248/0 steps
+2020-07-16 19:03:17.000440: I trainer_tf.py:265] Epoch 184 Valid Loss 35.1238, 1.852 secs, improved
+2020-07-16 19:03:17.000571: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-184
+Average Loss 14.2493114
+Average Loss 19.7717056
+2020-07-16 19:03:32.000272: I trainer_tf.py:253] Epoch 174 Train Loss 19.7809, 35.729 secs, 15261 feats/step, 12528/0 steps
+2020-07-16 19:03:35.000571: I trainer_tf.py:265] Epoch 174 Valid Loss 35.3968, 3.298 secs, tolerance 1
+2020-07-16 19:03:35.000793: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-174
+Average Loss 24.2182789
+Average Loss 17.9288521
+2020-07-16 19:03:45.000271: I trainer_tf.py:253] Epoch 185 Train Loss 18.3738, 27.695 secs, 15265 feats/step, 13320/0 steps
+2020-07-16 19:03:47.000080: I trainer_tf.py:265] Epoch 185 Valid Loss 35.5664, 1.808 secs, tolerance 1
+2020-07-16 19:03:47.000237: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-185
+Average Loss 17.8583317
+Average Loss 19.1159821
+Average Loss 18.2944412
+2020-07-16 19:04:11.000384: I trainer_tf.py:253] Epoch 175 Train Loss 19.6890, 35.587 secs, 15261 feats/step, 12600/0 steps
+2020-07-16 19:04:14.000703: I trainer_tf.py:265] Epoch 175 Valid Loss 35.0954, 3.319 secs, improved
+2020-07-16 19:04:14.000948: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-175
+2020-07-16 19:04:15.000183: I trainer_tf.py:253] Epoch 186 Train Loss 18.3981, 27.943 secs, 15260 feats/step, 13392/0 steps
+Average Loss 18.5255566
+2020-07-16 19:04:17.000101: I trainer_tf.py:265] Epoch 186 Valid Loss 35.5799, 1.916 secs, improved
+2020-07-16 19:04:17.000218: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-186
+Average Loss 17.5228901
+Average Loss 18.5762
+Average Loss 20.4253693
+2020-07-16 19:04:44.000885: I trainer_tf.py:253] Epoch 187 Train Loss 18.8186, 27.664 secs, 15258 feats/step, 13464/0 steps
+2020-07-16 19:04:46.000836: I trainer_tf.py:265] Epoch 187 Valid Loss 35.3914, 1.951 secs, improved
+2020-07-16 19:04:46.000957: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-187
+Average Loss 17.7107792
+2020-07-16 19:04:51.000144: I trainer_tf.py:253] Epoch 176 Train Loss 20.0543, 36.171 secs, 15260 feats/step, 12672/0 steps
+2020-07-16 19:04:53.000888: I trainer_tf.py:265] Epoch 176 Valid Loss 34.8987, 2.742 secs, improved
+2020-07-16 19:04:54.000145: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-176
+Average Loss 18.8243828
+Average Loss 18.2393608
+2020-07-16 19:05:14.000503: I trainer_tf.py:253] Epoch 188 Train Loss 18.7373, 27.529 secs, 15269 feats/step, 13536/0 steps
+2020-07-16 19:05:16.000331: I trainer_tf.py:265] Epoch 188 Valid Loss 35.1077, 1.826 secs, improved
+2020-07-16 19:05:16.000452: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-188
+Average Loss 20.083828
+Average Loss 20.0407295
+2020-07-16 19:05:30.000540: I trainer_tf.py:253] Epoch 177 Train Loss 19.8760, 36.389 secs, 15266 feats/step, 12744/0 steps
+2020-07-16 19:05:33.000880: I trainer_tf.py:265] Epoch 177 Valid Loss 35.0501, 3.340 secs, improved
+2020-07-16 19:05:34.000152: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-177
+Average Loss 19.1929913
+Average Loss 18.4084969
+2020-07-16 19:05:44.000182: I trainer_tf.py:253] Epoch 189 Train Loss 18.6205, 27.726 secs, 15266 feats/step, 13608/0 steps
+2020-07-16 19:05:46.000035: I trainer_tf.py:265] Epoch 189 Valid Loss 35.4345, 1.852 secs, improved
+2020-07-16 19:05:46.000162: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-189
+Average Loss 16.2558899
+Average Loss 19.4397717
+Average Loss 17.9222832
+2020-07-16 19:06:10.000195: I trainer_tf.py:253] Epoch 178 Train Loss 19.7816, 36.037 secs, 15258 feats/step, 12816/0 steps
+2020-07-16 19:06:13.000027: I trainer_tf.py:265] Epoch 178 Valid Loss 35.3174, 2.832 secs, improved
+2020-07-16 19:06:13.000263: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-178
+2020-07-16 19:06:13.000662: I trainer_tf.py:253] Epoch 190 Train Loss 18.3200, 27.486 secs, 15266 feats/step, 13680/0 steps
+Average Loss 22.133707
+2020-07-16 19:06:15.000426: I trainer_tf.py:265] Epoch 190 Valid Loss 35.3134, 1.764 secs, improved
+2020-07-16 19:06:15.000561: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-190
+Average Loss 22.3282127
+Average Loss 18.4817314
+Average Loss 19.6713409
+2020-07-16 19:06:43.000076: I trainer_tf.py:253] Epoch 191 Train Loss 18.3675, 27.501 secs, 15263 feats/step, 13752/0 steps
+2020-07-16 19:06:44.000961: I trainer_tf.py:265] Epoch 191 Valid Loss 35.3407, 1.885 secs, improved
+2020-07-16 19:06:45.000089: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-191
+Average Loss 17.3358192
+2020-07-16 19:06:49.000373: I trainer_tf.py:253] Epoch 179 Train Loss 19.7763, 36.094 secs, 15263 feats/step, 12888/0 steps
+2020-07-16 19:06:52.000148: I trainer_tf.py:265] Epoch 179 Valid Loss 35.4384, 2.774 secs, improved
+2020-07-16 19:06:52.000402: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-179
+Average Loss 21.2661247
+Average Loss 18.6130829
+2020-07-16 19:07:12.000593: I trainer_tf.py:253] Epoch 192 Train Loss 18.5342, 27.497 secs, 15268 feats/step, 13824/0 steps
+2020-07-16 19:07:14.000592: I trainer_tf.py:265] Epoch 192 Valid Loss 35.2066, 1.998 secs, improved
+2020-07-16 19:07:14.000754: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-192
+Average Loss 18.838871
+Average Loss 19.4977055
+2020-07-16 19:07:28.000297: I trainer_tf.py:253] Epoch 180 Train Loss 19.7669, 35.889 secs, 15271 feats/step, 12960/0 steps
+2020-07-16 19:07:31.000597: I trainer_tf.py:265] Epoch 180 Valid Loss 35.2488, 3.298 secs, improved
+2020-07-16 19:07:31.000817: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-180
+Average Loss 22.5479641
+Average Loss 18.734314
+2020-07-16 19:07:42.000129: I trainer_tf.py:253] Epoch 193 Train Loss 18.4677, 27.370 secs, 15268 feats/step, 13896/0 steps
+2020-07-16 19:07:44.000001: I trainer_tf.py:265] Epoch 193 Valid Loss 35.2723, 1.872 secs, improved
+2020-07-16 19:07:44.000105: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-193
+Average Loss 19.5697365
+Average Loss 19.8742447
+Average Loss 18.3542404
+2020-07-16 19:08:07.000933: I trainer_tf.py:253] Epoch 181 Train Loss 19.7374, 36.100 secs, 15262 feats/step, 13032/0 steps
+2020-07-16 19:08:10.000609: I trainer_tf.py:265] Epoch 181 Valid Loss 35.5880, 2.675 secs, improved
+2020-07-16 19:08:10.000854: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-181
+2020-07-16 19:08:11.000370: I trainer_tf.py:253] Epoch 194 Train Loss 18.1556, 27.254 secs, 15264 feats/step, 13968/0 steps
+Average Loss 16.555685
+2020-07-16 19:08:13.000296: I trainer_tf.py:265] Epoch 194 Valid Loss 35.2348, 1.925 secs, improved
+2020-07-16 19:08:13.000471: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-194
+Average Loss 21.1551285
+Average Loss 18.8681755
+Average Loss 19.7099361
+2020-07-16 19:08:40.000903: I trainer_tf.py:253] Epoch 195 Train Loss 18.5341, 27.427 secs, 15262 feats/step, 14040/0 steps
+2020-07-16 19:08:42.000757: I trainer_tf.py:265] Epoch 195 Valid Loss 35.4958, 1.854 secs, improved
+2020-07-16 19:08:42.000889: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-195
+Average Loss 18.1710014
+2020-07-16 19:08:47.000415: I trainer_tf.py:253] Epoch 182 Train Loss 19.6950, 36.547 secs, 15267 feats/step, 13104/0 steps
+2020-07-16 19:08:50.000763: I trainer_tf.py:265] Epoch 182 Valid Loss 35.2570, 3.347 secs, improved
+2020-07-16 19:08:51.000123: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-182
+Average Loss 20.120245
+Average Loss 18.3268948
+2020-07-16 19:09:10.000091: I trainer_tf.py:253] Epoch 196 Train Loss 18.3745, 27.195 secs, 15266 feats/step, 14112/0 steps
+2020-07-16 19:09:11.000986: I trainer_tf.py:265] Epoch 196 Valid Loss 35.6073, 1.892 secs, improved
+2020-07-16 19:09:12.000124: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-196
+Average Loss 17.8489723
+Average Loss 19.6368
+2020-07-16 19:09:26.000524: I trainer_tf.py:253] Epoch 183 Train Loss 19.4948, 35.394 secs, 15267 feats/step, 13176/0 steps
+2020-07-16 19:09:29.000906: I trainer_tf.py:265] Epoch 183 Valid Loss 35.4263, 3.382 secs, improved
+2020-07-16 19:09:30.000164: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-183
+Average Loss 23.4691257
+Average Loss 18.8403625
+2020-07-16 19:09:39.000697: I trainer_tf.py:253] Epoch 197 Train Loss 18.5444, 27.570 secs, 15277 feats/step, 14184/0 steps
+2020-07-16 19:09:41.000607: I trainer_tf.py:265] Epoch 197 Valid Loss 35.2333, 1.909 secs, improved
+2020-07-16 19:09:41.000715: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-197
+Average Loss 14.0529728
+Average Loss 20.2719
+Average Loss 17.9604092
+2020-07-16 19:10:05.000102: I trainer_tf.py:253] Epoch 184 Train Loss 20.1018, 34.934 secs, 15262 feats/step, 13248/0 steps
+2020-07-16 19:10:08.000276: I trainer_tf.py:265] Epoch 184 Valid Loss 35.1513, 3.172 secs, improved
+2020-07-16 19:10:08.000512: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-184
+2020-07-16 19:10:09.000051: I trainer_tf.py:253] Epoch 198 Train Loss 17.9869, 27.331 secs, 15264 feats/step, 14256/0 steps
+Average Loss 18.6499767
+2020-07-16 19:10:10.000946: I trainer_tf.py:265] Epoch 198 Valid Loss 35.3804, 1.893 secs, improved
+2020-07-16 19:10:11.000093: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-198
+Average Loss 20.7393951
+Average Loss 18.50704
+Average Loss 19.5623379
+2020-07-16 19:10:38.000534: I trainer_tf.py:253] Epoch 199 Train Loss 18.2771, 27.437 secs, 15257 feats/step, 14328/0 steps
+2020-07-16 19:10:40.000295: I trainer_tf.py:265] Epoch 199 Valid Loss 35.6189, 1.760 secs, improved
+2020-07-16 19:10:40.000445: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-199
+Average Loss 21.6468906
+2020-07-16 19:10:43.000887: I trainer_tf.py:253] Epoch 185 Train Loss 19.7313, 35.369 secs, 15260 feats/step, 13320/0 steps
+2020-07-16 19:10:47.000215: I trainer_tf.py:265] Epoch 185 Valid Loss 35.1278, 3.326 secs, improved
+2020-07-16 19:10:47.000482: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-185
+Average Loss 23.6570721
+Average Loss 18.9163818
+2020-07-16 19:11:07.000838: I trainer_tf.py:253] Epoch 200 Train Loss 18.7344, 27.389 secs, 15278 feats/step, 14400/0 steps
+2020-07-16 19:11:09.000604: I trainer_tf.py:265] Epoch 200 Valid Loss 35.2616, 1.766 secs, improved
+2020-07-16 19:11:09.000803: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-200
+Average Loss 19.4669304
+2020-07-16 19:11:23.000194: I trainer_tf.py:253] Epoch 186 Train Loss 19.7716, 35.706 secs, 15263 feats/step, 13392/0 steps
+2020-07-16 19:11:25.000803: I trainer_tf.py:265] Epoch 186 Valid Loss 35.1081, 2.607 secs, improved
+2020-07-16 19:11:26.000006: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-186
+Average Loss 14.3414221
+Average Loss 20.0847931
+2020-07-16 19:12:01.000860: I trainer_tf.py:253] Epoch 187 Train Loss 19.8916, 35.850 secs, 15270 feats/step, 13464/0 steps
+2020-07-16 19:12:05.000078: I trainer_tf.py:265] Epoch 187 Valid Loss 35.2238, 3.217 secs, improved
+2020-07-16 19:12:05.000318: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-187
+Average Loss 23.1766167
+Average Loss 19.9388046
+2020-07-16 19:12:40.000393: I trainer_tf.py:253] Epoch 188 Train Loss 19.8890, 35.046 secs, 15262 feats/step, 13536/0 steps
+2020-07-16 19:12:43.000663: I trainer_tf.py:265] Epoch 188 Valid Loss 35.0095, 3.269 secs, improved
+2020-07-16 19:12:43.000925: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-188
+Average Loss 15.8784046
+Average Loss 19.2644978
+2020-07-16 19:13:19.000177: I trainer_tf.py:253] Epoch 189 Train Loss 19.2864, 35.223 secs, 15263 feats/step, 13608/0 steps
+2020-07-16 19:13:22.000452: I trainer_tf.py:265] Epoch 189 Valid Loss 34.9471, 3.275 secs, improved
+2020-07-16 19:13:22.000672: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-189
+Average Loss 19.7919159
+Average Loss 19.4396172
+2020-07-16 19:13:57.000544: I trainer_tf.py:253] Epoch 190 Train Loss 19.5171, 34.857 secs, 15262 feats/step, 13680/0 steps
+2020-07-16 19:14:00.000814: I trainer_tf.py:265] Epoch 190 Valid Loss 35.2167, 3.269 secs, improved
+2020-07-16 19:14:01.000062: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-190
+Average Loss 22.5652275
+Average Loss 19.4536266
+2020-07-16 19:14:36.000778: I trainer_tf.py:253] Epoch 191 Train Loss 19.6258, 35.701 secs, 15268 feats/step, 13752/0 steps
+2020-07-16 19:14:39.000001: I trainer_tf.py:265] Epoch 191 Valid Loss 35.1641, 2.223 secs, improved
+2020-07-16 19:14:39.000221: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-191
+Average Loss 14.8934689
+Average Loss 19.153738
+2020-07-16 19:15:16.000001: I trainer_tf.py:253] Epoch 192 Train Loss 19.3445, 36.752 secs, 15254 feats/step, 13824/0 steps
+2020-07-16 19:15:18.000897: I trainer_tf.py:265] Epoch 192 Valid Loss 35.4369, 2.896 secs, improved
+2020-07-16 19:15:19.000151: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-192
+Average Loss 22.6468925
+Average Loss 19.5946121
+2020-07-16 19:15:54.000398: I trainer_tf.py:253] Epoch 193 Train Loss 19.5667, 35.242 secs, 15265 feats/step, 13896/0 steps
+2020-07-16 19:15:57.000487: I trainer_tf.py:265] Epoch 193 Valid Loss 35.3567, 3.087 secs, improved
+2020-07-16 19:15:57.000743: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-193
+Average Loss 19.9306755
+Average Loss 19.0474644
+2020-07-16 19:16:32.000814: I trainer_tf.py:253] Epoch 194 Train Loss 19.1998, 35.065 secs, 15261 feats/step, 13968/0 steps
+2020-07-16 19:16:36.000021: I trainer_tf.py:265] Epoch 194 Valid Loss 35.3299, 3.206 secs, improved
+2020-07-16 19:16:36.000247: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-194
+Average Loss 18.969059
+Average Loss 19.396162
+2020-07-16 19:17:11.000370: I trainer_tf.py:253] Epoch 195 Train Loss 19.4087, 35.108 secs, 15269 feats/step, 14040/0 steps
+2020-07-16 19:17:14.000571: I trainer_tf.py:265] Epoch 195 Valid Loss 35.4694, 3.200 secs, improved
+2020-07-16 19:17:14.000833: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-195
+Average Loss 21.1283684
+Average Loss 19.1985188
+2020-07-16 19:17:50.000436: I trainer_tf.py:253] Epoch 196 Train Loss 19.1721, 35.591 secs, 15260 feats/step, 14112/0 steps
+2020-07-16 19:17:53.000329: I trainer_tf.py:265] Epoch 196 Valid Loss 35.5205, 2.893 secs, improved
+2020-07-16 19:17:53.000547: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-196
+Average Loss 23.3862476
+Average Loss 19.3085766
+2020-07-16 19:18:29.000261: I trainer_tf.py:253] Epoch 197 Train Loss 19.2383, 35.710 secs, 15276 feats/step, 14184/0 steps
+2020-07-16 19:18:32.000546: I trainer_tf.py:265] Epoch 197 Valid Loss 35.5403, 3.284 secs, improved
+2020-07-16 19:18:32.000789: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-197
+Average Loss 21.9803658
+Average Loss 19.5182762
+2020-07-16 19:19:07.000782: I trainer_tf.py:253] Epoch 198 Train Loss 19.3730, 34.977 secs, 15267 feats/step, 14256/0 steps
+2020-07-16 19:19:11.000023: I trainer_tf.py:265] Epoch 198 Valid Loss 35.5295, 3.240 secs, improved
+2020-07-16 19:19:11.000265: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-198
+Average Loss 13.1907244
+Average Loss 19.4012661
+2020-07-16 19:19:45.000934: I trainer_tf.py:253] Epoch 199 Train Loss 19.4399, 34.654 secs, 15266 feats/step, 14328/0 steps
+2020-07-16 19:19:49.000094: I trainer_tf.py:265] Epoch 199 Valid Loss 35.4814, 3.158 secs, improved
+2020-07-16 19:19:49.000347: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-199
+Average Loss 22.1642361
+Average Loss 19.0998821
+2020-07-16 19:20:24.000535: I trainer_tf.py:253] Epoch 200 Train Loss 19.2550, 35.185 secs, 15258 feats/step, 14400/0 steps
+2020-07-16 19:20:27.000732: I trainer_tf.py:265] Epoch 200 Valid Loss 35.5191, 3.195 secs, improved
+2020-07-16 19:20:27.000958: I trainer_tf.py:275] Saving a ckpt for the last epoch at ./checkpoint/TF_L5_D128_H1024/ckpt-200
