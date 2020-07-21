@@ -16,7 +16,7 @@
 
 ### manuscript
   - tex source file and figures  
-  !! BEWARE: This manuscript is not submitted to any journals or conferences yet, under the internal review.
+  !! BEWARE: This manuscript is not submitted to any journals or conferences yet.  It is under the internal review.
 ### src
   - the python scripts for training and decoding  
 ### egs
