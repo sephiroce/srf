@@ -1,16 +1,16 @@
 # Supplementary files for the sequential routing framework
 
 ## Highlights
-. Capsule network only structures can successfully map sequences to sequences
-. Mappings are refined by initializing routing iteration based on the previous output
-. Sequence-wise routing iteration allows for non-iterative inference
-. Structures of capsule network are more important than the number of parameters
-. Top layer capsules become similar to the capsule corresponding to a sequence label
+  - Capsule network only structures can successfully map sequences to sequences
+  - Mappings are refined by initializing routing iteration based on the previous output
+  - Sequence-wise routing iteration allows for non-iterative inference
+  - Structures of capsule network are more important than the number of parameters
+  - Top layer capsules become similar to the capsule corresponding to a sequence label
 
 ## Prerequistes
-. Kaldi: https://github.com/kaldi-asr/kaldi  
-. SCTK: https://github.com/usnistgov/SCTK/blob/master/doc/sclite.htm  
-. Python libraries: Please check requirements.txt in the "src" folder.  
+  - Kaldi: https://github.com/kaldi-asr/kaldi  
+  - SCTK: https://github.com/usnistgov/SCTK/blob/master/doc/sclite.htm  
+  - Python libraries: Please check requirements.txt in the "src" folder.  
 
 ## Directory structure
 
