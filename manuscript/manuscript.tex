@@ -18,37 +18,8 @@
 \usepackage{multirow}
 \usepackage{multicol}
 
-%%%%%%%%%%%%%%%%%%%%%%%
-%% Elsevier bibliography styles
-%%%%%%%%%%%%%%%%%%%%%%%
-%% To change the style, put a % in front of the second line of the current style and
-%% remove the % from the second line of the style you would like to use.
-%%%%%%%%%%%%%%%%%%%%%%%
-
-%% Numbered
-%\bibliographystyle{model1-num-names}
-
-%% Numbered without titles
-%\bibliographystyle{model1a-num-names}
-
-%% Harvard
-%\bibliographystyle{model2-names.bst}\biboptions{authoryear}
-
-%% Vancouver numbered
-%\usepackage{numcompress}\bibliographystyle{model3-num-names}
-
-%% Vancouver name/year
 \usepackage{numcompress}\bibliographystyle{model4-names}\biboptions{authoryear}
 
-%% APA style
-%\bibliographystyle{model4-names}\biboptions{authoryear}
-
-%% AMA style
-%\usepackage{numcompress}\bibliographystyle{model6-num-names}
-
-%% `Elsevier LaTeX' style
-%bibliographystyle{elsarticle-num}
-%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{url}
 \def\UrlBreaks{\do\/\do-}
 \begin{document}
@@ -95,7 +66,7 @@ Capsule network\sep Automatic speech recognition\sep Sequence-to-sequence\sep Co
 \linenumbers
 
 \section{Introduction}
-Capsule networks (CapsNets) \citep{DBLP:conf/icann/HintonKW11, DBLP:conf/nips/SabourFH17, DBLP:conf/iclr/HintonSF18} are a kind of neural network that represents a specific entity type by a group of neurons, which are referred to as capsules, instead of a single neuron represented in a scalar.
+Capsule networks (CapsNets) \citep{DBLP:conf/icann/HintonKW11, DBLP:conf/nips/SabourFH17, DBLP:conf/iclr/HintonSF18} are a kind of neural network that represents a specific entity type by a group of neurons, which are referred to as capsules, instead of a single neuron represented as a scalar.
 The initial motivation of CapsNets was to abstract information more explicitly by adapting an unsupervised clustering method called routing-by-agreement to neural networks.
 By introducing the new representation units, the routing mechanism can be performed between adjacent capsules during neural network training.
 Capsules can represent not only the existence of the entity types but also entity instantiation parameters such as textures, angles, colors, and so on, thus CapsNets can be regarded as inverse rendering architectures.
@@ -107,11 +78,11 @@ Recently, research has been focused more on modifying the routing methods to fit
 There have also been attempts to apply CapsNet to various fields beyond image classification such as user intent detection \citep{DBLP:conf/emnlp/XiaZYCY18, DBLP:conf/acl/ZhangLDFY19}, self-driving \citep{DBLP:journals/tjs/KimC19},
 sound event detection \citep{DBLP:conf/eusipco/Iqbal0KW18}, speech command classification \citep{DBLP:conf/interspeech/BaeK18} and speech emotion recognition \citep{DBLP:conf/icassp/WuLCLYDMHWLM19}.
 
-A sequence to sequence (seq2seq) learning is an approach to learn mappings between input and output sequences and the the learning is successfully implemented by neural models \citep{DBLP:conf/nips/SutskeverVL14}.
+Sequence to sequence (seq2seq) learning is an approach to learn mappings between input and output sequences and learning is successfully implemented by neural models \citep{DBLP:conf/nips/SutskeverVL14}.
 It is one of the most popular methods in a wide range of fields such as automatic speech recognition (ASR) \citep{DBLP:conf/icassp/ChanJLV16, DBLP:conf/icassp/HeSPMAZRKWPLBSL19, DBLP:conf/asru/KimJLHKLGPKJLYK19, DBLP:conf/asru/MoritzHR19}, machine translation (MT) \citep{DBLP:journals/corr/BahdanauCB14, DBLP:conf/interspeech/JiaWBMJCW19}, natural language processing (NLP) \citep{DBLP:conf/ijcai/YinJLSLL16}, etc.
 Connectionist temporal classification (CTC) \citep{DBLP:conf/icml/GravesFGS06} is a popular loss function in seq2seq problems since the method can compute a conditional probability between a single reference and multiple possible paths of a network output vector sequence.
 As CTC started to be applied to ASR tasks, it became possible to learn the alignment between speech signal sequences and label sequences directly unlike the conventional Hidden Markov Model (HMM)-based methods \citep{18626} that need separately aligned intermediate representations.
-Recurrent neural network transducers (RNN-Ts) \citep{DBLP:conf/icassp/GravesMH13} have expanded CTC by introducing an additional axis to represent linguistic information. They are now one of the most pervaded methods in the commercial ASR systems \citep{DBLP:conf/icassp/HeSPMAZRKWPLBSL19}.
+Recurrent neural network transducers (RNN-Ts) \citep{DBLP:conf/icassp/GravesMH13} have expanded CTC by introducing an additional axis to represent linguistic information. They are now one of the most pervaded methods in commercial ASR systems \citep{DBLP:conf/icassp/HeSPMAZRKWPLBSL19}.
 Recently, CTC networks are also used as a form of joint training \citep{DBLP:conf/asru/KimJLHKLGPKJLYK19, DBLP:conf/asru/MoritzHR19} with cross-entropy based networks to help encoders learn better alignments when training attention-based encoder-decoder models.
 
 In seq2seq problems, long short term memory (LSTM) \citep{DBLP:journals/neco/HochreiterS97} is one of the most common approaches.
@@ -127,7 +98,7 @@ Transformers encode sequences by filtering with attention maps which indicate wi
 Although Transformers do not have an appropriate structure for streaming decoding since they need the whole context to compute the attention map, there have been recent attempts to apply them to streaming decoding \citep{9054476}.
 With their own context filtering mechanisms, the two alternative methods have shown similar or better accuracy compared to LSTMs in ASR related fields \citep{DBLP:conf/interspeech/ZhangPBZLBC16, 8462506, DBLP:journals/corr/abs-1812-06864, 9054476} while requiring less computations and have suitable structures for parallelization.
 In particular, the CNN-based CTC networks \citep{DBLP:conf/interspeech/ZhangPBZLBC16} have shown 0.2\% more accurate phoneme recognition rate (PRR) with 63.2\% of parameters compared to the BLSTM-based architecture while maintaining online decoding capabilities.
-The input feature sequences can be regarded as two dimensional images which having time length as width and the feature dimension as height.
+The input feature sequences can be regarded as two dimensional images, having the time length as width and the feature dimension as height.
 In this perspective, we hypothesized that CapsNets can potentially have richer representation capabilities than CNNs also in seq2seq problems for the same reasons mentioned earlier in this section.
 Research on CapsNets have mostly focused on classification tasks with fixed input sizes as alternatives for CNNs.
 Although there have been attempts to apply CapsNets to seq2seq tasks in combination with other models \citep{8852016, wang-2019-towards}, the utilization of CapsNets could be maximized more.
@@ -152,41 +123,47 @@ The proposed method achieved competitive performance on the speech recognition t
 
 \section{Preliminaries}
 \subsection{CTC Network}
-A CTC network \citep{DBLP:conf/icml/GravesFGS06} is defined as a continuous map \(\mathcal{N}_\theta: (\mathbb{R}^F)^T \mapsto (\mathbb{R}^{V})^T\) from an \(F\) dimensional input sequence \(x\) of length \(T\) to the same length sequence \(\hat{y}\) of \(V\) dimensional probability vectors with parameters \(\theta\).
-\(V\) is the cardinality of an expanded label set \(\mathbb{L}'\) consisting of the union between the label symbol set \(\mathbb{L}\) and the blank symbol set, \(\mathbb{L} \cup \{<\)blank\(>\}\).
+A CTC network \citep{DBLP:conf/icml/GravesFGS06} is defined as a continuous map $\mathcal{N}_\theta: (\mathbb{R}^F)^T \mapsto (\mathbb{R}^{V})^T$ from an $F$ dimensional input sequence $x$ of length $T$ to the same length sequence $\hat{y}$ of $V$ dimensional probability vectors with parameters $\theta$.
+$V$ is the cardinality of an expanded label set $\mathbb{L}^\prime$ consisting of the union between the label symbol set $\mathbb{L}$ and the blank symbol set, $\mathbb{L} \cup \{<$blank$>\}$.
 This network contains a softmax layer at the top of it in order to convert logits to valid probability distributions.
-The softmax layer for a given vector \(Z \in \mathbb{R}^D\) is computed as follows:
+The softmax layer for a given vector $Z \in \mathbb{R}^D$ is computed as follows:
 \begin{equation}
 \text{softmax}(Z)_i = {{\exp(z_i)} \over {\sum^D_{j=1} \exp(z_{j})}}, \text{for } i=1,...,D
 \label{eq:softmax}
 \end{equation}
-, where \(z_i\) is the \(i\)-th element of \(Z\).
-CTC computes a conditional probability of a label sequence \(y \in \mathbb{L} ^{\leq T}\) for a given input sequence \(x\) by summing up every conditional probability of possible paths \(\pi\), i.e. \(p(y|x) = \sum_{\pi \in \mathcal{B}^{-1}(y)} p(\pi|x)\).
-The possible paths are computed using an inverse of a map \(\mathcal{B}: \mathbb{L}^{\prime T} \mapsto \mathbb{L}^{\leq T}\) from an expanded label sequence \(y^\prime\) to \(y\).
-\(\mathcal{B}\) performs many-to-one mappings by simply removing repeating and blank symbols from the given paths.
-For example, \(\mathcal{B}\)(``cc-aaa-tt") = \(\mathcal{B}\)(``-cc-aattt") = ``cat", where ``-" indicates a blank symbol.
+, where $z_i$ is the $i$-th element of $Z$.
+CTC computes a conditional probability of a label sequence $y \in \mathbb{L} ^{\leq T}$ for a given input sequence $x$ by summing up every conditional probability of possible paths $\pi$, i.e. $p(y|x) = \sum_{\pi \in \mathcal{B}^{-1}(y)} p(\pi|x)$.
+The possible paths are computed using an inverse of a map $\mathcal{B}: \mathbb{L}^{\prime T} \mapsto \mathbb{L}^{\leq T}$ from an expanded label sequence $y^\prime$ to $y$.
+$\mathcal{B}$ performs many-to-one mappings by simply removing repeating and blank symbols from the given paths.
+For example, $\mathcal{B}$(``cc-aaa-tt") = $\mathcal{B}$(``-cc-aattt") = ``cat", where ``-" indicates a blank symbol.
 It allows CTC networks to learn alignments solely from the input and output sequence pairs.
-A conditional probability of each possible path is computed as \(p(\pi|x)=\prod_{t=1}^T p(y^{\prime t}_\pi |x^t)\), where \(y^{\prime t}_\pi\) is an expanded label symbol in a path \(\pi\) at time \(t\) and \(x^t\) is the \(t\)-th feature vector of \(x\).
+% CTC-Likelihood:
+A conditional probability of each possible path is computed as $p(\pi|x)=\prod_{t=1}^T p(y^{\prime t}_\pi |x^t)$, where $y^{\prime t}_\pi$ is an expanded label symbol in a path $\pi$ at time $t$ and $x^t$ is the $t$-th feature vector of $x$.
+% Training
 An objective function is defined to compute a negative summation of log probabilities of all the possible paths corresponding to the given labeling and CTC networks are trained to minimize it.
-The gradient of the objective function can be computed with respect to \(\hat{y}\) with any kind of gradient-based optimization techniques.
+The gradient of the objective function can be computed with respect to $\hat{y}$ with any kind of gradient-based optimization techniques.
 To derive the gradient more efficiently, the CTC forward-backward algorithm, which is a kind of dynamic programming, is applied during training.
 
 \subsection{Capsule Network}
+% Concepts
 The main structural difference of CapsNets with other neural architectures is that they use a group of neurons as an element of representation rather than a single neuron \citep{DBLP:conf/icann/HintonKW11}.
 The group of neurons is referred to as a capsule and it consists of an activation scalar and a group of instantiation parameters.
 For a certain entity type, the former indicates an existence probability while the latter represents characteristics such as deformations, poses, and textures in the form of a vector or matrix.
 Thus, encoding image data through CapsNets can be seen as a mechanism of inverse renderings which converts input data to their instantiation parameters.
 The activations can be computed either from the instantiation parameters~\citep{DBLP:conf/nips/SabourFH17} or from additional neural layers~\citep{DBLP:conf/iclr/HintonSF18}, according to the routing mechanisms.
 With the two representations, CapsNets can potentially~\citep{NIPS2018_8100} represent invariance of the existence probabilities and also equivariance of the properties of the entity type.
+% A Capsule group
 The input and output of capsule layers are the group of capsules which have a three-dimensional structure.
 Accordingly, a capsule group is composed of a pair of an instantiation parameter vector group and its corresponding activation scalar group.
 In this paper, for the sake of brevity, we describe the structure of an instantiation vector group in a capsule group as the structure of the capsule group because the structure of the activation scalar group can be derived by just removing the depth of the vector group structure.
 The product of the width and height of a capsule group indicates the number of capsules in the group and their depth represents the dimension of the instantiation parameter vectors.
+% CapsNet
 The capsule groups in the lowest, the highest, and in-between levels of CapsNets are called as primary, class, and convolutional capsule groups respectively.
 The width of class capsule groups is one and its height is equal to the number of labels for classification tasks.
 In order to compare the class capsule group with the given label, each instantiation vector of the group is flatten to an activation i.e. the final output structure of a CapsNet is converted to the same as that of a conventional neural network.
 Thus any loss methods used for other neural networks are applicable for CapsNets without modification.
 
+% CapsNet Training
 One of the key abilities of neural networks is to abstract the information in input data to higher concepts layer by layer, in order to make them a suitable representation for the purpose of training.
 We can assume that this hierarchical conceptualization can be seen as a tree-like structure made of multiple part-whole relationships.
 In order to use this assumption more explicitly to train models, CapsNets introduce the routing-by-agreement method which is a kind of unsupervised clustering algorithm.
@@ -196,23 +173,24 @@ The one key procedural difference is that routing-by-agreement is a non-gradient
 Research related to CapsNets have mainly focused on iterative routing methods which update their clustering mechanisms based on the outputs of previous iterations \citep{DBLP:conf/nips/SabourFH17, DBLP:conf/iclr/HintonSF18}.
 Recently in order to reduce their computational burdens, non-iterative \citep{DBLP:conf/nips/HahnPK19} or parallelized \citep{DBLP:conf/iclr/TsaiSGS20} methods have also been introduced.
 
-\subsubsection{Dynamic Routing} % Dynamic Routing 정의, 동작 방법(알고리즘 포함)
+\subsubsection{Dynamic Routing}
 DR \citep{DBLP:conf/nips/SabourFH17} is a kind of iterative routing-by-agreement method that controls information flow from lower to higher levels based on the capsule similarities between the adjacent capsule groups in a non-parametric manner.
 It is one of the most widely used implementation of CapsNets because of its competitive accuracy and intuitive mechanisms compared to more recent architectures  \citep{DBLP:conf/nips/HahnPK19, Malmgren1314210}.
 In DR, activation scalars of capsules are defined by the lengths of the instantiation parameter vectors so that they need to be normalized to have bounded lengths within the range from zero to one.
 In order to normalize them, a nonlinear function, which is referred to as a squash function, is defined as follows:
 \begin{equation}
-\text{squash}(s) = {{||s||^2} \over{1+||s||^2}} {{s}\over{||s||}}
+\text{squash}(s_j) = {{||s_j||^2} \over{1+||s_j||^2}} {{s_j}\over{||s_j||}}
 \label{eq:squash}
 \end{equation}
-, where $s$ is a unnormalized instantiation parameter vector.
+, where $s_j$ is a unnormalized instantiation parameter vector for the $j$-th capsule of the output capsule group.
 This function also has a role to make the output activations more discriminative by pushing most of the values to around zero or one.
-The $s$ for the $j$-th capsule of the output capsule group is computed as $s_j = \sum^{l_N}_i c_{ij} \hat{u}_{j|i}$, that is the summation of the prediction vector $\hat{u}_{j|i}$ from the $i$-th capsule in the lower level to the $j$-th capsule in the higher level weighted with corresponding coupling coefficients $c$.
+$s_j$ is computed as $s_j = \sum^{l_N}_i c_{ij} \hat{u}_{j|i}$, that is the summation of the prediction vector $\hat{u}_{j|i}$ from the $i$-th capsule in the lower level to the $j$-th capsule in the higher level weighted with corresponding coupling coefficients $c$.
 The coefficients are normalized values through the softmax function described in Eq.~\ref{eq:softmax} from the routing coefficients r, which is updated by a routing method.
-$\hat{u}_{j|i}$ is calculated as the multiplication of an instantiation parameter vector $u_i$, which is the $i$-th capsule in an input capsule group, and a learnable weight matrix $W_{ij}$.
+$\hat{u}_{j|i}$ is calculated as the product of an instantiation parameter vector $u_i$, which is the $i$-th capsule in an input capsule group, and a learnable weight matrix $W_{ij}$.
 Thus the required number of $W$ for each routing mechanism is the product of the capsule numbers of input and output capsule groups and each $W_{ij}$ has the shape of the input capsule depth times the output capsule depth.
 The primary capsules are calculated from input data through multiple convolutional layers activated with rectified linear unit (ReLU) functions.
 
+% Routing-by-Agreement
 In the routing algorithm, $r$ is initialized uniformly, then it is iteratively updated to maximize the agreements between $\hat{u}_{j|i}$ and the output vector $o_j$ by accumulating the values of their products.
 In order to allow for multiple digits, a separate margin loss between labels and the activations of the final output vectors is calculated as a prediction error.
 Reconstruction errors are calculated as the mean squared errors between the original signals and the reconstructed signals generated from the output capsule corresponding to the target label through additional feed forward layers.
@@ -247,7 +225,7 @@ the other is an instantiation parameter group with width $T$, height $P_H$ and d
 The layers to compute the group of activations are optional structures depending on the routing mechanism.
 A feature sequence $x$ is encoded into three-dimensional representation with width $T$, height $F$ and depth $F_D$ through $L_C$ two-dimensional convolutional layers, where $T \leq T^\prime$ and $F \leq F^\prime$.
 We employed maxout~\citep{DBLP:journals/corr/abs-1302-4389} as activation functions of the convolutional layers because of their competitive accuracy in ASR systems~\citep{DBLP:conf/interspeech/ZhangPBZLBC16}.
-Thus, the \(l_c\)-th convolutional layer in the first sub-block is defined as follows:
+Thus, the $l_c$-th convolutional layer in the first sub-block is defined as follows:
 \begin{equation}
 x_{l_c}=\max_{n_c \in [1, N_C]} \text{Dropout}_{n_c}([W_{l_c, n_c, f_d}*x_{l_c-1}]_{f_d=1}^{F_D}, \alpha_d)\text{, }l_c \in [1, L_C]
 \label{eq:maxout}
@@ -261,14 +239,14 @@ One of them is projected to a normalized vector sequence, i.e. an activation gro
 x_a=\sigma(W_{a} \times x^\prime_{L_C})
 \label{eq:nonlinear}
 \end{equation}
-, where \(W_a\) is a learnable weight matrix and \(\sigma\) is a nonlinear function for normalizing the values.
+, where $W_a$ is a learnable weight matrix and $\sigma$ is a nonlinear function for normalizing the values.
 The other is projected to another representation having the same shape with the activation group as follows:
 \begin{equation}
 x_p^\prime=W_{p} \times x^\prime_{L_C}
 \label{eq:linear}
 \end{equation}
-, where \(W_p\) is a learnable weight matrix.
-Afterwards, it is converted to a group of instantiation parameters \(x_p\) by expanding their channel dimensions into \(P_D\) through a two-dimensional convolutional layer activated with the maxout function as follows:
+, where $W_p$ is a learnable weight matrix.
+Afterwards, it is converted to a group of instantiation parameters $x_p$ by expanding their channel dimensions into $P_D$ through a two-dimensional convolutional layer activated with the maxout function as follows:
 \begin{equation}
 x_p=\max_{n_c\in[1, N_C]}\text{Dropout}_{n_c}([W_{n_c, p_d} * x_p^\prime]_{p_d=1}^{P_D}, \alpha_d)
 \label{eq:maxout2}
@@ -277,13 +255,13 @@ x_p=\max_{n_c\in[1, N_C]}\text{Dropout}_{n_c}([W_{n_c, p_d} * x_p^\prime]_{p_d=1
 We set $N_C$ and $\alpha_d$ identically for every layer activated with maxout in order to reduce the number of hyperparameters.
 
 \subsection{Routing-by-agreement for sequence to sequence learning}
-In SRF, each subgroup of a capsule group $\{x_a, x_p\}$ is sliced by $t$, i.e. $x^t=\{x_a^t, x_p^t\}$. The routing mechanism which we will refer to as sequential routing is performed for the each slice.
+In SRF, each subgroup of a capsule group $\{x_a, x_p\}$ is sliced by $t$, i.e. $x^t=\{x_a^t, x_p^t\}$. The routing mechanism which we will refer to as sequential routing is performed for each slice.
 In order to expand the size of a receptive field on a primary capsule group, sequential routing is performed between window slices, which consist of $\omega$ slices of the lower level, and single slices of the higher level.
 The bottom box in Fig.~\ref{fig:diagram} describes an example of sequential routing between the $t$-th window slice ($\omega = 3$) in the lower level and the $t$-th single slice in the higher level.
 In this study, we set the stride of the sliding window to one in all the cases and the both side of window contexts beyond the sequence boundaries are padded as zero so that the routing is performed $T$ times for a primary capsule group having width $T$.
-The width of the receptive field on a primary capsule group is computed as $\omega + (L-1) \times (\omega - 1)$ for each slice of the output of the \(L\)-th capsule layer.
-Accordingly, online decoding is allowed with a time delay corresponding to \(L \times \omega_R\), where \(\omega_R\) is the right context size of the window.
-In each capsule layer, the prediction vector \(\hat{u}_{j|i}\) is calculated per each \(t\) through a linear transformation consisting of a learnable weight matrix \(W_{ij}\) as follows:
+The width of the receptive field on a primary capsule group is computed as $\omega + (L-1) \times (\omega - 1)$ for each slice of the output of the $L$-th capsule layer.
+Accordingly, online decoding is allowed with a time delay corresponding to $L \times \omega_R$, where $\omega_R$ is the right context size of the window.
+In each capsule layer, the prediction vector $\hat{u}_{j|i}$ is calculated per each $t$ through a linear transformation consisting of a learnable weight matrix $W_{ij}$ as follows:
 \begin{equation}
 \hat{u}_{j|i}^t = W_{ij} \times x_{p_i}^t, i \in [1, \omega \times I_H], j \in [1, O_H]
 \label{eq:uhat}
@@ -306,11 +284,12 @@ Consequently, the number of parameters to perform the routing method in each cap
 \label{fig:diagram3}
 \end{figure}
 
+% Sequential Dynamic Routing method!
 We have an assumption that consecutive slices in sequence data have similar properties.
 Based on that, we designed an iterative routing mechanism which initializes routing coefficients of the $t$-th iteration based on the $(t-1)$-th iteration outputs.
 Fig.~\ref{fig:diagram3} is a schematic diagram of the two different iterative routing mechanisms of $L=2$ and $\omega=1$ for three consecutive window slices.
 In this figure, the three dimensional block represents the routing procedures, $\lambda$ is an iteration index in the range between 1 and the given iteration number $\Lambda$, and the solid and dashed arrows describe the required and optional flows to update routing coefficients $r$ respectively.
-In the original version of routing, $r$ is initialized uniformly, then updated within each $t$ iteratively as in Fig.~\ref{fig:diagram_3_or} in the order of a maximization and an expectation stages.
+In the original version of routing, $r$ is initialized uniformly, then updated within each $t$ iteratively as in Fig.~\ref{fig:diagram_3_or} in the order of a maximization and an expectation stage.
 The expectation stage means to update $r$ to improve the agreements between adjacent capsule groups and the updated coefficients are applied in the maximization stage.
 The proposed sequential routing method has two procedural differences from the original version as described in Fig.~\ref{fig:diagram_3_sr}.
 First, $r$ is initialized based on the agreements between the previous routing outputs $o_{l}^{t-1}$ and the current routing inputs $o_{l-1}^{t}$ thus $r$ is uniformly initialized only at $t=1$.
@@ -319,7 +298,7 @@ These two modifications have a similar effect of updating $r$ for $(t-1)$ times 
 In other words, they alleviate the need for iterative updates of $r$ within each slice as an option.
 Consequently, decoding can be performed in a non-iterative way when $\Lambda$ is set to one.
 
-In this research, we adapt DR to SRF and it is performed for each $t$ between the $l$-th and the $(l+1)$-th level as explained in Algorithm~\ref{algorithm:sdr}.
+In this research, we adapt DR to SRF and it works as Algorithm~\ref{algorithm:sdr} for each $t$ between the $l$-th and $(l+1)$-th level.
 The previous output vector $o_j^{t-1}$, $\hat{u}_{j|i}$, $\Lambda$, and the lower level index $l$ are given as inputs to the algorithm as in the first line of the algorithm.
 $r$ is set to zero at line 2 and 3.
 The current output vector $o^t$ is initialized to $o^{t-1}$ at line 4.
@@ -332,6 +311,7 @@ $o^{t=0}$ is set to a zero vector in order to initialize $c$ uniformly for $t=1$
 The number of operations of an iteration remains the same as the original version of DR since only the order of the expectation and maximization sub-procedures is changed.
 At the top layer, coefficients in $c$ which route capsules to a class capsule corresponding to the padding symbol are masked as zero.
 
+% SRF to DR
 \begin{algorithm}[H]
 \caption{Sequential version of Dynamic Routing (DR) algorithm}\label{euclid}
 \begin{algorithmic}[1]
@@ -351,10 +331,13 @@ At the top layer, coefficients in $c$ which route capsules to a class capsule co
 \end{algorithmic}
 \label{algorithm:sdr}
 \end{algorithm}
+
 \section{Results}
+
 \subsection{Experiment Setup}
 
 \subsubsection{Data preparation}
+% Data splitting & vocab set
 TIMIT~\citep{timit} consists of mono-channel read speech sampled at 16Khz.
 The training and test set consist of 4,620 utterances recorded from 462 speakers and 1,680 utterances recorded from 168 speakers respectively.
 We used a training set consisting of 3,696 utterances where all dialect utterances, i.e. the utterances tagged as ``SA", were removed and used 192 core test sets recorded from 24 speakers.
@@ -367,29 +350,35 @@ The data splitting and feature extraction process was performed using Kaldi\foot
 
 \subsubsection{Implementation details}
 All evaluations were performed with the same settings when it comes to training CapsNets unless otherwise noted.
-Variables are initialized using a fan-avg method~\citep{DBLP:journals/jmlr/GlorotB10} from the uniform distribution, i.e. initially learning weights are drawn from \([-\sqrt{3 \times \alpha_s / n_{init}}, \sqrt{3 \times \alpha_s / n_{init}}]\), where \(n_{init}\) is the average of input and output unit numbers and the scaling factor $\alpha_s$ is set to 1.0.
-The first convolutional sub-block in a capsulation block consists of two 3 \(\times\) 3 convolutional layers with 64 channels and a stride for both time and frequency dimensions is set to 2.
-The third sub-block consists of a 3 \(\times\) 3 convolutional layer with stride one and their channels are set to \(P_D\).
+% Init
+Variables are initialized using a fan-avg method~\citep{DBLP:journals/jmlr/GlorotB10} from the uniform distribution, i.e. initially learning weights are drawn from $[-\sqrt{3 \times \alpha_s / n_{init}}, \sqrt{3 \times \alpha_s / n_{init}}]$, where $n_{init}$ is the average of input and output unit numbers and the scaling factor $\alpha_s$ is set to 1.0.
+% Model archi.
+The first convolutional sub-block in a capsulation block consists of two 3 $\times$ 3 convolutional layers with 64 channels and a stride for both time and frequency dimensions is set to 2.
+The third sub-block consists of a 3 $\times$ 3 convolutional layer with stride one and their channels are set to $P_D$.
 Dropout~\citep{DBLP:journals/jmlr/SrivastavaHKSS14} layers are applied after every layer at rate 0.2.
 $\Lambda$ is set to one and we used 8 dimensional instantiation vectors.
+% Normalization
 We utilized two kinds of normalization layers.
 First, batch normalization~\citep{DBLP:conf/icml/IoffeS15} layers are added after every convolutional layer in the first convolutional sub-block of a capsulation block.
 Second, layer normalization~\citep{DBLP:journals/corr/BaKH16} layers are also applied between every capsule layer.
-One modification is that layer normalization is performed not per each capsule but over all capsules in the same capsule group slice to use more vectors for computing the normalization factor.
+One modification is that layer normalization is performed not per each capsule but over all capsules in the same capsule group slice.
+% Learning schedule
 An Adam optimizer~\citep{DBLP:journals/corr/KingmaB14} is used for the gradient descent algorithm.
 A learning rate is updated for each step $n_{s}$ depending on the two hyper-parameters, a warming-up step $n_{w}$ and a scaling factor $\kappa$ as follows:
 \begin{equation}
 \text{Learning Rate} = \kappa \times \text{rsqrt}(d_{emb}) \times min(n_{s}^{-0.5}, n_{s} \times n_{w}^{-1.5})
 \label{eq:lr}
 \end{equation}
-, where \(\text{rsqrt}\) is the reciprocal of a square root.
-\(d_{emb}\) is a embedding size of Transformers and it is set to one for the CapsNets and $n_{w}$ is set to 1,200.
+, where $\text{rsqrt}$ is the reciprocal of a square root.
+$d_{emb}$ is a embedding size of Transformers and it is set to one for the CapsNets and $n_{w}$ is set to 1,200.
 We applied an additional decay policy where a learning rate was started by setting $\kappa$ to 0.5, and then $\kappa$ was reduced to 0.1 after 27 epochs.
 We continued the training by 200 epochs to ensure sufficient weight updates.
 In order to avoid the accuracy being dependent on the early stop time, we evaluated PER with a model which is the averaged checkpoint of the last 10 epochs.
 Approximately 5,340-frames are contained in a batch for each training step according to their sequence length thus the learnable weight are updated 41,800 times per experiment.
+% Decoding
 Lastly, beam width for decoding is set to 100.
 
+% HW/SW environment
 The proposed system was implemented using Tensorflow~\citep{DBLP:journals/corr/AbadiABBCCCDDDG16}.
 The experiments were performed on a server equipped with an Intel 10900X 3.7GHz processor, 64GB main memory, and three graphic cards (one Titan RTX and two RTX 2080 Ti).
 We used a speech recognition scoring toolkit (SCTK)\footnote{\url{https://github.com/usnistgov/SCTK}} built by 
@@ -456,7 +445,7 @@ Left & Right &  (M) & Valid & Test \\\hline
 \label{fig:diagram_window}
 \end{figure}
 
-In order to observe the changes in accuracy depending on the configurations related to $\omega$, we compared 7 models as shown in Table~\ref{Tab:window}.
+In order to investigate the changes in accuracy depending on the configurations related to $\omega$, we compared 7 models as shown in Table~\ref{Tab:window}.
 With the consideration of algorithmic delay caused by the right context size of windows $\omega_R$, all models have longer or equal left context size $\omega_L$ to their $\omega_R$.
 As $\omega$ is expanded from 1 to 6, the numbers of required parameters (Params.) are increased from 0.21 to 0.66 million (M) as explained in  Section 3.2.
 The RPERRs are at most 18.0\% and 16.4\% for Valid and Test respectively depending on $\omega$ settings as shown in the table.
@@ -464,6 +453,7 @@ When both context sizes are set to two, the model shows the best performance wit
 The relationship between $\omega$ (X-axis) and PERs (Y-axis) are more explicitly described in Fig.~\ref{fig:diagram_window}.
 ``2-1" indicates that $\omega_L$ and $\omega_R$ are 2 and 1 respectively and the exact figures of the corresponding PERs are in Table~\ref{Tab:window}.
 Triangles and circles indicate Valid and Test respectively.
+% even 의 중요성
 We can see multiple cases where the balance of $\omega_L$ and $\omega_R$ has more of an effect on lowering the PERs than the number of parameters when $\omega > 1$ in Fig.~\ref{fig:diagram_win1}.
 This phenomenon is described by the dashed arrows in the figure and the percentages beside the arrows are RPERR between the balanced and unbalanced window configurations.
 Moreover, PERs of the three evenly sliced cases, that are ``0-0", ``1-1", and ``2-2", show an almost linear error reduction according to their $\omega$ for both evaluation sets from 25.6\% to 21.2\% on average as shown in Fig~\ref{fig:diagram_win2}.
@@ -588,10 +578,10 @@ In order to see how the phenomenon affects alignment, we checked the 10 probabil
 Symbols are represented with different line shapes described in the right side of the figure.
 The labels on the X-axis of each graph indicate a symbol with the highest probability, i.e. the phoneme sequence of the greedy decoding.
 Reference time markers and symbols are written at the bottom of Fig~\ref{fig:softmax_start} and Fig~\ref{fig:softmax_end}.
-For all the cases, no phenomenon of misalignment of the iteration 1 version of SDR model is observed.
+For all the cases, the misalignment phenomenon of the iteration 1 version of SDR model is not observed.
 It is not a big difference, but rather, the SDR model recognizes the symbol ``s" as fast as the iteration 2 version DR as shown in Fig~\ref{fig:softmax_start}.
 The end of sentence symbol ``h\#" is also precisely recognized in all the cases as in Fig~\ref{fig:softmax_end}.
-Even in the case of SDR when iteration is set to 1 at $t=137$, unlike the heat map which routes most of the primary capsules to the class capsule to the symbol ``pau", the probability of ``h\#" is the largest.
+Even in the case of SDR when iteration is set to 1 at $t=137$, unlike the heat map where most of the primary capsules are routed  to the class capsule to the symbol ``pau", the probability of ``h\#" is the largest.
 
 \section{Related work}
 In this paper, we explored the potential capabilities of CapsNets for sequence encoding.
@@ -606,6 +596,7 @@ In addition, an expectation-maximization (EM) algorithm based on the Gaussian mi
 Despite its structural and theoretical advances, the EM routing method has shown noncompetitive accuracy and computational complexity compared to DR~\citep{Malmgren1314210, DBLP:conf/nips/HahnPK19}.
 This is the reason why we did not adopt it in this study, but it still has a suitable structure to be applied to the proposed method.
 
+% Modifications
 In order to improve implementations of the pioneer studies, various modifications were proposed.
 When it comes to iterative routing methods, since increasing the number of iterations can lead to unbalanced activations, ~\citep{DBLP:conf/iclr/Wang018} proposed an optimized DR method which applies an entropy regularizer to constrain the routing coefficient to be close to the uniform distribution.
 A min-max normalization~\citep{DBLP:journals/corr/abs-1903-09662} was applied to resolve the performance degradation in DR caused by iterative usage of a softmax function as a normalization function for routing coefficients. 
@@ -613,6 +604,7 @@ For faster training, routing coefficients were initialized from the learnable we
 Recently, CapsNet has been applied to relatively large datasets such as CiFAR 100~\citep{Krizhevsky09learningmultiple} by parallelizing iterative routing methods~\citep{DBLP:conf/iclr/TsaiSGS20} and showed competitive performance compared to ResNet~\citep{DBLP:conf/cvpr/HeZRS16}.
 There is also self-routing~\citep{DBLP:conf/nips/HahnPK19}, which is a non-iterative routing method, that introduces the mixture-of-expect mechanism~\citep{DBLP:journals/neco/JacobsJNH91} to the routing method.
 
+% Combination
 In addition to research which improves CapsNets themselves, there are various attempts to merge CapsNets or the routing mechanism with other models.
 Especially for sequence inputs, CapsNets are combined with existing sequential models either as a successor block at the top of the LSTM layers~\citep{zhang-etal-2018-attention, DBLP:conf/icann/HePLHZ19}, the Transformer~\citep{DBLP:conf/nips/VaswaniSPUJGKP17} encoder blocks~\citep{liu-etal-2019-transformer}, and bidirectional encoder representations from Transformers (BERT)
 ~\citep{DBLP:conf/naacl/DevlinCLT19, DBLP:journals/jbi/SunYWZLW20} or as an intermediate block in between encoders and decoders which are made of LSTMs~\citep{wang-2019-towards}.
@@ -620,6 +612,7 @@ There are also attempts to put routing algorithms into attention methods and vic
 Routing mechanisms are adopted into self-attention based models to cluster similar information from the multi-head attentions~\citep{DBLP:conf/nlpcc/GuF19}.
 In contrast, STAR-Caps~\citep{DBLP:conf/nips/AhmedT19} merges attention methods into the routing mechanism.
 
+% Various fields
 CapsNets have been actively applied to a variety of fields because of their outstanding image encoding abilities.
 They are suitable for visual tracking~\citep{DBLP:journals/corr/abs-1902-10054} and object segmentation of medical images~\citep{DBLP:journals/corr/abs-1804-04241}.
 CapsNets also can be easily applied to non-visual tasks such as knowledge graph embedding and link prediction because of their representations of conceptual hierarchy relationships~\citep{DBLP:conf/naacl/NguyenVNNP19, DBLP:conf/iclr/XinyiC19}.
