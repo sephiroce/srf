@@ -64,3 +64,4 @@ est.json.
 
 ## Envorinment
   - Tensorflow(commit 12f5cd7dde06b2e2e76d39fd114d8ce37231f33b)
+  - Cuda compilation tools, release 10.1, V10.1.168
