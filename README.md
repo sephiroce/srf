@@ -61,3 +61,6 @@ est.json.
     > $ egs/script/train_stf.sh $LAYER $DIM $INN  
       * $DIM it means the embedding dimension for STF models.  
       * $INN is the dimension of inner layers, i.e. the point-wise feed forward layers in STF models.
+
+## Envorinment
+  - Tensorflow(commit 12f5cd7dde06b2e2e76d39fd114d8ce37231f33b)
