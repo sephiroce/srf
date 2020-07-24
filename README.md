@@ -1,5 +1,5 @@
 # Supplementary files for the sequential routing framework
-## Arxiv: 
+## Arxiv: https://arxiv.org/abs/2007.11747
 ## Highlights
   - Capsule network only structures can successfully map sequences to sequences
   - Mappings are refined by initializing routing iteration based on the previous output
