@@ -105,19 +105,9 @@ class SequenceRouter(tf.keras.Model):
     self.routing_type = config.model_caps_routing_type
     self.enc_num = enc_num = config.model_encoder_num
 
-    SequenceRouter.window = window = config.model_caps_window
-    assert config.model_caps_window > 0
-
-    if config.model_caps_window_even:
-      if window == 2:
-        SequenceRouter.lpad = self.lpad = 1
-      else:
-        SequenceRouter.lpad = self.lpad = int(math.ceil((window - 1) / 2.0))
-      SequenceRouter.rpad = self.rpad = int(math.floor((window - 1) / 2.0))
-    else:
-      SequenceRouter.lpad = config.model_caps_window_lpad
-      SequenceRouter.rpad = config.model_caps_window_rpad
-      assert (SequenceRouter.lpad + SequenceRouter.rpad + 1) == window
+    SequenceRouter.lpad = config.model_caps_window_lpad
+    SequenceRouter.rpad = config.model_caps_window_rpad
+    window = SequenceRouter.window = SequenceRouter.lpad + SequenceRouter.rpad + 1
 
     self.is_context = is_context = config.model_caps_context
     self.caps_inp_n = caps_inp_n = config.model_caps_primary_num
@@ -188,8 +178,8 @@ class SequenceRouter(tf.keras.Model):
   def call(self, inputs, **kwargs):
     inp_len = kwargs["input_lengths"]
     training = kwargs["training"]
-    lpad = self.lpad
-    rpad = self.rpad
+    lpad = SequenceRouter.lpad
+    rpad = SequenceRouter.rpad
     window = SequenceRouter.window
     caps_in_d = tf.shape(self.wgt[0])[5]
 
