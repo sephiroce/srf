@@ -40,6 +40,14 @@ function run() {
     --train-inn-dropout=0.4 \
     --train-inp-dropout=0.3 \
     --train-res-dropout=0.4 \
+    --model-ap-scale=1 \
+    --model-ap-encoder=True \
+    --model-ap-width-zero=1 \
+    --model-ap-width-stripe=1 \
+    --model-ap-scale=1 \
+    --model-ap-encoder=True \
+    --model-ap-decoder=True \
+    --model-ap-encdec=False \
     --model-dimension=${DIM} \
     --train-warmup-n=1000 \
     --train-batch-frame=20000 \
