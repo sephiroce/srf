@@ -38,6 +38,7 @@ class CNNEncoder(tf.keras.Model):
   def __init__(self, config, logger, class_n):
     super(CNNEncoder, self).__init__()
 
+    pool_freq = 3
     init = config.model_initializer
     self.enc_num = enc_num = config.model_encoder_num
     self.nfilt_inp = config.model_conv_inp_nfilt
@@ -72,7 +73,7 @@ class CNNEncoder(tf.keras.Model):
                                                     use_bias=False))
 
     #TODO: Hardcoded 3
-    feat_dim = config.feat_dim // 3
+    feat_dim = config.feat_dim // pool_freq
     last_filt = (self.proj_dim // feat_dim) * 2
     self.enc_layers.append(tf.keras.layers.Conv2D(filters=last_filt,
                                                   kernel_size=(5, 3),
@@ -84,9 +85,11 @@ class CNNEncoder(tf.keras.Model):
                                                   use_bias=False))
 
     self.dropouts = \
-      [tf.keras.layers.Dropout(rate=0.2, name="inn_drop1_%d"%(i+1)) for i in range(enc_num)]
+      [tf.keras.layers.Dropout(rate=0.2, name="inn_drop1_%d"%(i+1))
+       for i in range(enc_num)]
     self.dropouts_cnn = \
-      [tf.keras.layers.Dropout(rate=0.3, name="inn_drop1_%d"%(i+1)) for i in range(enc_num)]
+      [tf.keras.layers.Dropout(rate=0.3, name="inn_drop1_%d"%(i+1))
+       for i in range(enc_num)]
     self.layernorms = \
       [tf.keras.layers.LayerNormalization(epsilon=1e-6, name="inn_ln_%d"%(i+1))
        for i in range(enc_num)]
@@ -95,13 +98,15 @@ class CNNEncoder(tf.keras.Model):
     Maxout Projection layers
     """
     self.reshape_to_maxout = \
-      tf.keras.layers.Reshape((-1, feat_dim * (last_filt // 2)), name="reshape_to_ffwd")
+      tf.keras.layers.Reshape((-1, feat_dim * (last_filt // 2)),
+                              name="reshape_to_ffwd")
     self.proj = [tf.keras.layers.TimeDistributed(
         tf.keras.layers.Dense(self.proj_dim,
                               kernel_initializer=mh.get_init(init),
                               name="proj1_%d"%(i+1), use_bias=False))
                  for i in range(self.proj_layers - 1)]
-    self.dropproj = [tf.keras.layers.Dropout(rate=0.2, name="proj_drop1_%d"%(i+1))
+    self.dropproj = [tf.keras.layers.Dropout(rate=0.2,
+                                             name="proj_drop1_%d"%(i+1))
                      for i in range(self.proj_layers - 1)]
     self.dropouts_proj = [tf.keras.layers.Dropout(rate=0.3,
                                                   name="proj_drop1_%d"%(i+1))
