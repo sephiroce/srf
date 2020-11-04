@@ -97,7 +97,8 @@ def main():
     dummy_feats = tf.random.uniform([1, 20, config.feat_dim])
     dummy_in_len = tf.ones(1) * 20
     model(dummy_feats, input_lengths=dummy_in_len, is_training=False,
-          mask=None, attention_penalty_mask=None)
+          mask=None, attention_penalty_mask=None,
+          in_len_div=config.model_conv_layer_num ** config.model_conv_stride)
 
     models.append(model)
 
@@ -127,7 +128,8 @@ def main():
   dummy_feats = tf.random.uniform([10, 20, config.feat_dim])
   dummy_in_len = tf.ones(10) * 20
   model(dummy_feats, input_lengths=dummy_in_len, is_training=False,
-        mask=None, attention_penalty_mask=None)
+        mask=None, attention_penalty_mask=None,
+        in_len_div=config.model_conv_layer_num ** config.model_conv_stride)
 
   model.set_weights(weights[0])
 
