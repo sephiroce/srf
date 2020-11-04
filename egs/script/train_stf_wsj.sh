@@ -4,7 +4,7 @@
 
 LAYER=${1:-20}
 DIM=${2:-256}
-INN=${3:-2048}
+INN=${3:-1488}
 
 NAME=TF_L${LAYER}_D${DIM}_H${INN}
 
@@ -50,8 +50,9 @@ function run() {
     --model-encoder-num=${LAYER}
 }
 
-run tfsr/trainer_tf.py 1.5  27 dummy dummy  27 &>  ${NAME}.1train.out
-run tfsr/trainer_tf.py 0.5 200 dummy dummy 200 &>> ${NAME}.1train.out
+run tfsr/trainer_tf.py 10  27 dummy dummy 27 &>  ${NAME}.1train.out
+run tfsr/trainer_tf.py  1  70 dummy dummy 70 &>> ${NAME}.1train.out
+run tfsr/trainer_tf.py 0.5 80 dummy dummy 80 &>> ${NAME}.1train.out
 rm -rf ./checkpoint/${NAME}/avg
 run tfsr/utils/average_ckpt_tf.py 1e-6 1 dummy dummy 0 &>  ${NAME}.2avg.out
 run tfsr/trainer_tf.py   1e-6 0 /avg test 0 &>  ${NAME}.3decode.test.out &
