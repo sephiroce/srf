@@ -28,7 +28,7 @@
     - {timit, wsj}.conf: a configuration for the TIMIT and WSJ corpus  
   - data
     - timit_62.vocab: 62 label symbols.  
-    - wsj_31.vocab: 62 label symbols.    
+    - wsj_31.vocab: 31 label symbols.    
       * A blank symbol is automatically added during training and decoding.
     - sample.json: input file format for generating TFrecords.  
   - script
