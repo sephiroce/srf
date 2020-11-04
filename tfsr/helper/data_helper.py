@@ -21,8 +21,31 @@ __author__ = "Kyungmin Lee"
 __email__ = "sephiroce@snu.ac.kr"
 
 import os
+import tensorflow as tf
 import tfsr.helper.train_helper as th
 from tfsr.data import load_speech_data
+
+num_parallel_calls = tf.data.experimental.AUTOTUNE
+
+def get_data_len(config):
+  train_num = config.prep_data_num_train
+  valid_num = config.prep_data_num_valid
+  test_num = config.prep_data_num_test
+
+  if config.path_train_ptrn and train_num is None:
+    train_file_ptrn = os.path.join(config.path_base, config.path_train_ptrn)
+    train_files = tf.io.gfile.glob(train_file_ptrn)
+    train_num = sum(1 for _ in tf.data.TFRecordDataset(train_files))
+  if config.path_valid_ptrn and valid_num is None:
+    valid_file_ptrn = os.path.join(config.path_base, config.path_valid_ptrn)
+    valid_files = tf.io.gfile.glob(valid_file_ptrn)
+    valid_num = sum(1 for _ in tf.data.TFRecordDataset(valid_files))
+  if config.path_test_ptrn and test_num is None:
+    test_file_ptrn = os.path.join(config.path_base, config.path_test_ptrn)
+    test_files = tf.io.gfile.glob(test_file_ptrn)
+    test_num = sum(1 for _ in tf.data.TFRecordDataset(test_files))
+
+  return train_num, valid_num, test_num
 
 def create_ds_for_evaluation(config, logger):
   test_file_ptrn = os.path.join(config.path_base, config.path_test_ptrn)
@@ -32,18 +55,18 @@ def create_ds_for_evaluation(config, logger):
 
   test_ds = \
     load_speech_data.create_ds_batch_for_test(file_pattern=test_file_ptrn,
-                                              num_parallel_calls=6,
                                               batch_size=1,
                                               max_inp=config.prep_max_inp,
                                               max_tar=config.prep_max_tar)
 
   test_ds = test_ds.map(lambda x, y, a, b, c:
                         map_data_fn(x, y, a, b, c, config.feat_dim),
-                        num_parallel_calls=6)
+                        num_parallel_calls=num_parallel_calls)
 
   return test_ds
 
-def create_ds_for_training(config, logger, num_gpus):
+def create_ds_for_training(config, logger, num_gpus,
+                           manual_bucket_batch_sizes=None):
   train_file_ptrn = os.path.join(config.path_base, config.path_train_ptrn)
   valid_file_ptrn = os.path.join(config.path_base, config.path_valid_ptrn)
   map_data_fn = load_speech_data.map_data_for_transformer_fn
@@ -52,14 +75,14 @@ def create_ds_for_training(config, logger, num_gpus):
     assert config.train_batch_frame is not None and config.train_batch_frame \
            > 0
     bucket_boundaries, bucket_batch_sizes = \
-      th.get_bucket_info(config.train_batch_frame, num_gpus, 300, 10000, 200)
-
+      th.get_bucket_info(config.train_batch_frame, num_gpus, 241, 10000, 150,
+                         step_for_bucket_size=False,
+                         manual_bucket_batch_sizes=manual_bucket_batch_sizes)
     logger.info('bucket_boundaries: [%s]', ', '.join(map(str, bucket_boundaries)))
     logger.info('bucket_batch_sizes: [%s]', ', '.join(map(str,
                                                           bucket_batch_sizes)))
 
     train_ds = load_speech_data.create_ds_bucket(file_pattern=train_file_ptrn,
-                                                 num_parallel_calls=6,
                                                  shuffle=True,
                                                  repeat=1,
                                                  bucket_boundaries=bucket_boundaries,
@@ -68,7 +91,6 @@ def create_ds_for_training(config, logger, num_gpus):
                                                  max_tar=config.prep_max_tar)
 
     valid_ds = load_speech_data.create_ds_bucket(file_pattern=valid_file_ptrn,
-                                                 num_parallel_calls=6,
                                                  shuffle=False,
                                                  repeat=1,
                                                  bucket_boundaries=bucket_boundaries,
@@ -79,7 +101,6 @@ def create_ds_for_training(config, logger, num_gpus):
     assert config.train_batch_size is not None and config.train_batch_size > 0
 
     train_ds = load_speech_data.create_ds_batch_for_train(file_pattern=train_file_ptrn,
-                                                          num_parallel_calls=6,
                                                           shuffle=True,
                                                           repeat=1,
                                                           batch_size=config.train_batch_size,
@@ -87,7 +108,6 @@ def create_ds_for_training(config, logger, num_gpus):
                                                           max_tar=config.prep_max_tar)
 
     valid_ds = load_speech_data.create_ds_batch_for_train(file_pattern=valid_file_ptrn,
-                                                          num_parallel_calls=6,
                                                           shuffle=False,
                                                           repeat=1,
                                                           batch_size=config.train_batch_size,
@@ -96,10 +116,10 @@ def create_ds_for_training(config, logger, num_gpus):
 
   train_ds = \
     train_ds.map(lambda x, y, a, b: map_data_fn(x, y, a, b, config.feat_dim),
-                 num_parallel_calls=6)
+                 num_parallel_calls=num_parallel_calls)
 
   valid_ds = \
     valid_ds.map(lambda x, y, a, b: map_data_fn(x, y, a, b, config.feat_dim),
-                 num_parallel_calls=6)
+                 num_parallel_calls=num_parallel_calls)
 
   return train_ds, valid_ds

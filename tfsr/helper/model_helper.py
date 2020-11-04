@@ -22,7 +22,6 @@ __email__ = "sephiroce@snu.ac.kr"
 
 import math
 import tensorflow as tf
-import matplotlib.pylab as plt
 from tfsr.helper.common_helper import Constants
 
 #######################
@@ -230,7 +229,13 @@ class AttentionPenalty:
   def big_penalty_map(self):
     return self.eap
 
-  def create_pens(self, config, inp_len, tar_len=None):
+  def create_eap(self, inp_len):
+    #pylint: disable=too-many-locals
+    inp_len = tf.cast(inp_len, tf.int32)
+    enc_max_len = tf.math.reduce_max(inp_len, keepdims=False)
+    return self.eap[:, :enc_max_len, :enc_max_len]
+
+  def create_pens(self, ap_enc, ap_dec, inp_len, tar_len=None):
     #pylint: disable=too-many-locals
     inp_len = tf.cast(inp_len, tf.int32)
     enc_max_len = tf.math.reduce_max(inp_len, keepdims=False)
@@ -241,142 +246,16 @@ class AttentionPenalty:
     if tar_len is not None:
       dec_max_len = tf.cast(tf.math.reduce_max(tar_len, keepdims=False), tf.int32)
 
-      if config.model_ap_encdec:
+      if ap_enc:
         enc_dec_att_pen = self.eap[ :, :dec_max_len, :enc_max_len]
 
-      if config.model_ap_decoder:
+      if ap_dec:
         dec_att_pen = self.eap[ :, :dec_max_len, :dec_max_len]
 
     return enc_att_pen, enc_dec_att_pen, dec_att_pen
 
-
-###################
-# Model selection #
-###################
-def select_model(config, logger):
-  #pylint: disable=import-outside-toplevel
-  from tfsr.model.transformer import Transformer
-  from tfsr.model.transformer_mf import TransformerMF
-  from tfsr.model.transformer_fs import TransformerFS
-
-  if config.feat_dim1 and config.feat_dim2:
-    assert config.feat_dim1 + config.feat_dim2 == config.feat_dim
-    Model = TransformerMF
-    logger.info("Model: Transformer Multi Feature")
-  elif config.model_type == "stf_fs":
-    Model = TransformerFS
-    logger.info("Model: Transformer Future Sequence")
-  else:
-    Model = Transformer
-    logger.info("Model: Transformer")
-
-  return Model
-
-
-def main():
-  #pylint: disable=too-many-statements
-  # Testing Attention Penalty
-  class Config:
-    def __init__(self):
-      self.model_ap_encdec = None
-      self.model_ap_decoder = None
-  config = Config()
-
-  num_head = 4
-
-  # Tiny case
-  inp_len = tf.constant([10, 10])
-  tar_len = tf.constant([8, 2])
-  att_pen = AttentionPenalty(1500, num_head, 1, 1, 1.0)
-
-  config.model_ap_encdec = True
-  config.model_ap_decoder = True
-  eap, edap, dap = att_pen.create_pens(config, inp_len, tar_len)
-
-  plt.pcolormesh(eap[0], cmap='viridis')
-  plt.gca().invert_yaxis()
-  plt.show()
-  print(eap[0])
-
-  plt.pcolormesh(edap[0], cmap='viridis')
-  plt.gca().invert_yaxis()
-  plt.show()
-  print(edap[0])
-
-  plt.pcolormesh(edap[1], cmap='viridis')
-  plt.gca().invert_yaxis()
-  plt.show()
-  print(edap[1])
-
-  plt.pcolormesh(dap[0], cmap='viridis')
-  plt.gca().invert_yaxis()
-  plt.show()
-  print(dap[0])
-
-  plt.pcolormesh(dap[1], cmap='viridis')
-  plt.gca().invert_yaxis()
-  plt.show()
-  print(dap[1])
-
-  # Real case
-  att_pen = AttentionPenalty(1500, num_head, 10, 20, 1.0)
-  inp_len = tf.constant([366, 618, 618, 618, 618, 618, 618, 618, 618, 618, 618,
-                         618, 618, 618, 618, 618, 618, 618, 618, 618, 618, 618])
-  tar_len = tf.constant([200, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150,
-                         150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150])
-
-  eap, edap, dap = att_pen.create_pens(config, inp_len, tar_len)
-
-  plt.pcolormesh(eap[0], cmap='viridis')
-  plt.gca().invert_yaxis()
-  plt.show()
-
-  plt.pcolormesh(dap[0], cmap='viridis')
-  plt.gca().invert_yaxis()
-  plt.show()
-
-  plt.pcolormesh(dap[1], cmap='viridis')
-  plt.gca().invert_yaxis()
-  plt.show()
-
-  # Testing positional encoding
-  print("Test positional encoding")
-  model_dim = 256
-  pos_encoding = get_pos_enc(1040, model_dim, min_timescale=1.0,
-                             max_timescale=1.0e4)
-  print(pos_encoding.shape)
-
-  plt.pcolormesh(pos_encoding, cmap='RdBu')
-  plt.xlabel('Depth')
-  plt.xlim((0, model_dim))
-  plt.ylabel('Position')
-  plt.colorbar()
-  plt.show()
-
-  # Testing padding mask
-  print("Test Padding mask")
-  input_vector = tf.constant([[7, 6, 0, 0, 1],
-                              [1, 2, 3, 0, 0],
-                              [0, 0, 0, 4, 5]])
-
-  tmp = create_padding_mask(input_vector)
-
-  print(tmp)
-
-  # Testing padding bias
-  print("Test Padding bias")
-  input_vector = tf.constant([18, 12, 16])
-  tmp = get_padding_bias(input_vector)
-  print(tmp)
-
-  # Testing look ahead mask
-  input_vector = tf.random.uniform((1, 10))
-  temp = create_look_ahead_mask(input_vector.shape[1])
-  print(temp)
-
-  # Testing decoder self attention mask
-  temp = get_decoder_self_attention_bias(10)
-  print(temp)
-
-if __name__ == "__main__":
-  main()
+  def get_enc_att_pen(self, inp_len):
+    #pylint: disable=too-many-locals
+    inp_len = tf.cast(inp_len, tf.int32)
+    enc_max_len = tf.math.reduce_max(inp_len, keepdims=False)
+    return self.eap[:, :enc_max_len, :enc_max_len]

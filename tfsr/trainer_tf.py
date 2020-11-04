@@ -110,6 +110,7 @@ class ConvEncoder(tf.keras.Model):
     embeddings = self.layernorm(embeddings) # (batch_size, input_seq_len, d_model)
     return self.proj(embeddings) # (batch_size, input_seq_len, vocab)
 
+
 @tf.function
 def process_train_step(in_len_div, inputs, model, optimizer, loss_state,
                        frame_state, att_pen, n_gpus, blank_idx, samples):
@@ -142,13 +143,12 @@ def process_train_step(in_len_div, inputs, model, optimizer, loss_state,
   frame_state.update_state(tf.math.reduce_sum(inp_len))
   samples.update_state(batch)
 
+
 @tf.function
 def process_valid_step(in_len_div, inputs, model, loss_state, att_pen,
-                       blank_idx, samples):
+                       blank_idx):
   # pylint: disable=too-many-arguments
   feats, labels, inp_len, tar_len = inputs
-  batch = tf.shape(feats)[0]
-
   feats, _, _, enc_pad_mask, _ = \
     th.prep_process(labels, inp_len, tar_len, feats, in_len_div)
 
@@ -163,7 +163,7 @@ def process_valid_step(in_len_div, inputs, model, loss_state, att_pen,
                            tf.math.ceil(inp_len / in_len_div),
                            logits_time_major=False, blank_index=blank_idx)
   loss_state.update_state(pe_loss)
-  samples.update_state(batch)
+
 
 @tf.function
 def process_test_step(in_len_div, beam_width, inputs, model, att_pen):
@@ -231,7 +231,6 @@ def main():
   valid_loss = tf.keras.metrics.Mean(name='valid_loss')
   num_feats = tf.keras.metrics.Mean(name='feature_number')
   train_samples = tf.keras.metrics.Sum(name='train_sample')
-  valid_samples = tf.keras.metrics.Sum(name='valid_sample')
 
   # Distributed loop
   with strategy.scope():
@@ -270,17 +269,13 @@ def main():
                    (train_samples.result() / train_num) * 100,
                    train_loss.result(), opti._decayed_lr('float32'))
         index += 1
-      tf.print("Dropped train samples (Processed samples so far)", train_num -
-               train_samples.result(), train_samples.result())
 
     @tf.function
     def distributed_valid_step(dataset):
       for example in dataset:
         args = (config.model_conv_layer_num ** config.model_conv_stride,
-                example, model, valid_loss, att_pen, blank_idx, valid_samples)
+                example, model, valid_loss, att_pen, blank_idx)
         strategy.run(process_valid_step, args=args)
-      tf.print("Dropped valid samples (Processed samples so far)", valid_num -
-               valid_samples.result(), valid_samples.result())
 
     @tf.function
     def distributed_test_step(dataset):
@@ -309,7 +304,6 @@ def main():
       valid_loss.reset_states()
       num_feats.reset_states()
       train_samples.reset_states()
-      valid_samples.reset_states()
 
       prev = time.time()
       distributed_train_step(train_ds)

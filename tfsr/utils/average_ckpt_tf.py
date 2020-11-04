@@ -45,8 +45,9 @@ def main():
   config = ParseOption(sys.argv, logger).args
 
   # Loading a vocabulary
-  _, _, dec_in_dim, dec_out_dim = Util.load_vocab(Util.get_file_path(config.path_base,
-                                                           config.path_vocab), logger)
+  _, _, dec_in_dim, dec_out_dim = \
+    Util.load_vocab(Util.get_file_path(config.path_base, config.path_vocab),
+                    logger)
   dec_out_dim = dec_in_dim + 1
   logger.info("The modified output Dimension %d", dec_out_dim)
 
@@ -81,13 +82,13 @@ def main():
   for ckpt_path in ckpts[-config.model_average_num:]:
     logger.info(ckpt_path)
     model = ConvEncoder(config.model_encoder_num, config.model_dimension,
-                      config.model_att_head_num, config.model_inner_dim,
-                      config.feat_dim,
-                      config.train_inp_dropout, config.train_inn_dropout,
-                      config.train_att_dropout, config.train_res_dropout,
-                      config.model_conv_filter_num,
-                      config.model_conv_layer_num,
-                      config.model_initializer, dec_out_dim)
+                        config.model_att_head_num, config.model_inner_dim,
+                        config.feat_dim,
+                        config.train_inp_dropout, config.train_inn_dropout,
+                        config.train_att_dropout, config.train_res_dropout,
+                        config.model_conv_filter_num,
+                        config.model_conv_layer_num,
+                        config.model_initializer, dec_out_dim)
 
     # Creating or loading a check point
     ckpt = tf.train.Checkpoint(optimizer=optimizer, model=model)

@@ -2,11 +2,10 @@
 
 . path.sh
 
-LAYER=${1:-1}
-DIM=${2:-1}
-INN=${3:-1}
+LAYER=${1:-20}
+DIM=${2:-128}
+INN=${3:-1024}
 
-FRAME=20000
 NAME=TF_L${LAYER}_D${DIM}_H${INN}
 
 function run() {
@@ -33,8 +32,8 @@ function run() {
   fi
 
   python3.6 -u ${SCRIPT} \
-    --config=egs/timit/conf/stf.conf \
-    --path-base=${DATA_PATH} \
+    --path-base=/data/timit \
+    --config=egs/conf/timit.conf \
     --path-ckpt=./checkpoint/${NAME}${AVG} \
     --model-inner-dim=${INN} \
     --train-att-dropout=0.3 \
@@ -43,7 +42,7 @@ function run() {
     --train-res-dropout=0.4 \
     --model-dimension=${DIM} \
     --train-warmup-n=1000 \
-    --train-batch-frame=${FRAME} \
+    --train-batch-frame=20000 \
     --train-lr-param-k=${K} \
     --train-es-tolerance=${TOLERANCE} \
     --train-max-epoch=${MAX_EPOCH} \

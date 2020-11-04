@@ -30,7 +30,9 @@ import tensorflow as tf
 from tfsr.helper.common_helper import ParseOption, Logger
 from tfsr.helper.misc_helper import Util
 import tfsr.helper.data_helper as dh
-from tfsr.model.sequence_router import SequenceRouter as SRF
+from tfsr.model.sequence_router_einsum import SequenceRouter as SRFE
+from tfsr.model.sequence_router_lowmemory import SequenceRouter as SRFL
+from tfsr.model.sequence_router_naive import SequenceRouter as SRFN
 import tfsr.helper.train_helper as th
 from tfsr.model.lstm_encoder import LstmEncoder
 from tfsr.model.cnn_encoder import CNNEncoder
@@ -61,11 +63,9 @@ def process_train_step(in_len_div, inputs, model, optimizer, loss_state,
   samples.update_state(batch)
 
 @tf.function
-def process_valid_step(in_len_div, inputs, model, loss_state, blank_idx,
-                       samples):
+def process_valid_step(in_len_div, inputs, model, loss_state, blank_idx):
   # pylint: disable=too-many-arguments
   feats, labels, inp_len, tar_len = inputs
-  batch = tf.shape(feats)[0]
   max_feat_len = tf.math.reduce_max(inp_len, keepdims=False)
   feats = feats[:, :max_feat_len, :]
   y_pred = model(feats, input_lengths=inp_len, training=False)
@@ -73,7 +73,6 @@ def process_valid_step(in_len_div, inputs, model, loss_state, blank_idx,
                            tf.math.ceil(inp_len / in_len_div),
                            logits_time_major=False, blank_index=blank_idx)
   loss_state.update_state(pe_loss)
-  samples.update_state(batch)
 
 @tf.function
 def process_test_step(in_len_div, inputs, model, beam_width):
@@ -132,7 +131,6 @@ def main():
   valid_loss = tf.keras.metrics.Mean(name='valid_loss')
   num_feats = tf.keras.metrics.Mean(name='feature_number')
   train_samples = tf.keras.metrics.Sum(name='train_sample')
-  valid_samples = tf.keras.metrics.Sum(name='valid_sample')
 
   # Distributed loop
   with strategy.scope():
@@ -157,7 +155,14 @@ def main():
     else:
       in_len_div = config.model_conv_layer_num ** config.model_conv_stride
       if config.model_caps_layer_time is None:
-        model = SRF(config, logger, dec_out_dim)
+        if config.model_caps_type == "lowmemory":
+          model = SRFL(config, logger, dec_out_dim)
+        elif config.model_caps_type == "einsum":
+          model = SRFE(config, logger, dec_out_dim)
+        elif config.model_caps_type == "naive":
+          model = SRFN(config, logger, dec_out_dim)
+        else:
+          model = None
       else:
         logger.critical("LSRF is deprecated")
     opti = th.get_optimizer(config)
@@ -178,16 +183,12 @@ def main():
           tf.print("STEP", opti.iterations, (train_samples.result()/train_num)
                    * 100, train_loss.result(), opti._decayed_lr('float32'))
         index += 1
-      tf.print("Dropped train samples (Processed samples so far)", train_num -
-               train_samples.result(), train_samples.result())
 
     @tf.function
     def distributed_valid_step(dataset):
       for example in dataset:
-        args = (in_len_div, example, model, valid_loss, blank_idx, valid_samples)
+        args = (in_len_div, example, model, valid_loss, blank_idx)
         strategy.run(process_valid_step, args=args)
-      tf.print("Dropped valid samples (Processed samples so far)", valid_num -
-               valid_samples.result(), valid_samples.result())
 
     @tf.function
     def distributed_test_step(dataset):
@@ -202,6 +203,8 @@ def main():
       model(dummy_feats, input_lengths=dummy_in_len, training=False)
     dummy_step()
     model.summary()
+    if config.model_type in ["cnn", "conv", "convolution"]:
+      model.model.summary()
 
     pre_loss = 1e+9
     tolerance = 0
@@ -211,7 +214,6 @@ def main():
       valid_loss.reset_states()
       num_feats.reset_states()
       train_samples.reset_states()
-      valid_samples.reset_states()
 
       prev = time.time()
       distributed_train_step(train_ds)

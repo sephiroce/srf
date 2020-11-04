@@ -13,6 +13,8 @@
 # limitations under the License.
 # ==============================================================================
 
+# pylint: disable=import-error, too-few-public-methods
+
 """ Point wise feed forward network """
 
 __author__ = "Kyungmin Lee"

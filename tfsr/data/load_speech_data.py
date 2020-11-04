@@ -21,8 +21,9 @@ import tensorflow as tf
 __author__ = "Kyungmin Lee"
 __email__ = "sephiroce@snu.ac.kr"
 
-def create_ds(file_pattern, num_parallel_calls, shuffle, max_inp, max_tar,
-              is_utt_id=False):
+num_parallel_calls = tf.data.experimental.AUTOTUNE
+
+def create_ds(file_pattern, shuffle, max_inp, max_tar, is_utt_id=False):
   """Create dataset where each item is a dict of "inputs" and "targets".
     :arg file_pattern: String used to match the input TFRecord files.
     :arg batch_size: Maximum number of tokens per global batch of examples.
@@ -41,7 +42,8 @@ def create_ds(file_pattern, num_parallel_calls, shuffle, max_inp, max_tar,
 
   def _load_records(filename):
     """Read file and return a dataset of tf.Examples."""
-    return tf.data.TFRecordDataset(filename, buffer_size=120 * 1000 * 1000)
+    return tf.data.TFRecordDataset(filename, buffer_size=100 * 1000 * 1000,
+                                   num_parallel_reads=10)
 
   def _filter_max_length(example, max_length, idx):
     """max_length in seconds, sampled per 10 ms, so divide it by 100"""
@@ -86,15 +88,11 @@ def create_ds(file_pattern, num_parallel_calls, shuffle, max_inp, max_tar,
     return inputs, targets, input_length, target_length, utt_id
 
   dataset = tf.data.Dataset.list_files(file_pattern, shuffle=shuffle)
-
   # Read files and interleave results. When training, the order of the examples
   # will be non-deterministic.
-  options = tf.data.Options()
-  options.experimental_deterministic = False
-  dataset = \
-    dataset.interleave(_load_records, cycle_length=num_parallel_calls,
-                       num_parallel_calls=tf.data.experimental.AUTOTUNE
-                      ).with_options(options)
+  dataset = dataset.interleave(_load_records, cycle_length=None,
+                               num_parallel_calls=num_parallel_calls,
+                               deterministic=False)
 
   # Parse each tf.Example into a dictionary
   if is_utt_id:
@@ -115,7 +113,10 @@ def create_ds(file_pattern, num_parallel_calls, shuffle, max_inp, max_tar,
   return dataset
 
 
-def finalize_ds(dataset, repeat):
+def finalize_ds(dataset, repeat, shuffle):
+  dataset = dataset.cache()
+  if shuffle:
+    dataset = dataset.shuffle(buffer_size=5000)
   dataset = dataset.repeat(repeat)
 
   # Prefetch the next element to improve speed of input pipeline.
@@ -123,10 +124,8 @@ def finalize_ds(dataset, repeat):
   return dataset
 
 
-def create_ds_batch_for_test(file_pattern, num_parallel_calls, batch_size,
-                             max_inp, max_tar):
+def create_ds_batch_for_test(file_pattern, batch_size, max_inp, max_tar):
   # Sanity check since this toolkit not support drop_remainder=True yet.
-  # pylint: disable=import-outside-toplevel
   import glob
   utt_num = 0
   for file_name in glob.glob(file_pattern):
@@ -135,8 +134,7 @@ def create_ds_batch_for_test(file_pattern, num_parallel_calls, batch_size,
   if utt_num % batch_size != 0:
     batch_size = 1 # Hard coded!!
 
-  dataset = create_ds(file_pattern, num_parallel_calls, False, max_inp,
-                      max_tar, True)
+  dataset = create_ds(file_pattern, False, max_inp, max_tar, True)
   dataset = dataset.padded_batch(
       # First calculate batch size (token number) per worker, then divide it
       # into sentences, and finally expand to a global batch. It could prove
@@ -144,12 +142,12 @@ def create_ds_batch_for_test(file_pattern, num_parallel_calls, batch_size,
       batch_size=batch_size,
       padded_shapes=([None], [None], [], [], []), drop_remainder=False)
 
-  return finalize_ds(dataset, 1)
+  return finalize_ds(dataset, 1, False)
 
 
-def create_ds_batch_for_train(file_pattern, num_parallel_calls, shuffle, repeat,
+def create_ds_batch_for_train(file_pattern, shuffle, repeat,
                               batch_size, max_inp, max_tar):
-  dataset = create_ds(file_pattern, num_parallel_calls, shuffle, max_inp, max_tar)
+  dataset = create_ds(file_pattern, shuffle, max_inp, max_tar)
   dataset = dataset.padded_batch(
       # First calculate batch size (token number) per worker, then divide it
       # into sentences, and finally expand to a global batch. It could prove
@@ -157,25 +155,24 @@ def create_ds_batch_for_train(file_pattern, num_parallel_calls, shuffle, repeat,
       batch_size=batch_size,
       padded_shapes=([None], [None], [], []), drop_remainder=True)
 
-  return finalize_ds(dataset, repeat)
+  return finalize_ds(dataset, repeat, shuffle)
 
 
-def create_ds_bucket(file_pattern, num_parallel_calls, shuffle, repeat,
+def create_ds_bucket(file_pattern, shuffle, repeat,
                      bucket_boundaries, bucket_batch_sizes, max_inp, max_tar):
 
   def element_length_fn(inputs, targets, input_length, target_length):
     # pylint: disable=unused-argument
     return tf.cast(input_length, tf.int32)
 
-  dataset = create_ds(file_pattern, num_parallel_calls, shuffle, max_inp, max_tar)
+  dataset = create_ds(file_pattern, shuffle, max_inp, max_tar)
   dataset = dataset.apply(tf.data.experimental.bucket_by_sequence_length(
       element_length_func=element_length_fn,
       bucket_boundaries=bucket_boundaries,
       bucket_batch_sizes=bucket_batch_sizes,
       pad_to_bucket_boundary=False,
       no_padding=False, drop_remainder=True))
-
-  return finalize_ds(dataset, repeat)
+  return finalize_ds(dataset, repeat, shuffle)
 
 
 def map_data_for_transformer_fn(inputs, targets, input_length, target_length,
@@ -211,38 +208,3 @@ def map_data_for_transformer_utt_id_fn(inputs, targets, input_length,
          tf.cast(input_length, tf.int32), \
          tf.cast(target_length, tf.int32), \
          tf.cast(utt_id, tf.string)
-
-
-def main():
-  """
-  This main code contains hard coded arguments for read_and_batch_from_files
-  :return:
-  """
-  # pylint: disable=import-outside-toplevel
-  import os
-  from tfsr.helper.misc_helper import Util
-  Util.prepare_device()
-
-  batch_size = 4
-
-  data_path = "/home/sephiroce/data/OpenSLR/LibriSpeech"
-  tfrd_patn = "tfrecord_fbank80/libri-train-fbank80-80-*-of-*"
-
-  train_file_ptrn = os.path.join(data_path, tfrd_patn)
-  map_data_fn = map_data_for_transformer_fn
-  train_ds = create_ds_batch_for_train(file_pattern=train_file_ptrn,
-                                       num_parallel_calls=6,
-                                       shuffle=True,
-                                       repeat=1,
-                                       batch_size=batch_size,
-                                       max_inp=-1,
-                                       max_tar=-1)
-  train_ds = train_ds.map(lambda x, y, a, b: map_data_fn(x, y, a, b, 80),
-                          num_parallel_calls=6)
-
-  for datum in iter(train_ds):
-    print(datum)
-    break
-
-if __name__ == "__main__":
-  main()

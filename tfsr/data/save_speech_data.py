@@ -153,8 +153,8 @@ def convert_to_tfrecord(logger, config, data_set, cmvn, is_debug=False):
           utt_id = spec["key"].split("/")[-1].split(".")[0]
         elif config.prep_data_name == 'timit':
           if config.decoding_from_npy:
-            id = spec["key"].split("/")[-1].split(".npy")[0].split("_")
-            utt_id = id[0] + "-" + id[1]
+            _id = spec["key"].split("/")[-1].split(".npy")[0].split("_")
+            utt_id = _id[0] + "-" + _id[1]
           else:
             spk_id = spec["key"].split("/DR")[1].split("/")[1]
             utt_id = spk_id + "-" + spec["key"].split("/")[-1].split(".")[0]
@@ -174,7 +174,6 @@ def convert_to_tfrecord(logger, config, data_set, cmvn, is_debug=False):
                           config.feat_dim)
           sys.exit(ExitCode.INVALID_OPTION)
 
-        #tfrecord_in_text = open("check_saving","w")
         int_seq = Util.get_int_seq(spec["text"], is_char=is_char, vocab=vocab)
         example = tf.train.Example(features=tf.train.Features(feature={
             "target_label": _int64_list_feat(int_seq),

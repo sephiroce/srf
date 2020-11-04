@@ -2,11 +2,10 @@
 
 . path.sh
 
-LAYER=${1:-1}
-DIM=${2:-1}
-INN=${3:-1}
+LAYER=${1:-20}
+DIM=${2:-256}
+INN=${3:-2048}
 
-FRAME=20000
 NAME=TF_L${LAYER}_D${DIM}_H${INN}
 
 function run() {
@@ -26,15 +25,15 @@ function run() {
     AVG=
   fi
 
-  TEST_TFRD=tfrecord_graves13/timit-test-None-123-*-of-*
+  TEST_TFRD=tfrecord_graves13/wsj-test-graves13-123-*-of-*
   if [ $TC = "dev" ]
   then
-    TEST_TFRD=tfrecord_graves13/timit-valid-None-123-*-of-*
+    TEST_TFRD=tfrecord_graves13/wsj-valid-graves13-123-*-of-*
   fi
 
   python3.6 -u ${SCRIPT} \
-    --config=egs/timit/conf/stf.conf \
-    --path-base=${DATA_PATH} \
+    --path-base=/data/wsj \
+    --config=egs/conf/wsj.conf \
     --path-ckpt=./checkpoint/${NAME}${AVG} \
     --model-inner-dim=${INN} \
     --train-att-dropout=0.3 \
@@ -43,7 +42,7 @@ function run() {
     --train-res-dropout=0.4 \
     --model-dimension=${DIM} \
     --train-warmup-n=1000 \
-    --train-batch-frame=${FRAME} \
+    --train-batch-frame=20000 \
     --train-lr-param-k=${K} \
     --train-es-tolerance=${TOLERANCE} \
     --train-max-epoch=${MAX_EPOCH} \
@@ -58,7 +57,7 @@ run tfsr/utils/average_ckpt_tf.py 1e-6 1 dummy dummy 0 &>  ${NAME}.2avg.out
 run tfsr/trainer_tf.py   1e-6 0 /avg test 0 &>  ${NAME}.3decode.test.out &
 run tfsr/trainer_tf.py   1e-6 0 /avg dev  0 &>  ${NAME}.3decode.valid.out
 
-python3 tfsr/utils/log2utt.py ${NAME}.3decode.test.out > ${NAME}.test.utt
-egs/script/sclite.sh test.ref ${NAME}.test.utt
-python3 tfsr/utils/log2utt.py ${NAME}.3decode.valid.out > ${NAME}.valid.utt
-egs/script/sclite.sh valid.ref ${NAME}.valid.utt
+python3 tfsr/utils/log2utt_wsj.py ${NAME}.3decode.test.out > ${NAME}.test.utt
+egs/script/sclite.sh test_wsj.ref ${NAME}.test.utt
+python3 tfsr/utils/log2utt_wsj.py ${NAME}.3decode.valid.out > ${NAME}.valid.utt
+egs/script/sclite.sh valid_wsj.ref ${NAME}.valid.utt

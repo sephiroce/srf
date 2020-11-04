@@ -70,8 +70,8 @@ if len(sys.argv) != 2:
   print("!!Usage: python3 log2utt.py log voc")
   sys.exit(1)
 
-voc=list()
-with open("samples/data/timit_61.vocab") as f:
+voc = []
+with open("egs/data/timit_62.vocab") as f:
   for line in f:
     voc.append(line.strip())
 
@@ -80,7 +80,7 @@ with open(sys.argv[1]) as f:
   for line in f:
     if status == 0:
       if "UTTID" in line:
-        uttid = line.replace("UTTID: [\"","").replace("\"]","").strip()
+        uttid = line.replace("UTTID: [\"", "").replace("\"]", "").strip()
         status = 1
     elif status == 1:
       if "values" in line:
@@ -89,5 +89,5 @@ with open(sys.argv[1]) as f:
         for char in value.split(" "):
           a += mapping_dict[voc[int(char)]] + " "
 
-        print(a.strip()+" ("+uttid+")")
+        print(a.strip()+" (" + uttid + ")")
         status = 0

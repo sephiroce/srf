@@ -5,8 +5,8 @@ if len(sys.argv) != 2:
   print("!!Usage: python3 log2utt.py log voc")
   sys.exit(1)
 
-voc=list()
-with open("samples/data/wsj.char.vocab") as f:
+voc = []
+with open("egs/data/wsj_31.vocab") as f:
   for line in f:
     voc.append(line.strip())
 
@@ -15,7 +15,7 @@ with open(sys.argv[1]) as f:
   for line in f:
     if status == 0:
       if "UTTID" in line:
-        uttid = line.replace("UTTID: [\"","").replace("\"]","").strip()
+        uttid = line.replace("UTTID: [\"", "").replace("\"]", "").strip()
         status = 1
     elif status == 1:
       if "values" in line:
@@ -27,5 +27,5 @@ with open(sys.argv[1]) as f:
           else:
             a += voc[int(char)]
 
-        print(a.strip()+" ("+uttid+")")
+        print(a.strip() + " (" + uttid + ")")
         status = 0

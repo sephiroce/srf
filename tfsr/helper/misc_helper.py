@@ -28,8 +28,8 @@ import sys
 import time
 
 import numpy as np
-import tensorflow as tf
 import matplotlib.pyplot as plt
+import tensorflow as tf
 from tfsr.helper.common_helper import Constants, ExitCode
 
 class Util:

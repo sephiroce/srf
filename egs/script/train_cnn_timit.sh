@@ -2,18 +2,18 @@
 
 . path.sh
 
-LAYER=${1:-1}
-DIM=${2:-1}
-INN=${3:-1}
+LAYER=${1:-10}
+FILT_INP=${2:-128}
+FILT_INN=${3:-256}
+PROJ_NUM=${4:-3}
+PROJ_DIM=${5:-1024}
 
-FRAME=20000
-NAME=TF_L${LAYER}_D${DIM}_H${INN}
+NAME=CNN_L${LAYER}_NFILT${FILT_INP}_${FILT_INN}_PROJ${PROJ_NUM}_${PROJ_DIM}
 
 function run() {
   SCRIPT=${1}
   K=${2}
   TOLERANCE=${3}
-  AVG=${4}
   AVG=${4}
   TC=${5}
 
@@ -33,32 +33,32 @@ function run() {
   fi
 
   python3.6 -u ${SCRIPT} \
-    --config=egs/timit/conf/stf.conf \
-    --path-base=${DATA_PATH} \
+    --path-base=/data/timit \
+    --config=egs/conf/timit.conf \
     --path-ckpt=./checkpoint/${NAME}${AVG} \
-    --model-inner-dim=${INN} \
-    --train-att-dropout=0.3 \
-    --train-inn-dropout=0.4 \
-    --train-inp-dropout=0.3 \
-    --train-res-dropout=0.4 \
-    --model-dimension=${DIM} \
-    --train-warmup-n=1000 \
-    --train-batch-frame=${FRAME} \
+    --model-type=cnn \
+    --model-conv-inp-nfilt=${FILT_INP} \
+    --model-conv-inn-nfilt=${FILT_INN} \
+    --model-conv-proj-num=${PROJ_NUM} \
+    --model-conv-proj-dim=${PROJ_DIM} \
+    --train-batch-frame=7000 \
     --train-lr-param-k=${K} \
     --train-es-tolerance=${TOLERANCE} \
     --train-max-epoch=${MAX_EPOCH} \
     --path-test-ptrn=${TEST_TFRD} \
+    --train-warmup-n=1200 \
+    --model-dimension=1 \
     --model-encoder-num=${LAYER}
 }
 
-run tfsr/trainer_tf.py 1.5  27 dummy dummy  27 &>  ${NAME}.1train.out
-run tfsr/trainer_tf.py 0.5 200 dummy dummy 200 &>> ${NAME}.1train.out
+run tfsr/trainer_sr.py   0.5   27 dummy dummy  27 &>  ${NAME}.1train.out
+run tfsr/trainer_sr.py   0.1  200 dummy dummy 200 &>> ${NAME}.1train.out
 rm -rf ./checkpoint/${NAME}/avg
-run tfsr/utils/average_ckpt_tf.py 1e-6 1 dummy dummy 0 &>  ${NAME}.2avg.out
-run tfsr/trainer_tf.py   1e-6 0 /avg test 0 &>  ${NAME}.3decode.test.out &
-run tfsr/trainer_tf.py   1e-6 0 /avg dev  0 &>  ${NAME}.3decode.valid.out
+run tfsr/utils/average_ckpt_sr.py 1e-6 1 dummy dummy 0 &> ${NAME}.2avg.out
+run tfsr/trainer_sr.py   1e-6 0 /avg test 0 &>  ${NAME}.3decode.test.out &
+run tfsr/trainer_sr.py   1e-6 0 /avg dev  0 &>  ${NAME}.3decode.valid.out
 
-python3 tfsr/utils/log2utt.py ${NAME}.3decode.test.out > ${NAME}.test.utt
-egs/script/sclite.sh test.ref ${NAME}.test.utt
-python3 tfsr/utils/log2utt.py ${NAME}.3decode.valid.out > ${NAME}.valid.utt
-egs/script/sclite.sh valid.ref ${NAME}.valid.utt
+python3 script/log2utt.py ${NAME}.3decode.test.out > ${NAME}.test.utt
+sclite.sh test.ref ${NAME}.test.utt
+python3 script/log2utt.py ${NAME}.3decode.valid.out > ${NAME}.valid.utt
+sclite.sh valid.ref ${NAME}.valid.utt

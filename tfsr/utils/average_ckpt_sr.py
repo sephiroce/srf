@@ -34,7 +34,9 @@ import tensorflow as tf
 from tfsr.helper.common_helper import ParseOption, Logger
 from tfsr.helper.misc_helper import Util
 import tfsr.helper.train_helper as th
-from tfsr.model.sequence_router import SequenceRouter as SRF
+from tfsr.model.sequence_router_einsum import SequenceRouter as SRFE
+from tfsr.model.sequence_router_lowmemory import SequenceRouter as SRFL
+from tfsr.model.sequence_router_naive import SequenceRouter as SRFN
 from tfsr.model.lstm_encoder import LstmEncoder
 from tfsr.model.cnn_encoder import CNNEncoder
 
@@ -47,27 +49,31 @@ def main():
   config = ParseOption(sys.argv, logger).args
 
   # Loading a vocabulary
-  _, _, dec_in_dim, dec_out_dim = Util.load_vocab(Util.get_file_path(config.path_base,
-                                                           config.path_vocab), logger)
+  _, _, dec_in_dim, dec_out_dim =\
+    Util.load_vocab(Util.get_file_path(config.path_base,
+                                       config.path_vocab), logger)
   dec_out_dim = dec_in_dim + 1
   logger.info("The modified output Dimension %d", dec_out_dim)
 
   # Model selection
   # pylint: disable=invalid-name
+  model = None
   if config.model_type.endswith("lstm"):
     model = LstmEncoder(config.model_encoder_num, config.model_dimension,
                         config.train_inp_dropout, config.train_inn_dropout,
                         config.model_type == "blstm",
                         config.model_initializer, dec_out_dim)
-    in_len_div = 1
   elif config.model_type in ["cnn", "conv", "convolution"]:
 
     model = CNNEncoder(config, logger, dec_out_dim)
-    in_len_div = 1
   else:
-    in_len_div = config.model_conv_layer_num ** config.model_conv_stride
     if config.model_caps_layer_time is None:
-      model = SRF(config, logger, dec_out_dim)
+      if config.model_caps_type == "lowmemory":
+        model = SRFL(config, logger, dec_out_dim)
+      elif config.model_caps_type == "einsum":
+        model = SRFE(config, logger, dec_out_dim)
+      elif config.model_caps_type == "naive":
+        model = SRFN(config, logger, dec_out_dim)
     else:
       logger.critical("LSRF is deprecated")
 
@@ -90,20 +96,23 @@ def main():
   models = []
   for ckpt_path in ckpts[-config.model_average_num:]:
     logger.info(ckpt_path)
+    model = None
     if config.model_type.endswith("lstm"):
       model = LstmEncoder(config.model_encoder_num, config.model_dimension,
                           config.train_inp_dropout, config.train_inn_dropout,
                           config.model_type == "blstm",
                           config.model_initializer, dec_out_dim)
-      in_len_div = 1
     elif config.model_type in ["cnn", "conv", "convolution"]:
 
       model = CNNEncoder(config, logger, dec_out_dim)
-      in_len_div = 1
     else:
-      in_len_div = config.model_conv_layer_num ** config.model_conv_stride
       if config.model_caps_layer_time is None:
-        model = SRF(config, logger, dec_out_dim)
+        if config.model_caps_type == "lowmemory":
+          model = SRFL(config, logger, dec_out_dim)
+        elif config.model_caps_type == "einsum":
+          model = SRFE(config, logger, dec_out_dim)
+        elif config.model_caps_type == "naive":
+          model = SRFN(config, logger, dec_out_dim)
       else:
         logger.critical("LSRF is deprecated")
     # Creating or loading a check point
@@ -136,15 +145,17 @@ def main():
                         config.train_inp_dropout, config.train_inn_dropout,
                         config.model_type == "blstm",
                         config.model_initializer, dec_out_dim)
-    in_len_div = 1
   elif config.model_type in ["cnn", "conv", "convolution"]:
 
     model = CNNEncoder(config, logger, dec_out_dim)
-    in_len_div = 1
   else:
-    in_len_div = config.model_conv_layer_num ** config.model_conv_stride
     if config.model_caps_layer_time is None:
-      model = SRF(config, logger, dec_out_dim)
+      if config.model_caps_type == "lowmemory":
+        model = SRFL(config, logger, dec_out_dim)
+      elif config.model_caps_type == "einsum":
+        model = SRFE(config, logger, dec_out_dim)
+      elif config.model_caps_type == "naive":
+        model = SRFN(config, logger, dec_out_dim)
     else:
       logger.critical("LSRF is deprecated")
 

@@ -186,12 +186,25 @@ class ParseOption:
   def str2bool(bool_string):
     return bool_string.lower() in ("yes", "true", "t", "1")
 
+  @staticmethod
+  def str2list_int(list_string):
+    if list_string is None:
+      return list_string
+    return list(map(int, list_string.replace("\"", "").replace("[", "").
+                    replace("]", "").split(",")))
+
   @property
   def args(self):
     return self._args
 
   def sanity_check(self, args):
     # Checking sanity of configuration options
+    # pylint: disable=too-many-return-statements
+    if args.model_caps_type not in ["lowmemory", "einsum", "naive"]:
+      self.logger.critical("model-caps-type must be lowmemory, einsum or naive"
+                           "but %s", args.model_caps_type)
+      return False
+
     if not args.path_base:
       self.logger.critical("the following arguments are required:"
                            " paths-data-path")
@@ -289,8 +302,11 @@ class ParseOption:
     train_group.add_argument("--train-schedule-prob", type=float, default=None)
     train_group.add_argument("--train-batch-size", type=int, default=26)
     train_group.add_argument('--train-batch-frame', type=int, default=20000)
+    train_group.add_argument('--train-lr-max', type=float, default=1e3)
     train_group.add_argument("--train-batch-dynamic", type=ParseOption.str2bool, default="False")
     train_group.add_argument('--train-is-mwer', type=ParseOption.str2bool, default="false")
+    train_group.add_argument("--train-batch-buckets",
+                             type=ParseOption.str2list_int, default=None)
 
     # Preprocess
     prep_group = parser.add_argument_group(title="Pre-processing")
@@ -301,6 +317,9 @@ class ParseOption:
     prep_group.add_argument("--prep-data-pad-space", type=ParseOption.str2bool, default="True")
     prep_group.add_argument('--prep-max-tar', type=int, default=-1)
     prep_group.add_argument('--prep-max-inp', type=int, default=-1)
+    prep_group.add_argument('--prep-data-num-train', type=int, default=None)
+    prep_group.add_argument('--prep-data-num-valid', type=int, default=None)
+    prep_group.add_argument('--prep-data-num-test', type=int, default=None)
 
     # Path
     path_group = parser.add_argument_group(title="path",
@@ -325,9 +344,12 @@ class ParseOption:
     feature_group = parser.add_argument_group(title="feature",
                                               description="speech feature")
     feature_group.add_argument("--feat-type", default=None, help="stf, stfraw")
-    feature_group.add_argument("--feat-dim", type=int, default=None, help="feature dimension")
-    feature_group.add_argument("--feat-dim1", type=int, default=None, help="dimension for the first feature")
-    feature_group.add_argument("--feat-dim2", type=int, default=None, help="dimension for the second feature")
+    feature_group.add_argument("--feat-dim", type=int, default=None,
+                               help="feature dimension")
+    feature_group.add_argument("--feat-dim1", type=int, default=None,
+                               help="dimension for the first feature")
+    feature_group.add_argument("--feat-dim2", type=int, default=None,
+                               help="dimension for the second feature")
 
     # Setting for the entire model
     model_group = parser.add_argument_group(title="model architecture",
@@ -337,50 +359,60 @@ class ParseOption:
     model_group.add_argument("--model-decoder-num", type=int, default=None)
     model_group.add_argument("--model-res-enc", type=int, default=1)
     model_group.add_argument("--model-res-dec", type=int, default=1)
-    model_group.add_argument("--model-dimension", type=int, default=None)
-    model_group.add_argument("--model-inner-dim", type=int, default=None)
-    model_group.add_argument("--model-att-head-num", type=int, default=None)
+    model_group.add_argument("--model-dimension", type=int, default=1)
+    model_group.add_argument("--model-inner-dim", type=int, default=2048)
+    model_group.add_argument("--model-inner-num", type=int, default=3)
+    model_group.add_argument("--model-att-head-num", type=int, default=4)
     model_group.add_argument("--model-conv-filter-num", type=int, default=64)
     model_group.add_argument("--model-conv-layer-num", type=int, default=2)
     model_group.add_argument("--model-conv-stride", type=int, default=2)
     model_group.add_argument("--model-ckpt-max-to-keep", type=int, default=-1)
-    model_group.add_argument("--model-shared-embed", type=ParseOption.str2bool, default="False")
+    model_group.add_argument("--model-shared-embed", type=ParseOption.str2bool,
+                             default="False")
     model_group.add_argument("--model-conv-mask-type", type=int, default=None)
     model_group.add_argument("--model-ap-scale", type=float, default=None)
     model_group.add_argument("--model-ap-width-zero", type=int, default=None)
     model_group.add_argument("--model-ap-width-stripe", type=int, default=None)
     model_group.add_argument("--model-average-num", type=int, default=None)
-    model_group.add_argument("--model-ap-encoder", type=ParseOption.str2bool, default="False")
-    model_group.add_argument("--model-ap-decoder", type=ParseOption.str2bool, default="False")
-    model_group.add_argument("--model-ap-encdec", type=ParseOption.str2bool, default="False")
+    model_group.add_argument("--model-ap-encoder", type=ParseOption.str2bool,
+                             default="False")
+    model_group.add_argument("--model-ap-decoder", type=ParseOption.str2bool,
+                             default="False")
+    model_group.add_argument("--model-ap-encdec", type=ParseOption.str2bool,
+                             default="False")
 
-    model_group.add_argument("--model-type", default="stf")
+    model_group.add_argument("--model-type", default="srf")
     model_group.add_argument("--model-initializer", default=None)
-    model_group.add_argument("--model-emb-sqrt", type=ParseOption.str2bool, default="True")
-    model_group.add_argument("--model-caps-context", type=ParseOption.str2bool, default="True")
-    model_group.add_argument("--model-caps-recon", type=ParseOption.str2bool, default="False")
-    model_group.add_argument("--model-caps-layernorm", type=ParseOption.str2bool, default="True")
+    model_group.add_argument("--model-emb-sqrt", type=ParseOption.str2bool,
+                             default="True")
+    model_group.add_argument("--model-caps-context", type=ParseOption.str2bool,
+                             default="True")
+    model_group.add_argument("--model-caps-type", default="lowmemory",
+                             help="[einsum, lowmemory, naive]")
     model_group.add_argument("--model-caps-iter", type=int, default=2)
-    model_group.add_argument("--model-caps-window", type=int, default=3)
-    model_group.add_argument("--model-caps-stride", type=int, default=1)
-    model_group.add_argument("--model-caps-stride-n", type=int, default=2)
     model_group.add_argument("--model-caps-primary-num", type=int, default=3)
     model_group.add_argument("--model-caps-primary-dim", type=int, default=2)
     model_group.add_argument("--model-caps-convolution-num", type=int, default=4)
     model_group.add_argument("--model-caps-convolution-dim", type=int, default=4)
     model_group.add_argument("--model-caps-class-dim", type=int, default=64)
-    model_group.add_argument("--model-caps-seq-type", default=None)
-    model_group.add_argument("--model-caps-routing-type", default="dr")
-    model_group.add_argument("--model-caps-norm", default=None)
-    model_group.add_argument("--model-caps-window-even", type=ParseOption.str2bool, default="True")
     model_group.add_argument("--model-caps-window-lpad", type=int, default=None)
     model_group.add_argument("--model-caps-window-rpad", type=int, default=None)
+    model_group.add_argument("--model-caps-layer-num", type=int, default=2)
+    model_group.add_argument("--model-caps-layer-time", type=int, default=None)
+    model_group.add_argument("--model-caps-res-connection",
+                             type=ParseOption.str2bool, default="False")
+
+    model_group.add_argument("--model-conv-inp-nfilt", type=int, default=64)
+    model_group.add_argument("--model-conv-inn-nfilt", type=int, default=128)
+    model_group.add_argument("--model-conv-proj-num", type=int, default=3)
+    model_group.add_argument("--model-conv-proj-dim", type=int, default=512)
 
     # Decoding option
     decoding_group = parser.add_argument_group()
     decoding_group.add_argument("--decoding-beam-width", type=int, default=None)
     decoding_group.add_argument("--decoding-lp-alpha", type=float, default=None)
-    decoding_group.add_argument("--decoding-from-npy", type=ParseOption.str2bool, default="False")
+    decoding_group.add_argument("--decoding-from-npy", type=ParseOption.str2bool,
+                                default="False")
     return parser
 
 def main():
