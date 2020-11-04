@@ -16,9 +16,10 @@
 # pylint: disable=import-error, no-member, too-many-locals
 # pylint: disable=too-many-instance-attributes
 
+
 """
 cnn_encoder.py: convolutional ctc network
-# citation: Ying Zhang, Mohammad Pezeshki, Philemon Brakel, Saizheng Zhang,
+# reference: Ying Zhang, Mohammad Pezeshki, Philemon Brakel, Saizheng Zhang,
 Cesar Laurent Yoshua Bengio, Aaron Courville, Towards End-to-End Speech
 Recognition with Deep Convolutional Neural Networks, interspeech 2016
 # arxiv: https://arxiv.org/abs/1701.02720
@@ -29,7 +30,6 @@ __email__ = "sephiroce@snu.ac.kr"
 
 import tensorflow as tf
 import tfsr.helper.model_helper as mh
-from tensorflow_addons.layers import Maxout
 
 class CNNEncoder(tf.keras.Model):
   def get_config(self):
@@ -47,91 +47,114 @@ class CNNEncoder(tf.keras.Model):
     self.mask_layer = tf.keras.layers.Masking(mask_value=0.0)
     # filter : [time, frequency]
 
-    #self.mask = tf.keras.layers.Lambda(mh.feat_mask, name="pad_mask1")
+    self.mask = tf.keras.layers.Lambda(mh.feat_mask, name="pad_mask1")
     self.mask2 = tf.keras.layers.Lambda(mh.feat_mask2, name="pad_mask2")
 
-    self.model = tf.keras.models.Sequential()
-    for i in range(4):
-      self.model.add(tf.keras.layers.Conv2D(filters=self.nfilt_inp,
-                                            kernel_size=(5, 3),
-                                            activation='linear',
-                                            padding='same', strides=1,
-                                            kernel_initializer=mh.get_init(init),
-                                            name="inn_conv1_%d"%(i+1),
-                                            use_bias=False))
-      self.model.add(tf.keras.layers.Dropout(rate=0.2,
-                                             name="mo_drop_%d"%(i+1)))
-      self.model.add(Maxout(num_units=self.nfilt_inp // 2,
-                            name="maxout%d"%(i + 1)))
-      if i == 0:
-        self.model.add(tf.keras.layers.MaxPooling2D((1, 3)))
-      self.model.add(tf.keras.layers.Dropout(rate=0.3,
-                                             name="cnn_drop_%d"%(i+1)))
-      self.model.add(tf.keras.layers.BatchNormalization(epsilon=1e-6,
-                                                        name="inn_ln_%d"%(i+1)))
+    """
+    Maxout Conv layers
+    """
+    self.enc_layers = [tf.keras.layers.Conv2D(filters=self.nfilt_inp,
+                                              kernel_size=(5, 3),
+                                              activation='linear',
+                                              padding='same', strides=1,
+                                              kernel_initializer=mh.get_init(init),
+                                              name="inn_conv1_%d"%(i+1),
+                                              use_bias=False) for i in range(4)]
 
     for i in range(4, enc_num - 1):
-      self.model.add(tf.keras.layers.Conv2D(filters=self.nfilt_inn,
-                                            kernel_size=(5, 3),
-                                            activation='linear',
-                                            padding='same',
-                                            strides=1,
-                                            kernel_initializer=mh.get_init(init),
-                                            name="inn_conv1_%d"%(i+1),
-                                            use_bias=False))
-      self.model.add(tf.keras.layers.Dropout(rate=0.2,
-                                             name="inn_drop1_%d"%(i+1)))
-      self.model.add(Maxout(num_units=self.nfilt_inn // 2,
-                            name="maxout%d" % (i + 1)))
-      self.model.add(tf.keras.layers.Dropout(rate=0.3,
-                                             name="cnn_drop_%d"%(i + 1)))
-      self.model.add(tf.keras.layers.BatchNormalization(epsilon=1e-6,
-                                                        name="inn_ln_%d"%(i + 1)))
+      self.enc_layers.append(tf.keras.layers.Conv2D(filters=self.nfilt_inn,
+                                                    kernel_size=(5, 3),
+                                                    activation='linear',
+                                                    padding='same',
+                                                    strides=1,
+                                                    kernel_initializer=mh.get_init(init),
+                                                    name="inn_conv1_%d"%(i+1),
+                                                    use_bias=False))
 
+    #TODO: Hardcoded 3
     feat_dim = config.feat_dim // 3
     last_filt = (self.proj_dim // feat_dim) * 2
-    self.model.add(tf.keras.layers.Conv2D(filters=last_filt,
-                                          kernel_size=(5, 3),
-                                          activation='linear',
-                                          padding='same',
-                                          strides=1,
-                                          kernel_initializer=mh.get_init(init),
-                                          name="inn_conv1_%d"%(enc_num),
-                                          use_bias=False))
-    self.model.add(Maxout(num_units=last_filt // 2,
-                          name="maxout%d" % (enc_num)))
-    self.model.add(tf.keras.layers.BatchNormalization(epsilon=1e-6,
-                                                      name="inn_ln_%d"%(enc_num)))
+    self.enc_layers.append(tf.keras.layers.Conv2D(filters=last_filt,
+                                                  kernel_size=(5, 3),
+                                                  activation='linear',
+                                                  padding='same',
+                                                  strides=1,
+                                                  kernel_initializer=mh.get_init(init),
+                                                  name="inn_conv1_%d"%(enc_num - 1),
+                                                  use_bias=False))
 
-    #Maxout Feedforward layers
-    self.model.add(tf.keras.layers.Reshape((-1, feat_dim * (last_filt // 2))))
+    self.dropouts = \
+      [tf.keras.layers.Dropout(rate=0.2, name="inn_drop1_%d"%(i+1)) for i in range(enc_num)]
+    self.dropouts_cnn = \
+      [tf.keras.layers.Dropout(rate=0.3, name="inn_drop1_%d"%(i+1)) for i in range(enc_num)]
+    self.layernorms = \
+      [tf.keras.layers.LayerNormalization(epsilon=1e-6, name="inn_ln_%d"%(i+1))
+       for i in range(enc_num)]
 
-    for i in range(self.enc_num, self.enc_num + self.proj_layers - 1):
-      self.model.add(tf.keras.layers.TimeDistributed(
-          tf.keras.layers.Dense(self.proj_dim,
-                                kernel_initializer=mh.get_init(init),
-                                name="proj1_%d"%(i+1), use_bias=False)))
-      self.model.add(tf.keras.layers.Dropout(rate=0.2, name="proj_drop_%d"%(i+1)))
-      self.model.add(Maxout(self.proj_dim // 2, name="proj_maxout%d"%(i+1)))
-      self.model.add(tf.keras.layers.Dropout(rate=0.3,
-                                             name="proj_drop1_%d"%(i+1)))
-      self.model.add(tf.keras.layers.BatchNormalization(epsilon=1e-6,
-                                                        name="proj_ln_%d"%(i+1)))
+    """
+    Maxout Projection layers
+    """
+    self.reshape_to_maxout = \
+      tf.keras.layers.Reshape((-1, feat_dim * (last_filt // 2)), name="reshape_to_ffwd")
+    self.proj = [tf.keras.layers.TimeDistributed(
+        tf.keras.layers.Dense(self.proj_dim,
+                              kernel_initializer=mh.get_init(init),
+                              name="proj1_%d"%(i+1), use_bias=False))
+                 for i in range(self.proj_layers - 1)]
+    self.dropproj = [tf.keras.layers.Dropout(rate=0.2, name="proj_drop1_%d"%(i+1))
+                     for i in range(self.proj_layers - 1)]
+    self.dropouts_proj = [tf.keras.layers.Dropout(rate=0.3,
+                                                  name="proj_drop1_%d"%(i+1))
+                          for i in range(self.proj_layers - 1)]
+    self.layernorms_proj = \
+      [tf.keras.layers.LayerNormalization(epsilon=1e-6, name="proj_ln_%d"%(i+1))
+       for i in range(self.proj_layers - 1)]
 
-    #Maxout Last Projection layers
-    self.model.add(tf.keras.layers.TimeDistributed(
+    """
+    Maxout Last Projection layers
+    """
+    self.projv = tf.keras.layers.TimeDistributed(
         tf.keras.layers.Dense(class_n * 2, kernel_initializer=mh.get_init(init),
-                              use_bias=False)))
-    self.model.add(tf.keras.layers.Dropout(rate=0.2,
-                                           name="proj_drop_%d"%(self.proj_layers - 1)))
-    self.model.add(Maxout(class_n, name="proj_maxout%d"%(self.proj_layers - 1)))
-    self.model.add(tf.keras.layers.BatchNormalization(epsilon=1e-6))
-
+                              use_bias=False))
+    self.dropprojv = tf.keras.layers.Dropout(rate=0.2)
+    self.layernorms_projv = tf.keras.layers.LayerNormalization(epsilon=1e-6)
+    self.pool = tf.keras.layers.MaxPooling2D((1, 3))
     logger.info("CNN CTC model, please check config model_conv_*")
 
   def call(self, inputs, **kwargs):
     # pylint: disable=arguments-differ
-    inp_len, _ = kwargs["input_lengths"], kwargs["training"]
+    inp_len = kwargs["input_lengths"]
+    training = kwargs["training"]
 
-    return self.mask_layer(self.mask2([self.model(tf.expand_dims(inputs, -1)),
-                                       inp_len, 1]))
+    emb = tf.expand_dims(inputs, -1)
+
+    # conv layers
+    for idx in range(self.enc_num):
+      emb = self.dropouts[idx](self.enc_layers[idx](emb), training=training)
+      dim = tf.cast(tf.shape(emb)[3] / 2, tf.int32)
+      emb = tf.math.maximum(emb[:, :, :, :dim], emb[:, :, :, dim:])
+      if idx == 0:
+        emb = self.pool(emb)
+      emb = self.layernorms[idx](emb)
+      emb = self.dropouts_cnn[idx](emb)
+      emb = self.mask([emb, inp_len, 1])
+
+
+    # fully connected layers
+    emb = self.reshape_to_maxout(emb)
+    for idx in range(self.proj_layers - 1):
+      emb = self.dropproj[idx](self.proj[idx](emb), training=training)
+      dim = tf.cast(tf.shape(emb)[2] / 2, tf.int32)
+      emb = self.layernorms_proj[idx](tf.math.maximum(emb[:, :, :dim],
+                                                      emb[:, :, dim:]))
+      emb = self.dropouts_proj[idx](emb)
+      emb = self.mask2([emb, inp_len, 1])
+
+    # a projection layer
+    emb = self.dropprojv(self.projv(emb), training=training)
+    dim = tf.cast(tf.shape(emb)[2] / 2, tf.int32)
+    emb = self.layernorms_projv(tf.math.maximum(emb[:, :, :dim],
+                                                emb[:, :, dim:]))
+    emb = self.mask2([emb, inp_len, 1])
+
+    return self.mask_layer(emb)
