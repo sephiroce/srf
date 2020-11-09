@@ -58,7 +58,7 @@ run tfsr/utils/average_ckpt_sr.py 1e-6 1 dummy dummy 0 &> ${NAME}.2avg.out
 run tfsr/trainer_sr.py   1e-6 0 /avg test 0 &>  ${NAME}.3decode.test.out &
 run tfsr/trainer_sr.py   1e-6 0 /avg dev  0 &>  ${NAME}.3decode.valid.out
 
-python3 script/log2utt.py ${NAME}.3decode.test.out > ${NAME}.test.utt
+python3 tfsr/utils/log2utt.py ${NAME}.3decode.test.out > ${NAME}.test.utt
 sclite.sh test.ref ${NAME}.test.utt
-python3 script/log2utt.py ${NAME}.3decode.valid.out > ${NAME}.valid.utt
+python3 tfsr/utils/log2utt.py ${NAME}.3decode.valid.out > ${NAME}.valid.utt
 sclite.sh valid.ref ${NAME}.valid.utt

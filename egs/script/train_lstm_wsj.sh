@@ -34,7 +34,7 @@ function run() {
   python3.6 -u ${SCRIPT} \
     --path-base=/data/wsj \
     --config=egs/conf/wsj.conf \
-    --path-ckpt=./checkpoint/${NAME} \
+    --path-ckpt=./checkpoint/${NAME}${AVG} \
     --train-inn-dropout=0.4 \
     --train-inp-dropout=0.3 \
     --model-type=${TYPE} \

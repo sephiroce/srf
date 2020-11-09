@@ -49,8 +49,6 @@ function run() {
     --model-ap-decoder=True \
     --model-ap-encdec=False \
     --model-dimension=${DIM} \
-    --train-warmup-n=1000 \
-    --train-batch-frame=20000 \
     --train-lr-param-k=${K} \
     --train-es-tolerance=${TOLERANCE} \
     --train-max-epoch=${MAX_EPOCH} \

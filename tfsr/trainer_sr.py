@@ -143,13 +143,12 @@ def main():
     # Creating a model & preparing to train
     in_len_div = None
     if config.model_type.endswith("lstm"):
+      in_len_div = 1
       model = LstmEncoder(config.model_encoder_num, config.model_dimension,
                           config.train_inp_dropout, config.train_inn_dropout,
                           config.model_type == "blstm",
                           config.model_initializer, dec_out_dim)
-      in_len_div = 1
     elif config.model_type in ["cnn", "conv", "convolution"]:
-
       model = CNNEncoder(config, logger, dec_out_dim)
       in_len_div = 1
     else:
@@ -158,6 +157,9 @@ def main():
         if config.model_caps_type == "lowmemory":
           model = SRFL(config, logger, dec_out_dim)
         elif config.model_caps_type == "einsum":
+          logger.info("This option was used only for comparing training "
+                      "speed since other options need bigger memory "
+                      "requirements.")
           model = SRFE(config, logger, dec_out_dim)
         elif config.model_caps_type == "naive":
           model = SRFN(config, logger, dec_out_dim)
@@ -180,7 +182,7 @@ def main():
           tf.print("learning rate will be decreased from now.")
         if index % 50 == 0 and index > 0:
           # pylint: disable=protected-access
-          tf.print("STEP", opti.iterations, (train_samples.result()/train_num)
+          tf.print("STEP", opti.iterations, (train_samples.result() / train_num)
                    * 100, train_loss.result(), opti._decayed_lr('float32'))
         index += 1
 
@@ -203,8 +205,6 @@ def main():
       model(dummy_feats, input_lengths=dummy_in_len, training=False)
     dummy_step()
     model.summary()
-    if config.model_type in ["cnn", "conv", "convolution"]:
-      model.model.summary()
 
     pre_loss = 1e+9
     tolerance = 0

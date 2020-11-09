@@ -71,7 +71,7 @@ class LstmEncoder(tf.keras.Model):
       embeddings = self.layernorms[idx](embeddings)
       embeddings = self.dropouts[idx](embeddings, training=training)
 
-    embeddings = self.layernorm(self.proj(embeddings))
+    embeddings = self.proj(embeddings)
     embeddings = self.mask([embeddings, inp_len, 1])
     embeddings = self.mask_layer(embeddings)
-    return embeddings
+    return self.layernorm(embeddings)
