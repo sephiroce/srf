@@ -63,11 +63,12 @@
     * $TYPE: blstm or ulstm
     * $DIM means cell sizes
   - Convolutional Neural Network (CNN)-based CTC network  
-    ```$egs/script/train_cnn_{timit,wsj}.sh $LAYER $FILT_INP $FILT_INN $PROJ_NUM $PROJ_DIM```
+    ```$egs/script/train_cnn_{timit,wsj}.sh $LAYER $FILT_INP $FILT_INN $PROJ_NUM $PROJ_DIM $STRIDE```
     * $FILT_INP: the number of filters for the first four layers
     * $FILT_INN: the number of filters for the rest of layers  
     * $PROJ_NUM: the number of feed forwarding layers
     * $PROJ_DIM: the number of neurons in feed forwarding layers   
+	* $STRIDE: the numbe of stride for the first two layers.
 
 ## License
   - Apache 2.0
