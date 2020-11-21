@@ -1,6 +1,6 @@
 # Supplementary files for the sequential routing framework
-## Author: Kyungmin Lee (sephiroce@snu.ac.kr)
-## Arxiv: https://arxiv.org/abs/2007.11747
+  - Author: Kyungmin Lee (sephiroce@snu.ac.kr)
+  - Arxiv: https://arxiv.org/abs/2007.11747
 
 ## Highlights
   - Capsule network only structures can successfully map sequences to sequences
