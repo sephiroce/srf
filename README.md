@@ -54,21 +54,24 @@
     * $LPAD, and $RPAD indicates left and right context size of the window.  
     * $METHOD means the routing algorithm you can choose SDR or DR.  
     * $ITER is the number of routing iteration.  
-  - Speech TransFormer (STF)-based CTC network  
+  - Speech TransFormer (STF)-based CTC network (it always uses the same CNN-FE with the SRF models)
     ```$egs/script/train_stf_{timit,wsj}.sh $LAYER $DIM $INN```  
     * $DIM means the embedding dimension for STF models.  
     * $INN is the dimension of inner layers, i.e. the point-wise feed forward layers in STF models.
   - Bi/Uni-directional Long Short Term Memory-based CTC network  
-    ```$egs/script/train_lstm_wsj.sh $LAYER $TYPE $DIM```
+    ```$egs/script/train_lstm_wsj.sh $LAYER $TYPE $DIM $CNNFE $LR```
     * $TYPE: blstm or ulstm
     * $DIM means cell sizes
+    * $CNNFE: whether to use the same CNN-FE structure with SRF models (set to True to use the CNN-FE).
+    * $LR: Learning rate for Adam optimizers. (We decide to use Adam optimizers to LSTM-based models.)
   - Convolutional Neural Network (CNN)-based CTC network  
-    ```$egs/script/train_cnn_{timit,wsj}.sh $LAYER $FILT_INP $FILT_INN $PROJ_NUM $PROJ_DIM $STRIDE```
+    ```$egs/script/train_cnn_{timit,wsj}.sh $LAYER $FILT_INP $FILT_INN $PROJ_NUM $PROJ_DIM $STRIDE $IS_MP```
     * $FILT_INP: the number of filters for the first four layers
     * $FILT_INN: the number of filters for the rest of layers  
     * $PROJ_NUM: the number of feed forwarding layers
     * $PROJ_DIM: the number of neurons in feed forwarding layers   
 	* $STRIDE: the numbe of stride for the first two layers.
+    * $IS_MP : whether to use the same CNN-FE structure with SRF models. (set to False to use the CNN-FE).
 
 ## License
   - Apache 2.0

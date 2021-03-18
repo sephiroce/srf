@@ -10,7 +10,6 @@ LPAD=${5:-1}
 RPAD=${6:-1}
 METHOD=${7:-"SDR"}
 ITER=${8:-1}
-export CUDA_VISIBLE_DEVICES=${9}
 
 if [ ${METHOD} = "DR" ]
 then

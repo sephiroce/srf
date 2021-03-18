@@ -54,10 +54,10 @@ function run() {
     --model-encoder-num=${LAYER}
 }
 
-run tfsr/trainer_sr.py   0.6  15 dummy dummy 15 &>  ${NAME}.1train.out
-run tfsr/trainer_sr.py   0.5  50 dummy dummy 50 &>  ${NAME}.1train.out
-run tfsr/trainer_sr.py   0.1  70 dummy dummy 70 &>  ${NAME}.1train.out
-run tfsr/trainer_sr.py   0.05 80 dummy dummy 80 &>> ${NAME}.1train.out
+run tfsr/trainer_sr.py 0.6  15 dummy dummy 15 &>  ${NAME}.1train.out
+run tfsr/trainer_sr.py 0.5  50 dummy dummy 50 &>> ${NAME}.1train.out
+run tfsr/trainer_sr.py 0.1  70 dummy dummy 70 &>> ${NAME}.1train.out
+run tfsr/trainer_sr.py 0.05 80 dummy dummy 80 &>> ${NAME}.1train.out
 rm -rf ./checkpoint/${NAME}/avg
 run tfsr/utils/average_ckpt_sr.py 1e-6 1 dummy dummy 0 &> ${NAME}.2avg.out
 run tfsr/trainer_sr.py   1e-6 0 /avg test 0 &>  ${NAME}.3decode.test.out &

@@ -1,1 +1,8 @@
 .idea
+path.sh
+run.sh
+*.out
+*utt*
+checkpoint/
+*.ref
+__pycache__

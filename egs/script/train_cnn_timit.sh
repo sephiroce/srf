@@ -8,6 +8,7 @@ FILT_INN=${3:-256}
 PROJ_NUM=${4:-3}
 PROJ_DIM=${5:-1024}
 STRIDE=${6:-1}
+IS_MP=${7:-True}
 
 NAME=CNN_L${LAYER}_NFILT${FILT_INP}_${FILT_INN}_PROJ${PROJ_NUM}_${PROJ_DIM}
 
@@ -45,6 +46,7 @@ function run() {
     --model-conv-stride=${STRIDE} \
     --train-batch-frame=7000 \
     --train-warmup-n=1200 \
+    --model-conv-is-mp=${IS_MP} \
     --train-lr-param-k=${K} \
     --train-es-tolerance=${TOLERANCE} \
     --train-max-epoch=${MAX_EPOCH} \
