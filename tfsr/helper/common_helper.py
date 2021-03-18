@@ -31,11 +31,17 @@ import os
 import sys
 
 class Tag:
+  """
+  A class of data tags
+  """
   TRAIN = 'train'
   VALID = 'valid'
   TEST = 'test'
 
 class Constants: # pylint: disable=no-init
+  """
+  A class of constant values.
+  """
   # Special tokens
   PAD_CHAR = 'p'
   PAD_WORD = "<PADDING_SYMBOL>"
@@ -75,12 +81,15 @@ class Constants: # pylint: disable=no-init
   INIT_UNIFORM = 'uniform'
 
 class ExitCode(Enum):
+  """
+  A class of exit code extended from Enum
+  """
   NO_DATA = 0
   NOT_SUPPORTED = 1
   INVALID_OPTION = 11
   INVALID_CONVERSION = 12
   INVALID_NAME = 13
-  INVALID_NAME_OF_CONFIGURATION_FILE = 14
+  INVALID_NAME_OF_CONFIGURATION_FILE = 14 #pylint: disable=invalid-name
   INVALID_FILE_PATH = 15
   INVALID_DICTIONARY = 16
   INVALID_CONDITION = 17
@@ -95,8 +104,9 @@ class Logger:
     logger.error('error message')
     logger.critical('critical message')
 
-  This logger print out logging messages similar to the logging message of tensorflow.
-  2018-07-01 19:35:33.945120: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406]
+  This logger print out logging messages similar to the logging message of
+  tensorflow.
+  2018-07-01 19:35:33.945120: I tensorflow/core/common_runtime/gpu/gpu_..
   2018-07-20 16:23:08.000295: I kmlm_common.py:94] Configuration lists:
 
   TO-DO:
@@ -185,10 +195,18 @@ class ParseOption:
 
   @staticmethod
   def str2bool(bool_string):
+    """
+    A method to convert string to boolean
+    bool_string:
+    """
     return bool_string.lower() in ("yes", "true", "t", "1")
 
   @staticmethod
   def str2list_int(list_string):
+    """
+    A method to convert string to list
+    list_string:
+    """
     if list_string is None:
       return list_string
     return list(map(int, list_string.replace("\"", "").replace("[", "").
@@ -196,9 +214,15 @@ class ParseOption:
 
   @property
   def args(self):
+    """
+    A property method to return arguments
+    """
     return self._args
 
   def sanity_check(self, args):
+    """
+    A method to check if the configurations are not conflicted.
+    """
     # Checking sanity of configuration options
     # pylint: disable=too-many-return-statements
     if args.model_caps_type not in ["lowmemory", "einsum", "naive"]:
@@ -232,8 +256,8 @@ class ParseOption:
     if not args.train_is_mwer and (args.prep_max_inp > 0 or
                                    args.prep_max_tar > 0):
       self.logger.warn("Please do not set max length unless you use mwer, "
-                       "but prep-max-inp %d, prep-max-tar %d"%(args.prep_max_inp,
-                                                               args.prep_max_tar))
+                       "but prep-max-inp %d, prep-max-tar %d"%
+                       (args.prep_max_inp, args.prep_max_tar))
 
     if args.train_smoothing_type not in (Constants.SM_LABEL,
                                          Constants.SM_NEIGHBOR):
@@ -244,8 +268,11 @@ class ParseOption:
     return True
 
   def print_args(self, args):
+    """
+    A method to print configurations
+    """
     self.logger.info("********************************************")
-    self.logger.info("        Settings for Transformer ASR")
+    self.logger.info("        Sequential Routing Framework        ")
     self.logger.info("********************************************")
     sorted_args = sorted(vars(args))
     pre_name = ""
@@ -260,6 +287,9 @@ class ParseOption:
 
   @staticmethod
   def build_parser():
+    """
+    A method to build argument parsers
+    """
     # create parser
     parser = argparse.ArgumentParser(description="Keras based RNN-LM Toolkit ",
                                      fromfile_prefix_chars='@')
@@ -296,7 +326,8 @@ class ParseOption:
     train_group.add_argument("--train-ppl-step", type=int, default=1)
     train_group.add_argument("--train-max-step", type=int, default=0)
     train_group.add_argument("--train-opti-type", default=None)
-    train_group.add_argument("--train-smoothing-confidence", type=float, default=0.0)
+    train_group.add_argument("--train-smoothing-confidence", type=float,
+                             default=0.0)
     train_group.add_argument("--train-smoothing-type",
                              default=Constants.SM_NEIGHBOR,
                              help="%s, %s"%(Constants.SM_LABEL,
@@ -305,8 +336,10 @@ class ParseOption:
     train_group.add_argument("--train-batch-size", type=int, default=26)
     train_group.add_argument('--train-batch-frame', type=int, default=20000)
     train_group.add_argument('--train-lr-max', type=float, default=1e3)
-    train_group.add_argument("--train-batch-dynamic", type=ParseOption.str2bool, default="False")
-    train_group.add_argument('--train-is-mwer', type=ParseOption.str2bool, default="false")
+    train_group.add_argument("--train-batch-dynamic", type=ParseOption.str2bool,
+                             default="False")
+    train_group.add_argument('--train-is-mwer', type=ParseOption.str2bool,
+                             default="false")
     train_group.add_argument("--train-batch-buckets",
                              type=ParseOption.str2list_int, default=None)
 
@@ -315,8 +348,10 @@ class ParseOption:
     prep_group.add_argument("--prep-data-shard", type=int, default=100)
     prep_group.add_argument("--prep-data-name", default="wsj")
     prep_group.add_argument("--prep-data-unit", default="char")
-    prep_group.add_argument("--prep-data-bos", type=ParseOption.str2bool, default="True")
-    prep_group.add_argument("--prep-data-pad-space", type=ParseOption.str2bool, default="True")
+    prep_group.add_argument("--prep-data-bos", type=ParseOption.str2bool,
+                            default="True")
+    prep_group.add_argument("--prep-data-pad-space", type=ParseOption.str2bool,
+                            default="True")
     prep_group.add_argument('--prep-max-tar', type=int, default=-1)
     prep_group.add_argument('--prep-max-inp', type=int, default=-1)
     prep_group.add_argument('--prep-data-num-train', type=int, default=None)
@@ -389,13 +424,18 @@ class ParseOption:
                              default="True")
     model_group.add_argument("--model-caps-context", type=ParseOption.str2bool,
                              default="True")
+    model_group.add_argument("--model-lstm-is-cnnfe", default="False",
+                             type=ParseOption.str2bool)
+    model_group.add_argument("--model-lstm-merge", default="ave")
     model_group.add_argument("--model-caps-type", default="lowmemory",
                              help="[einsum, lowmemory, naive]")
     model_group.add_argument("--model-caps-iter", type=int, default=2)
     model_group.add_argument("--model-caps-primary-num", type=int, default=3)
     model_group.add_argument("--model-caps-primary-dim", type=int, default=2)
-    model_group.add_argument("--model-caps-convolution-num", type=int, default=4)
-    model_group.add_argument("--model-caps-convolution-dim", type=int, default=4)
+    model_group.add_argument("--model-caps-convolution-num", type=int,
+                             default=4)
+    model_group.add_argument("--model-caps-convolution-dim", type=int,
+                             default=4)
     model_group.add_argument("--model-caps-class-dim", type=int, default=64)
     model_group.add_argument("--model-caps-window-lpad", type=int, default=None)
     model_group.add_argument("--model-caps-window-rpad", type=int, default=None)
@@ -403,7 +443,8 @@ class ParseOption:
     model_group.add_argument("--model-caps-layer-time", type=int, default=None)
     model_group.add_argument("--model-caps-res-connection",
                              type=ParseOption.str2bool, default="False")
-
+    model_group.add_argument("--model-conv-is-mp", default="False",
+                             type=ParseOption.str2bool)
     model_group.add_argument("--model-conv-inp-nfilt", type=int, default=64)
     model_group.add_argument("--model-conv-inn-nfilt", type=int, default=128)
     model_group.add_argument("--model-conv-proj-num", type=int, default=3)
@@ -413,11 +454,14 @@ class ParseOption:
     decoding_group = parser.add_argument_group()
     decoding_group.add_argument("--decoding-beam-width", type=int, default=None)
     decoding_group.add_argument("--decoding-lp-alpha", type=float, default=None)
-    decoding_group.add_argument("--decoding-from-npy", type=ParseOption.str2bool,
-                                default="False")
+    decoding_group.add_argument("--decoding-from-npy",
+                                type=ParseOption.str2bool, default="False")
     return parser
 
 def main():
+  """
+  A dummy main function to see common_helper.py is working well.
+  """
   logger = Logger(name="data", level=Logger.DEBUG).logger
   ParseOption(sys.argv, logger)
 

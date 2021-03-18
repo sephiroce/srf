@@ -36,13 +36,16 @@ import tfsr.helper.train_helper as th
 import tfsr.model.block as block
 from tfsr.model.sequence_router import CapsulationLayer as ConvLayer
 
-class ConvEncoder(tf.keras.Model):
+class ConvEncoder(tf.keras.Model):  # pylint: disable=too-many-ancestors
+  """
+  An implementation of Transformer Speech Encoder
+  """
   # pylint: disable=too-many-instance-attributes, too-many-arguments, too-few-public-methods
   def __init__(self, num_layers, d_model, num_heads, dff, feat_dim,
                input_dropout, inner_dropout, residual_dropout,
                attention_dropout, nfilt, cnn_n, init,
                vocab_n):
-    super(ConvEncoder, self).__init__()
+    super().__init__()
 
     self.d_model = d_model
     self.dff = dff
@@ -58,6 +61,7 @@ class ConvEncoder(tf.keras.Model):
 
     self.layernorm = tf.keras.layers.LayerNormalization(epsilon=1e-6)
 
+    # pylint: disable=fixme
     # TODO: stride and filter number are hard coded.
     self.stride = 2
     kernel_size = 3
@@ -69,14 +73,17 @@ class ConvEncoder(tf.keras.Model):
       tf.keras.layers.Reshape((-1, math.ceil(feat_dim / (2 * 2)) * nfilt),
                               name="reshape_to_ffwd")
 
-    self.linear_projection = tf.keras.layers.Dense(d_model,
-                                                   activation='linear',
-                                                   kernel_initializer=mh.get_init(init))
+    self.linear_projection = \
+      tf.keras.layers.Dense(d_model, activation='linear',
+                            kernel_initializer=mh.get_init(init))
 
     # (batch_size, input_seq_len, d_model)
     self.input_dropout = tf.keras.layers.Dropout(rate=input_dropout)
     # (batch_size, input_seq_len, vocab)
     self.proj = tf.keras.layers.Dense(vocab_n)
+
+  def get_config(self):
+    pass
 
   def call(self, inputs, **kwargs):
     # pylint: disable=arguments-differ
@@ -107,14 +114,26 @@ class ConvEncoder(tf.keras.Model):
       embeddings = enc_layer(embeddings, is_training=training,
                              mask=mask, attention_penalty_mask=att_penalty)
 
-    embeddings = self.layernorm(embeddings) # (batch_size, input_seq_len, d_model)
-    return self.proj(embeddings) # (batch_size, input_seq_len, vocab)
+    embeddings = self.layernorm(embeddings) # (batch, seq_len, d_model)
+    return self.proj(embeddings) # (batch, seq_len, vocab)
 
 
 @tf.function
 def process_train_step(in_len_div, inputs, model, optimizer, loss_state,
                        frame_state, att_pen, n_gpus, blank_idx, samples):
-  # pylint: disable=too-many-arguments
+  """
+  in_len_div : a divisor to the input lengths.
+  inputs: feat, label, input length, target length
+  model:
+  optimizer:
+  loss_state:
+  frame_state:
+  att_pen:
+  n_gpus:
+  blank_idx:
+  samples:
+  """
+  # pylint: disable=too-many-arguments, unbalanced-tuple-unpacking
   feats, labels, inp_len, tar_len = inputs
   batch = tf.shape(feats)[0]
   global_batch_size = tf.cast(batch * n_gpus, tf.float32)
@@ -147,7 +166,15 @@ def process_train_step(in_len_div, inputs, model, optimizer, loss_state,
 @tf.function
 def process_valid_step(in_len_div, inputs, model, loss_state, att_pen,
                        blank_idx):
-  # pylint: disable=too-many-arguments
+  """
+  in_len_div : a divisor to the input lengths.
+  inputs: feat, label, input length, target length
+  model:
+  loss_state:
+  att_pen:
+  blank_idx:
+  """
+  # pylint: disable=too-many-arguments, unbalanced-tuple-unpacking
   feats, labels, inp_len, tar_len = inputs
   feats, _, _, enc_pad_mask, _ = \
     th.prep_process(labels, inp_len, tar_len, feats, in_len_div)
@@ -167,7 +194,14 @@ def process_valid_step(in_len_div, inputs, model, loss_state, att_pen,
 
 @tf.function
 def process_test_step(in_len_div, beam_width, inputs, model, att_pen):
-  # pylint: disable=too-many-arguments
+  """
+  in_len_div: a divisor to the input lengths.
+  beam_width:
+  inputs: feat, label, input length, target length, uttid
+  model:
+  att_pen:
+  """
+  # pylint: disable=too-many-arguments, unbalanced-tuple-unpacking
   feats, labels, inp_len, tar_len, utt_id = inputs
 
   feats, _, _, enc_pad_mask, _ = \
@@ -184,11 +218,16 @@ def process_test_step(in_len_div, beam_width, inputs, model, att_pen):
   hypos, _ = tf.nn.ctc_beam_search_decoder(y_pred, inp_len // in_len_div,
                                            beam_width=beam_width, top_paths=1)
   tf.print("UTTID:", utt_id)
+
   for hyp in hypos:
+    # pylint:disable=unexpected-keyword-arg
     tf.print(hyp, summarize=1000)
 
 
 def main():
+  """
+  A main function to train Transformer speech encoder
+  """
   #pylint: disable=too-many-branches
 
   # Initializing toolkit
@@ -196,8 +235,9 @@ def main():
   logger = Logger(name="speech_transformer", level=Logger.DEBUG).logger
   config = ParseOption(sys.argv, logger).args
 
-  _, _, dec_in_dim, _ = Util.load_vocab(Util.get_file_path(config.path_base,
-                                                           config.path_vocab), logger)
+  _, _, dec_in_dim, _ = \
+    Util.load_vocab(Util.get_file_path(config.path_base, config.path_vocab),
+                    logger)
 
   dec_out_dim = dec_in_dim + 1
   blank_idx = dec_in_dim
@@ -211,7 +251,8 @@ def main():
   # Creates dataset
   logger.info("Analysing data samples..")
   train_num, valid_num, test_num = dh.get_data_len(config)
-  logger.info("Data number: Train %d, Valid %d, Test %d", train_num, valid_num, test_num)
+  logger.info("Data number: Train %d, Valid %d, Test %d", train_num, valid_num,
+              test_num)
   options = tf.data.Options()
   options.experimental_distribute.auto_shard_policy = \
     tf.data.experimental.AutoShardPolicy.DATA
@@ -257,11 +298,14 @@ def main():
     def distributed_train_step(dataset):
       index = 0
       for example in dataset:
+        # pylint: disable=too-many-function-args
         args = (config.model_conv_layer_num ** config.model_conv_stride,
                 example, model, opti, train_loss,
                 num_feats, att_pen, num_gpus, blank_idx, train_samples)
         strategy.run(process_train_step, args=args)
-        if opti.iterations == config.train_warmup_n:
+        if (config.train_opti_type is None or
+            config.train_opti_type not in ["adam", "adadelta"]) and \
+            opti.iterations == config.train_warmup_n:
           tf.print("learning rate will be decreased from now.")
         if index % 50 == 0 and index > 0:
           # pylint: disable=protected-access
@@ -279,16 +323,22 @@ def main():
 
     @tf.function
     def distributed_test_step(dataset):
+      # Please uncomment to compute decoding time.
+      #start = tf.timestamp()
       for example in dataset:
         args = (config.model_conv_layer_num ** config.model_conv_stride,
                 config.decoding_beam_width, example, model, att_pen)
         strategy.run(process_test_step, args=args)
+        # elapsed = tf.timestamp() - start
+        # tf.print("Decoding Time of ", example[4], ":", elapsed)
+        # start = tf.timestamp()
 
     distributed_valid_step(valid_ds)
 
     @tf.function
     def dummy_step():
-      dummy_feats = tf.random.uniform([1, 20, config.feat_dim])
+      dummy_feats = tf.random.uniform([1, 20, config.feat_dim],
+                                      dtype=tf.float32)
       dummy_in_len = tf.ones(1) * 20
       model(dummy_feats, input_lengths=dummy_in_len, is_training=False,
             mask=None, attention_penalty_mask=None,
@@ -319,7 +369,8 @@ def main():
       tolerance = 0 if better else tolerance + 1
       logger.info('Epoch {:03d} Valid Loss {:.4f}, {:.3f} secs{}'.
                   format(epoch + 1, valid_loss.result(), time.time() - prev,
-                         ", improved" if better else ", tolerance %d" % tolerance))
+                         ", improved" if better else ", tolerance %d" %
+                         tolerance))
       pre_loss = valid_loss.result()
 
       if 0 < config.train_es_tolerance <= tolerance:
@@ -336,9 +387,14 @@ def main():
                        config.train_ckpt_saving_per)
 
     if config.train_max_epoch == 0:
-      logger.info("Recognizing speeches")
+      # Please uncomment to evaluate decoding time
+      #logger.info("Recognizing speeches twice since the time of the first"
+      #            "decoding is unreliable.")
       prev = time.time()
       distributed_test_step(test_ds)
+      #logger.info("Decoding time will be measured from now!")
+      #prev = time.time()
+      #distributed_test_step(test_ds)
       logger.info("%.3f secs elapsed", (time.time() - prev))
 
 if __name__ == "__main__":

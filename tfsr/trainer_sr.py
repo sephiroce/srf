@@ -36,10 +36,22 @@ from tfsr.model.sequence_router_naive import SequenceRouter as SRFN
 import tfsr.helper.train_helper as th
 from tfsr.model.lstm_encoder import LstmEncoder
 from tfsr.model.cnn_encoder import CNNEncoder
+from tfsr.model.cnn_stride_encoder import CNNStrideEncoder
 
 @tf.function
 def process_train_step(in_len_div, inputs, model, optimizer, loss_state,
                        frame_state, n_gpus, blank_idx, samples):
+  """
+  in_len_div : a divisor to the input lengths.
+  inputs: feat, label, input length, target length
+  model:
+  optimizer:
+  loss_state:
+  frame_state:
+  n_gpus:
+  blank_idx:
+  samples:
+  """
   # pylint: disable=too-many-arguments
   feats, labels, inp_len, tar_len = inputs
   batch = tf.shape(feats)[0]
@@ -64,6 +76,13 @@ def process_train_step(in_len_div, inputs, model, optimizer, loss_state,
 
 @tf.function
 def process_valid_step(in_len_div, inputs, model, loss_state, blank_idx):
+  """
+  in_len_div : a divisor to the input lengths.
+  inputs: feat, label, input length, target length
+  model:
+  loss_state:
+  blank_idx:
+  """
   # pylint: disable=too-many-arguments
   feats, labels, inp_len, tar_len = inputs
   max_feat_len = tf.math.reduce_max(inp_len, keepdims=False)
@@ -76,6 +95,12 @@ def process_valid_step(in_len_div, inputs, model, loss_state, blank_idx):
 
 @tf.function
 def process_test_step(in_len_div, inputs, model, beam_width):
+  """
+  in_len_div : a divisor to the input lengths.
+  inputs: feat, label, input length, target length, uttid
+  model:
+  beam_width:
+  """
   # pylint: disable=too-many-arguments
   feats, _, inp_len, _, utt_id = inputs
   max_feat_len = tf.math.reduce_max(inp_len, keepdims=False)
@@ -86,11 +111,16 @@ def process_test_step(in_len_div, inputs, model, beam_width):
                                            beam_width=beam_width,
                                            top_paths=1)
   tf.print("UTTID:", utt_id)
+
   for hyp in hypos:
+    # pylint: disable=unexpected-keyword-arg
     tf.print(hyp, summarize=1000)
 
 
 def main():
+  """
+  A main function to train and decode SRF, LSTM, and CNN-based CTC networks
+  """
   #pylint: disable=too-many-branches, too-many-statements
   # Initializing toolkit
   Util.prepare_device()
@@ -112,7 +142,8 @@ def main():
   # Creates dataset
   logger.info("Analysing data samples..")
   train_num, valid_num, test_num = dh.get_data_len(config)
-  logger.info("Data number: Train %d, Valid %d, Test %d", train_num, valid_num, test_num)
+  logger.info("Data number: Train %d, Valid %d, Test %d", train_num, valid_num,
+              test_num)
   options = tf.data.Options()
   options.experimental_distribute.auto_shard_policy = \
     tf.data.experimental.AutoShardPolicy.DATA
@@ -143,14 +174,15 @@ def main():
     # Creating a model & preparing to train
     in_len_div = None
     if config.model_type.endswith("lstm"):
-      in_len_div = 1
-      model = LstmEncoder(config.model_encoder_num, config.model_dimension,
-                          config.train_inp_dropout, config.train_inn_dropout,
-                          config.model_type == "blstm",
-                          config.model_initializer, dec_out_dim)
+      in_len_div = config.model_conv_stride ** config.model_conv_layer_num \
+                   if config.model_lstm_is_cnnfe else 1
+      model = LstmEncoder(config, dec_out_dim)
     elif config.model_type in ["cnn", "conv", "convolution"]:
       in_len_div = config.model_conv_stride ** config.model_conv_layer_num
-      model = CNNEncoder(config, logger, dec_out_dim)
+      if config.model_conv_is_mp:
+        model = CNNEncoder(config, logger, dec_out_dim)
+      else:
+        model = CNNStrideEncoder(config, logger, dec_out_dim)
     else:
       in_len_div = config.model_conv_stride ** config.model_conv_layer_num
       if config.model_caps_layer_time is None:
@@ -175,10 +207,13 @@ def main():
       index = 0
       tf.print("Step, Progress%, Average Loss, lr")
       for example in dataset:
+        #pylint: disable=too-many-function-args
         args = (in_len_div, example, model, opti, train_loss, num_feats,
                 num_gpus, blank_idx, train_samples)
         strategy.run(process_train_step, args=args)
-        if opti.iterations == config.train_warmup_n:
+        if (config.train_opti_type is None or
+            config.train_opti_type not in ["adam", "adadelta"]) and \
+            opti.iterations == config.train_warmup_n:
           tf.print("learning rate will be decreased from now.")
         if index % 50 == 0 and index > 0:
           # pylint: disable=protected-access
@@ -194,13 +229,19 @@ def main():
 
     @tf.function
     def distributed_test_step(dataset):
+      # Please uncomment to compute decoding time.
+      # start = tf.timestamp()
       for example in dataset:
         args = (in_len_div, example, model, config.decoding_beam_width)
         strategy.run(process_test_step, args=args)
+        # elapsed = tf.timestamp() - start
+        # tf.print("Decoding Time of ", example[4], ":", elapsed)
+        # start = tf.timestamp()
 
     @tf.function
     def dummy_step():
-      dummy_feats = tf.random.uniform([1, 20, config.feat_dim])
+      dummy_feats = tf.random.uniform([1, 20, config.feat_dim],
+                                      dtype=tf.float32)
       dummy_in_len = tf.ones(1) * 20
       model(dummy_feats, input_lengths=dummy_in_len, training=False)
     dummy_step()
@@ -229,7 +270,8 @@ def main():
       tolerance = 0 if better else tolerance + 1
       logger.info('Epoch {:03d} Valid Loss {:.4f}, {:.3f} secs{}'.
                   format(epoch + 1, valid_loss.result(), time.time() - prev,
-                         ", improved" if better else ", tolerance %d"%tolerance))
+                         ", improved" if better else ", tolerance %d"%
+                         tolerance))
       pre_loss = valid_loss.result()
 
       if 0 < config.train_es_tolerance <= tolerance:
@@ -241,14 +283,19 @@ def main():
         ckpt_path = ckpt_mgr.save()
         logger.info('Saving a ckpt for the last epoch at %s', ckpt_path)
       else:
-        logger.warning("Not saved since train-ckpt-saving-per is %d, it needs to"
-                       " be bigger than 0 if you want save checkpoints",
+        logger.warning("Not saved since train-ckpt-saving-per is %d, it needs"
+                       " to be bigger than 0 if you want save checkpoints",
                        config.train_ckpt_saving_per)
 
     if config.train_max_epoch == 0:
-      logger.info("Recognizing speeches")
+      # Please uncomment to evaluate decoding time
+      #logger.info("Recognizing speeches twice since the time of the first"
+      #            "decoding is unreliable.")
       prev = time.time()
       distributed_test_step(test_ds)
+      #logger.info("Decoding time will be measured from now!")
+      #prev = time.time()
+      #distributed_test_step(test_ds)
       logger.info("%.3f secs elapsed", (time.time() - prev))
 
 

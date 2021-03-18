@@ -18,7 +18,8 @@
 
 """
 average_ckpt.py: Tensorflow 2.1 averaging model weights.
-I referred to https://stackoverflow.com/questions/48212110/average-weights-in-keras-models
+It was referred from
+https://stackoverflow.com/questions/48212110/average-weights-in-keras-models
 """
 
 __author__ = "Kyungmin Lee"
@@ -39,9 +40,13 @@ from tfsr.model.sequence_router_lowmemory import SequenceRouter as SRFL
 from tfsr.model.sequence_router_naive import SequenceRouter as SRFN
 from tfsr.model.lstm_encoder import LstmEncoder
 from tfsr.model.cnn_encoder import CNNEncoder
+from tfsr.model.cnn_stride_encoder import CNNStrideEncoder
 
 
 def main():
+  """
+  A main function to make averaged checkpoints.
+  """
   # pylint: disable=too-many-branches
   # Initializing
   Util.prepare_device()
@@ -59,13 +64,12 @@ def main():
   # pylint: disable=invalid-name
   model = None
   if config.model_type.endswith("lstm"):
-    model = LstmEncoder(config.model_encoder_num, config.model_dimension,
-                        config.train_inp_dropout, config.train_inn_dropout,
-                        config.model_type == "blstm",
-                        config.model_initializer, dec_out_dim)
+    model = LstmEncoder(config, dec_out_dim)
   elif config.model_type in ["cnn", "conv", "convolution"]:
-
-    model = CNNEncoder(config, logger, dec_out_dim)
+    if config.model_conv_is_mp:
+      model = CNNEncoder(config, logger, dec_out_dim)
+    else:
+      model = CNNStrideEncoder(config, logger, dec_out_dim)
   else:
     if config.model_caps_layer_time is None:
       if config.model_caps_type == "lowmemory":
@@ -98,13 +102,12 @@ def main():
     logger.info(ckpt_path)
     model = None
     if config.model_type.endswith("lstm"):
-      model = LstmEncoder(config.model_encoder_num, config.model_dimension,
-                          config.train_inp_dropout, config.train_inn_dropout,
-                          config.model_type == "blstm",
-                          config.model_initializer, dec_out_dim)
+      model = LstmEncoder(config, dec_out_dim)
     elif config.model_type in ["cnn", "conv", "convolution"]:
-
-      model = CNNEncoder(config, logger, dec_out_dim)
+      if config.model_conv_is_mp:
+        model = CNNEncoder(config, logger, dec_out_dim)
+      else:
+        model = CNNStrideEncoder(config, logger, dec_out_dim)
     else:
       if config.model_caps_layer_time is None:
         if config.model_caps_type == "lowmemory":
@@ -119,7 +122,7 @@ def main():
     ckpt = tf.train.Checkpoint(optimizer=optimizer, model=model)
     ckpt.restore(ckpt_path).expect_partial()
 
-    dummy_feats = tf.random.uniform([1, 20, config.feat_dim])
+    dummy_feats = tf.random.uniform([1, 20, config.feat_dim], dtype=tf.float32)
     dummy_in_len = tf.ones(1) * 20
     model(dummy_feats, input_lengths=dummy_in_len, training=False,
           mask=None, att_mask=None)
@@ -140,14 +143,14 @@ def main():
     )
 
   # Saving
+  model = None
   if config.model_type.endswith("lstm"):
-    model = LstmEncoder(config.model_encoder_num, config.model_dimension,
-                        config.train_inp_dropout, config.train_inn_dropout,
-                        config.model_type == "blstm",
-                        config.model_initializer, dec_out_dim)
+    model = LstmEncoder(config, dec_out_dim)
   elif config.model_type in ["cnn", "conv", "convolution"]:
-
-    model = CNNEncoder(config, logger, dec_out_dim)
+    if config.model_conv_is_mp:
+      model = CNNEncoder(config, logger, dec_out_dim)
+    else:
+      model = CNNStrideEncoder(config, logger, dec_out_dim)
   else:
     if config.model_caps_layer_time is None:
       if config.model_caps_type == "lowmemory":
@@ -159,7 +162,7 @@ def main():
     else:
       logger.critical("LSRF is deprecated")
 
-  dummy_feats = tf.random.uniform([10, 20, config.feat_dim])
+  dummy_feats = tf.random.uniform([10, 20, config.feat_dim], dtype=tf.float32)
   dummy_in_len = tf.ones(10) * 20
   model(dummy_feats, input_lengths=dummy_in_len, training=False,
         mask=None, att_mask=None)
