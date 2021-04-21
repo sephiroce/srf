@@ -1,5 +1,6 @@
 # Supplementary files for the sequential routing framework
-  - Author of git repo: Kyungmin Lee (sephiroce@snu.ac.kr)
+  - An author of this git repo: Kyungmin Lee (sephiroce@snu.ac.kr)
+  - Git: https://github.com/sephiroce/srf
   - DOI: https://doi.org/10.1016/j.csl.2021.101228
 
 ## Highlights
