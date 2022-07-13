@@ -167,7 +167,7 @@ def main():
   model(dummy_feats, input_lengths=dummy_in_len, training=False,
         mask=None, att_mask=None)
 
-  model.set_weights(weights[0])
+  model.set_weights(new_weights)
 
   ckpt = tf.train.Checkpoint(optimizer=optimizer, model=model)
   if os.path.exists(config.path_ckpt + "/avg"):

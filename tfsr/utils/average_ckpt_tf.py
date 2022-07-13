@@ -131,7 +131,7 @@ def main():
         mask=None, attention_penalty_mask=None,
         in_len_div=config.model_conv_layer_num ** config.model_conv_stride)
 
-  model.set_weights(weights[0])
+  model.set_weights(new_weights)
 
   ckpt = tf.train.Checkpoint(optimizer=optimizer, model=model)
   if os.path.exists(config.path_ckpt + "/avg"):
